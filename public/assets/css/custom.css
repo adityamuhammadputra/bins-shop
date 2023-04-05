@@ -1,0 +1,11 @@
+.section-margin.row-2{
+    background: linear-gradient(-135deg,#e0e6ed,#e0e6ed,#fff7fa);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.main-menu {
+    justify-content: left;
+}

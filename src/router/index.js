@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ProductView from '../views/product/IndexView.vue'
+import ProductShow from '../views/product/ShowView.vue'
+import CartView from '../views/user/CartView.vue'
+import PathNotFound from '../views/auth/PageNotFound.vue'
 
 const routes = [
   {
@@ -8,18 +12,46 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/product',
+    name: 'produt',
+    component: ProductView
+  },
+  {
+    path: '/product/:slug',
+    name: 'produt-detail',
+    component: ProductShow
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView
+  },
+  { 
+    path: '/:pathMatch(.*)*', 
+    component: PathNotFound 
+  },
+  // {
+  //   path: '/auth/:provider/callback',
+  //   component: {
+  //     template: '<div class="auth-component">google</div>'
+  //   }
+  // }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior() {
+    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
+  }
 })
 
 export default router

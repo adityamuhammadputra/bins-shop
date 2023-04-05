@@ -1,0 +1,169 @@
+<template>
+    <div class="header section" id="myHeader">
+    <!-- Header Bottom Start -->
+        <div class="header-bottom">
+            <div class="header-sticky">
+                <div class="container">
+
+                    <div class="row align-items-center" v-if="!isMobile()">
+
+                        <!-- Header Logo Start -->
+                        <div class="col-xl-2 col-6">
+                            <div class="header-logo">
+                                <router-link to="/">
+                                    <img src="/assets/images/logo/logo.png" alt="Site Logo" style="width: 60px;"/>
+                                    <span style="font-size: 20px;position: relative;left: -8px;top: 10px;">Bins Shop</span>
+                                </router-link> 
+                            </div>
+                        </div>
+                        <!-- Header Logo End -->
+
+                        <!-- Header Menu Start -->
+                        <div class="col-xl-8 d-none d-xl-block">
+                            <div class="main-menu position-relative">
+                                <ul>
+                                    <li>
+                                        <div class="error_form mt-6">
+                                            <form class="search-form-error" @submit.prevent="search">
+                                                <input class="input-text" placeholder="Search..." type="text" 
+                                                    v-model="this.$store.state.meta.q">
+                                                <button class="submit-btn" type="button" @click="search">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <router-link to="/about">Tentang</router-link> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Header Menu End -->
+
+                        <!-- Header Action Start -->
+                        <div class="col-xl-2 col-6">
+                            <div class="header-actions">
+
+                                <router-link to="/cart" class="header-action-btn header-action-btn-cart">
+                                    <i class="pe-7s-bell"></i>
+                                    <span class="header-action-num">0</span>
+                                </router-link> 
+                                <router-link to="/cart" class="header-action-btn header-action-btn-cart">
+                                    <i class="pe-7s-cart"></i>
+                                    <span class="header-action-num">{{ this.$store.state.default.cart }}</span>
+                                </router-link> 
+
+                                <!-- <a href="javascript:void(0)" 
+                                    @click="cart = 'open'">
+                                </a> -->
+
+                                <router-link to="/user" class="header-action-btn d-none d-md-block">
+                                    <i class="pe-7s-user" v-if="!user"></i>
+                                    <img :src="user.avatar" width="30" v-else style="border-radius: 100%;">
+                                </router-link> 
+                                <a>
+                                    <GoogleLogin :callback="handleLogin" prompt auto-login v-if="!user"/>
+                                </a>
+                                <!-- <GoogleLogin :callback="handleLogin" prompt auto-login/> -->
+
+
+                                <!-- <a href="javascript:void(0)" class="header-action-btn header-action-btn-menu d-xl-none d-lg-block">
+                                    <i class="fa fa-bars"></i>
+                                </a> -->
+                                
+
+                            </div>
+                        </div>
+                        <!-- Header Action End -->
+
+                    </div>
+
+                    <div class="row align-items-center" v-else>
+                        <!-- Header Logo Start -->
+                        <div class="col-2" style="position: relative; top: 14px; left: -10px;">
+                            <div class="header-logo" >
+                                <router-link to="/">
+                                    <img src="/assets/images/logo/logo.png" alt="Site Logo" style="width: 60px;"/>
+                                </router-link> 
+                            </div>
+                        </div>
+                        <!-- Header Logo End -->
+                        <!-- Header Menu Start -->
+                        <div class="col-10" style="padding-right: 20px;">
+                            <div class="error_form mt-6">
+                                <form class="search-form-error" @submit.prevent="search">
+                                    <input class="input-text" placeholder="Search..." type="text" v-model="this.$store.state.meta.q">
+                                    <button class="submit-btn" type="button"  @click="search">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</template>
+
+
+<script>
+import { decodeCredential } from 'vue3-google-login'
+
+export default {
+    name: 'Header',
+    data() {
+        return {
+            q : null,
+            user : null,
+            default: {
+                cart : '',
+            }
+        }
+    },
+    mounted() {
+        this.stickyScroll();
+        if (this.$store.state.auth.user) 
+            this.user = this.$store.state.auth.user;
+
+            
+    },
+    created() {
+        this.countChart();
+    },
+    methods: {
+        stickyScroll: function() {
+            window.onscroll = function() {
+                var header = document.getElementById("myHeader");
+                var sticky = header.offsetTop;
+
+                if (window.pageYOffset > sticky) {
+                    header.classList.add("sticky");
+                } else {
+                    header.classList.remove("sticky");
+                }
+            }
+        },
+        handleLogin: function(response) {
+            const userData = decodeCredential(response.credential)
+            this.$store.dispatch("auth/login", userData).then(
+                () => {
+                    window.location.reload()
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
+    }
+}
+
+
+</script>
+
+
+
+  

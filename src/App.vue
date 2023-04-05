@@ -1,30 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div v-if="$route.fullPath === '/login'">
+    <router-view/>
+  </div>
+  <div v-else>
+    <HeaderTemp></HeaderTemp>
+    <router-view/>
+    <FooterTemp></FooterTemp>
+  </div>
+
+
+
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
+
+
+<script>
+import HeaderTemp from './components/TempHeader.vue'
+import FooterTemp from './components/TempFooter.vue'
+import { ref } from 'vue'
+
+export default {
+    components : {
+      HeaderTemp,
+      FooterTemp,
+    }, 
+    data() {
+        return {
+          theme: ref('light'),
+        }
+    },
+    methods: {
+      onClick() {
+        this.theme.value = this.theme.value === 'light' ? 'dark' : 'light'
+        console.log(this.theme.value);
+      },
+    }
+}
+
+
+</script>
