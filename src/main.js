@@ -68,6 +68,9 @@ vueApp.mixin({
         dateOuput: function(date) {
             return moment(date).format('DD/MM/YYYY');
         },
+        dateOuput2: function(date) {
+            return moment(date).format('DD MMMM YYYY');
+        },
         dateTimeOuput: function(date) {
             return moment(date).format('DD/MM/YYYY HH:II');
         },
@@ -84,13 +87,17 @@ vueApp.mixin({
                 this.logOut();
             }
         },
+        errorNotifMsg: function(msg) {
+            toast.error(msg);
+        },
         userLogin: function(){
             return (this.$store.state.auth) ? this.$store.state.auth.user.user : null;
         },
         logOut: function(){
             console.log('logut');
             this.$store.dispatch('auth/logout');
-            this.$router.push('/login');
+            this.$router.push('/');
+            window.location.href = '/'
         },
         search: function() {
             this.$router.push('/product?q=' + this.$store.state.meta.q);
@@ -98,8 +105,8 @@ vueApp.mixin({
         countChart : function() {
             this.axios.get('chart-count', this.$store.state.config)
             .then((response) => {
-                this.$store.state.default.cart = response.data
-                localStorage.setItem('cartLocal', response.data)
+                this.$store.state.default.cart = response.data.message
+                localStorage.setItem('cartLocal', response.data.message)
             })
             .catch(error => {
                 this.errorNotif(error)

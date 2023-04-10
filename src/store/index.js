@@ -15,7 +15,7 @@ export default createStore({
     },
     config : {
       headers:{
-        g: auth.state.user.id,
+        Authorization: (auth.state.user) ? 'Bearer ' + auth.state.user.accessToken : null,
       }
     },
     default : {

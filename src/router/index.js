@@ -3,6 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/product/IndexView.vue'
 import ProductShow from '../views/product/ShowView.vue'
 import CartView from '../views/user/CartView.vue'
+import UserView from '../views/user/UserView.vue'
+import OrderView from '../views/user/OrderView.vue'
+
 import PathNotFound from '../views/auth/PageNotFound.vue'
 
 const routes = [
@@ -10,6 +13,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: UserView
   },
   {
     path: '/product',
@@ -33,6 +41,11 @@ const routes = [
     path: '/cart',
     name: 'cart',
     component: CartView
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: OrderView
   },
   { 
     path: '/:pathMatch(.*)*', 

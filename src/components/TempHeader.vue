@@ -57,26 +57,16 @@
                                 <!-- <a href="javascript:void(0)" 
                                     @click="cart = 'open'">
                                 </a> -->
+                                <!-- <i class="pe-7s-user"></i> -->
 
                                 <router-link to="/user" class="header-action-btn d-none d-md-block">
-                                    <i class="pe-7s-user" v-if="!user"></i>
-                                    <img :src="user.avatar" width="30" v-else style="border-radius: 100%;">
+                                    <img :src="user.avatar"  referrerpolicy="no-referrer" width="30" style="border-radius: 100%;" v-if="user">
+                                    <i class="pe-7s-user" v-else></i>
                                 </router-link> 
-                                <a>
-                                    <GoogleLogin :callback="handleLogin" prompt auto-login v-if="!user"/>
-                                </a>
-                                <!-- <GoogleLogin :callback="handleLogin" prompt auto-login/> -->
-
-
-                                <!-- <a href="javascript:void(0)" class="header-action-btn header-action-btn-menu d-xl-none d-lg-block">
-                                    <i class="fa fa-bars"></i>
-                                </a> -->
-                                
-
+                                <GoogleLogin :callback="handleLogin" prompt auto-login v-if="!user"/>
                             </div>
                         </div>
                         <!-- Header Action End -->
-
                     </div>
 
                     <div class="row align-items-center" v-else>
@@ -88,8 +78,6 @@
                                 </router-link> 
                             </div>
                         </div>
-                        <!-- Header Logo End -->
-                        <!-- Header Menu Start -->
                         <div class="col-10" style="padding-right: 20px;">
                             <div class="error_form mt-6">
                                 <form class="search-form-error" @submit.prevent="search">
@@ -112,6 +100,7 @@
 
 <script>
 import { decodeCredential } from 'vue3-google-login'
+// import { googleTokenLogin } from "vue3-google-login"
 
 export default {
     name: 'Header',
@@ -127,9 +116,7 @@ export default {
     mounted() {
         this.stickyScroll();
         if (this.$store.state.auth.user) 
-            this.user = this.$store.state.auth.user;
-
-            
+            this.user = this.$store.state.auth.user.user;
     },
     created() {
         this.countChart();
@@ -148,6 +135,7 @@ export default {
             }
         },
         handleLogin: function(response) {
+            // console.log(response);
             const userData = decodeCredential(response.credential)
             this.$store.dispatch("auth/login", userData).then(
                 () => {
@@ -157,7 +145,12 @@ export default {
                     console.log(error);
                 }
             );
-        }
+        },
+        // handleLogin2: function() {
+        //     googleTokenLogin().then((response) => {
+        //         console.log("Handle the response", response)
+        //     })
+        // }
     }
 }
 

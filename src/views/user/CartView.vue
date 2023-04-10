@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-8 col-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" v-if="user">
                             <div class="comment-area-wrapper" v-if="this.loading === true">
                                 <div class="spinner-grow spinner-grow-sm" role="status">
                                     <span class="visually-hidden">Loading...</span>
@@ -74,6 +74,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body" v-else="user">
+                            <ElseLogin></ElseLogin>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -120,11 +123,12 @@
 <script>
 // import { useAttrs } from 'vue';
 import ProductRecomend from '/src/components/ProductRecomend.vue'
+import ElseLogin from '/src/components/ElseLogin.vue'
 
 export default {
     name: 'cart',
     components: {
-        ProductRecomend
+        ProductRecomend, ElseLogin
     },
     data() {
         return {
@@ -135,6 +139,7 @@ export default {
             loading: true,
             loadingButton: false,
             errored: false,
+            user : null,
         }
     },
     watch:{
@@ -152,10 +157,15 @@ export default {
             return this.$store.state.default.cartLoading;
         }
     },
+    mounted() {
+        if (this.$store.state.auth.user) 
+            this.user = this.$store.state.auth.user.user;
+    },
     methods: {
         cartCheck: function (data) {
             let totalBarang = 0,
                 totalHarga = 0;
+
             data.map(function(value, key){
                 
                 if (value.status === true || value.status === false) {
@@ -211,14 +221,32 @@ export default {
                 this.successNotif('Belum pilih / tandai barang yang akan di beli')
                 return false;
             }
+            this.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
             this.loadingButton = true
-            const data = {
+            const dataSumm = {
                 amount : this.totalHarga,
                 qty : this.totalBarang,
+                product: this.data,
             }
-            this.axios.post('checkout', data, this.$store.state.config)
+            this.axios.post('checkout', dataSumm, this.$store.state.config)
             .then((response) => {
-                window.snap.pay(response.data.token);
+                // console.log(response);
+                window.snap.pay(response.data.token, {
+                    onSuccess: function(result){
+                        alert("payment success!"); console.log(result);
+                    },
+                    onPending: function(result){
+                        alert("wating your payment!"); console.log(result);
+                    },
+                    onError: function(result){
+                        alert("payment failed!"); console.log(result);
+                    },
+                    onClose: function(){
+                        return false;
+                        // alert('Transaksi ');
+                    }
+                })
+                // window.snap.pay(response.data.token);
             })
             .catch(error => {
                 this.errorNotif(error)
@@ -227,6 +255,17 @@ export default {
                 () => this.loadingButton = false
             )
         },
+        // addTrans: function() {
+        //     this.axios.delete('chart/' + row.id, this.$store.state.config)
+        //     .then((response) => {
+        //         this.successNotif(response.data.message)
+        //         this.cartData(false)
+        //         this.countChart();
+        //     })
+        //     .catch(error => {
+        //         this.errorNotif(error)
+        //     })
+        // },
     },
 }
 </script>
