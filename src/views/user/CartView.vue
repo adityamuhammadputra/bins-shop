@@ -23,7 +23,8 @@
                                         <input type="checkbox" 
                                             v-model="data[indexCart].status"
                                             @change="cartCheck(data)"
-                                            style="width: 20px;margin-right: 15px;height: 20px;">
+                                            style="width: 20px;margin-right: 15px;height: 20px;"
+                                        >
                                         <a class="author-thumb" href="#">
                                             <router-link :to="'/product/'+data[indexCart].product.slug" class="image">
                                                 <img :src="cart.product.file" alt="Author">
@@ -230,7 +231,7 @@ export default {
             }
             this.axios.post('checkout', dataSumm, this.$store.state.config)
             .then((response) => {
-                // console.log(response);
+                console.log(response.data.token);
                 window.snap.pay(response.data.token, {
                     onSuccess: function(result){
                         alert("payment success!"); console.log(result);

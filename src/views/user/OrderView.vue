@@ -34,25 +34,25 @@
                                     v-for="(order, indexOrder) in dataOrder" v-bind:key="order.id">
                                     <div class="card-header" style="background: white;border: none;">
                                         <i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}
-                                        {{ order.invoice }}
-                                        <span class="badge bg-warning text-dark pull-right"> {{ order.asset_status.name }} </span>
+                                        <span class="text-detail">|</span> {{ order.invoice }}
+                                        <span class="badge bg-warning text-dark pull-right"> {{ order.status.name }} </span>
                                     </div>
-                                    <div class="card-body comment-area-wrapper pt-1">
+                                    <div class="card-body comment-area-wrapper pt-1" 
+                                        v-for="detail in order.transaction_details" v-bind:key="detail.id">
                                         <div class="single-comment-wrap mb-2">
-                                            <a href="/product/lisensi-project-2016" class="image author-thumb">
-                                                <img src="http://bins.local/api/v1/storage/default.png" alt="Author">
-                                            </a>
+                                            <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
+                                                <img :src="detail.product.file" alt="Author">
+                                            </router-link>
                                             <div class="comments-info">
                                                 <p class="mb-0" style="font-size: 14px;">
-                                                    <a href="/product/lisensi-project-2016" class="image">Lisensi Project 2016</a>
+                                                    <router-link :to="'/product/'+detail.product.slug" class="image">
+                                                        {{ detail.name }}
+                                                    </router-link>
                                                 </p>
                                                 <p>
-                                                    <b>Rp99.000</b>
+                                                    {{ detail.qty }} barang x <b>{{ detail.price_rp }}</b>
                                                 </p>
                                             </div>
-                                            <a href="#" style="font-weight: 500; font-size: 20px; margin-right: 10px;">
-                                                <i class="pe-7s-close-circle"></i>
-                                            </a>
                                         </div>
                                     </div>
                                     <div class="card-footer text-muted">
