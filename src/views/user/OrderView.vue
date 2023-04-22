@@ -108,7 +108,7 @@ export default {
     },
     methods: {
         orderIndex: function() {
-            this.axios.get('checkout', this.$store.state.config)
+            this.axios.get('order', this.$store.state.config)
             .then((response) => {
                 this.dataOrder = response.data.data
             })

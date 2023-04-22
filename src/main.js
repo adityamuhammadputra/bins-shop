@@ -54,6 +54,9 @@ vueApp.component("content-loader", ContentLoader)
 
 vueApp.mixin({
     methods: {
+        testAh: function (){
+            console.log('test');
+        },
         globalAlert: function (message) {
             this.$swal(message);
         },

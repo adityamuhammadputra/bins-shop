@@ -222,7 +222,7 @@ export default {
                 this.successNotif('Belum pilih / tandai barang yang akan di beli')
                 return false;
             }
-            this.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
+
             this.loadingButton = true
             const dataSumm = {
                 amount : this.totalHarga,
@@ -230,43 +230,71 @@ export default {
                 product: this.data,
             }
             this.axios.post('checkout', dataSumm, this.$store.state.config)
-            .then((response) => {
-                console.log(response.data.token);
-                window.snap.pay(response.data.token, {
-                    onSuccess: function(result){
-                        alert("payment success!"); console.log(result);
-                    },
-                    onPending: function(result){
-                        alert("wating your payment!"); console.log(result);
-                    },
-                    onError: function(result){
-                        alert("payment failed!"); console.log(result);
-                    },
-                    onClose: function(){
-                        return false;
-                        // alert('Transaksi ');
-                    }
+                .then((response) => {
+                    // console.log(response.data.token);
+                    var that = this;
+                    window.snap.pay(response.data.token, {
+                        onSuccess: function(result){
+                            that.successNotif('Pembayaran berhasil... Pesanan dalam proses')
+                            that.cartCreated(that, result);
+                            // alert("payment success!"); 
+                        },
+                        onPending: function(result){
+                            that.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
+                            that.cartCreated(that, result);
+                            // console.log(result); alert("wating your payment!"); 
+                        },
+                        onError: function(result){
+                            that.successNotif('Pesanan gagal, Silahkan muat ulang halaman')
+                            // alert("payment failed!"); console.log(result);
+                        },
+                        onClose: function(){
+                            // that.successNotif('Pesanan batal dibuat... Silahkan lanjutkan pembayaran')
+                            return false;
+                        },
+                    })
+                    // window.snap.pay(response.data.token);
                 })
-                // window.snap.pay(response.data.token);
+                .catch(error => {
+                    this.errorNotif(error)
+                })
+                .finally(
+                    () => this.loadingButton = false
+                )
+        },
+        cartCreated: function (that, result) {
+            const dataSumm = {
+                amount : that.totalHarga,
+                qty : that.totalBarang,
+                product: that.data,
+                midtrans: result
+            }
+            that.axios.post('order', dataSumm, that.$store.state.config)
+            .then((response) => {
+                console.log(response);
             })
             .catch(error => {
-                this.errorNotif(error)
+                that.errorNotif(error)
             })
-            .finally(
-                () => this.loadingButton = false
-            )
-        },
-        // addTrans: function() {
-        //     this.axios.delete('chart/' + row.id, this.$store.state.config)
-        //     .then((response) => {
-        //         this.successNotif(response.data.message)
-        //         this.cartData(false)
-        //         this.countChart();
-        //     })
-        //     .catch(error => {
-        //         this.errorNotif(error)
-        //     })
-        // },
+
+            that.data.map(function(cart, key){                
+                // delete cart & insert order 
+                if (cart.status === true || cart.status === false) {
+                    if (cart.status === true) {
+                        that.axios.delete('chart/' + cart.id, that.$store.state.config)
+                        .then((response) => {
+                            that.cartData(false)
+                            that.countChart();
+                        })
+                        .catch(error => {
+                            // that.errorNotif(error)
+                        })
+                    } 
+                }
+
+
+            });
+        }
     },
 }
 </script>
