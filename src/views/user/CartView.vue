@@ -276,11 +276,14 @@ export default {
             .catch(error => {
                 that.errorNotif(error)
             })
-
+            
+            that.totalHarga = 0;
+            that.totalBarang = 0;
             that.data.map(function(cart, key){                
                 // delete cart & insert order 
                 if (cart.status === true || cart.status === false) {
                     if (cart.status === true) {
+
                         that.axios.delete('chart/' + cart.id, that.$store.state.config)
                         .then((response) => {
                             that.cartData(false)
