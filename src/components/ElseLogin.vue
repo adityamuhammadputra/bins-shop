@@ -14,7 +14,6 @@ export default {
     name: 'ElseLogin',
     methods: {
         handleLoginUser: function(response) {
-            console.log('c');
             const userData = decodeCredential(response.credential)
             this.$store.dispatch("auth/login", userData).then(
                 () => {

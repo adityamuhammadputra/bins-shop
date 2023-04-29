@@ -29,16 +29,37 @@
 
                             <!-- My Account Tab Content Start -->
                             <div class="col-lg-9 col-md-8">
-
                                 <div class="card mb-4 " 
                                     v-for="(order, indexOrder) in dataOrder" v-bind:key="order.id">
                                     <div class="card-header" style="background: white;border: none;">
                                         <i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}
                                         <span class="text-detail">|</span> {{ order.invoice }}
-                                        <span class="badge bg-warning text-dark pull-right"> {{ order.status.name }} </span>
+                                        <span class="badge text-dark pull-right"
+                                                :class="'bg-' + order.status.color"> 
+                                            {{ order.status.name }} 
+                                        </span>
                                     </div>
+                                    <div class="alert alert-warning d-flex align-items-center mx-3 py-2" role="alert"
+                                     v-if="order.status.id == 1">
+                                        <div>
+                                            Lakukan pembayaran dalam waktu
+                                            <vue-countdown :time="order.transaction_midtrans.payment_diff" v-slot="{ hours, minutes, seconds }">
+                                                <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
+                                            </vue-countdown> 
+                                                <!-- <b>{{ dateTimeOuput2(order.transaction_midtrans.payment_timeout) }}</b> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-danger d-flex align-items-center mx-3 py-2" role="alert"
+                                     v-if="order.status.id == 11">
+                                        <div>
+                                            Tidak melakukan pembayaran <b>{{ order.transaction_midtrans.payment_type }}</b>, batas waktu <b> {{ dateTimeOuput2(order.transaction_midtrans.payment_timeout) }}</b>
+                                        </div>
+                                    </div>
+
                                     <div class="card-body comment-area-wrapper pt-1" 
                                         v-for="detail in order.transaction_details" v-bind:key="detail.id">
+                                        
                                         <div class="single-comment-wrap mb-2">
                                             <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
                                                 <img :src="detail.product.file" alt="Author">
@@ -55,9 +76,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer text-muted">
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                        2 days ago
+                                    <div class="card-footer text-muted" v-if="order.status.id == 1">
+                                        <span class="pull-left">
+                                            Pembayaran : {{ order.transaction_midtrans.payment_type }}
+                                        </span>
+                                        <a href="#" class="btn btn-primary pull-right" 
+                                            @click="orderPay(order.transaction_midtrans.payment_token)">
+                                            Cara Bayar
+                                        </a>
                                     </div>
                                </div>
                             </div> <!-- My Account Tab Content End -->
@@ -88,11 +114,13 @@
 
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 export default {
     name: 'Header',
     components: {
-        ElseLogin
+        ElseLogin,
+        VueCountdown
     },
     data() {
         return {
@@ -119,6 +147,19 @@ export default {
                 () => this.loading = false
             )
         },
+        orderPay: function(token) {
+            window.snap.pay(token, {
+                onSuccess: function(result){
+                },
+                onPending: function(result){
+                },
+                onError: function(result){
+                },
+                onClose: function(){
+                    return false;
+                },
+            })
+        }
     }
 }
 </script>

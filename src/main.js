@@ -77,6 +77,9 @@ vueApp.mixin({
         dateTimeOuput: function(date) {
             return moment(date).format('DD/MM/YYYY HH:II');
         },
+        dateTimeOuput2: function(date) {
+            return moment(date).format('DD MMMM YYYY') + ' Pukul ' + moment(date).format('HH:II');
+        },
         findString: function(str) {
             console.log(str);
         },
@@ -187,7 +190,15 @@ vueApp.mixin({
             } else {
                 return '-';
             }
-            
+        },
+        countDown : function (time) {
+
+            setInterval(function () {
+                if (time > 0)
+                    time = time - 1;
+            }, 1000);
+
+            return time;
         },
         isMobile() {
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

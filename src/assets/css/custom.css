@@ -30,6 +30,10 @@
     margin-left: 5rem;
 }
 
+.bg-danger {
+    color: white !important;
+}
+
 .text-detail {
     color: #9f9f9f;
 }

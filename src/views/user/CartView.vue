@@ -236,12 +236,12 @@ export default {
                     window.snap.pay(response.data.token, {
                         onSuccess: function(result){
                             that.successNotif('Pembayaran berhasil... Pesanan dalam proses')
-                            that.cartCreated(that, result);
+                            that.cartCreated(that, result, response.data.token);
                             // alert("payment success!"); 
                         },
                         onPending: function(result){
                             that.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
-                            that.cartCreated(that, result);
+                            that.cartCreated(that, result, response.data.token);
                             // console.log(result); alert("wating your payment!"); 
                         },
                         onError: function(result){
@@ -262,11 +262,12 @@ export default {
                     () => this.loadingButton = false
                 )
         },
-        cartCreated: function (that, result) {
+        cartCreated: function (that, result, snap) {
             const dataSumm = {
                 amount : that.totalHarga,
                 qty : that.totalBarang,
                 product: that.data,
+                snapData: snap,
                 midtrans: result
             }
             that.axios.post('order', dataSumm, that.$store.state.config)
@@ -283,19 +284,14 @@ export default {
                 // delete cart & insert order 
                 if (cart.status === true || cart.status === false) {
                     if (cart.status === true) {
-
                         that.axios.delete('chart/' + cart.id, that.$store.state.config)
                         .then((response) => {
                             that.cartData(false)
                             that.countChart();
                         })
-                        .catch(error => {
-                            // that.errorNotif(error)
-                        })
+                        .catch(error => { })
                     } 
                 }
-
-
             });
         }
     },
