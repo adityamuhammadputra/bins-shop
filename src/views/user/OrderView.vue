@@ -34,8 +34,14 @@
                                     <div class="card-header" style="background: white;border: none;">
                                         <i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}
                                         <span class="text-detail">|</span> {{ order.invoice }}
-                                        <span class="badge text-dark pull-right"
-                                                :class="'bg-' + order.status.color"> 
+                                        <span class="badge pull-left"
+                                            v-if="isMobile()"
+                                            :class="'bg-' + order.status.color"> 
+                                            {{ order.status.name }} 
+                                        </span>
+                                        <span class="badge pull-right"
+                                            v-else
+                                            :class="'bg-' + order.status.color"> 
                                             {{ order.status.name }} 
                                         </span>
                                     </div>
@@ -47,6 +53,13 @@
                                                 <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
                                             </vue-countdown> 
                                                 <!-- <b>{{ dateTimeOuput2(order.transaction_midtrans.payment_timeout) }}</b> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-info d-flex align-items-center mx-3 py-2" role="alert"
+                                     v-if="order.status.id == 2">
+                                        <div>
+                                            {{ order.status.desc }}
                                         </div>
                                     </div>
 
@@ -76,13 +89,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer text-muted" v-if="order.status.id == 1">
-                                        <span class="pull-left">
-                                            Pembayaran : {{ order.transaction_midtrans.payment_type }}
+                                    <div class="card-footer text-muted">
+                                        <span class="pull-left" v-if="order.status.id == 1">
+                                            <small>Pembayaran : {{ order.transaction_midtrans.payment_type }} </small>
                                         </span>
                                         <a href="#" class="btn btn-primary pull-right" 
+                                            v-if="order.status.id == 1"
                                             @click="orderPay(order.transaction_midtrans.payment_token)">
                                             Cara Bayar
+                                        </a>
+
+                                        <a href="#" class="btn btn-primary btn-sm pull-right" 
+                                            v-if="order.status.id == 2"
+                                            >
+                                            <i class="pe-7s-chat"></i> Tanya Admin
+                                        </a>
+                                        <a href="#" class="text-danger pull-right mr-1" 
+                                            v-if="order.status.id == 2"
+                                            >
+                                            <b>Lihat Detail</b>
                                         </a>
                                     </div>
                                </div>
