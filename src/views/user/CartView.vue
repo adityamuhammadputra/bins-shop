@@ -12,12 +12,15 @@
                     <div class="card">
                         <div class="card-body" v-if="user">
                             <div class="comment-area-wrapper" v-if="this.loading === true">
-                                <div class="spinner-grow spinner-grow-sm" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
+                                <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
+                                    secondaryColor="#ecebeb" >
+                                    <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
+                                    <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
+                                </content-loader>
                             </div>
                             <div class="comment-area-wrapper" v-else>
                                 <div class="mb-4 pb-4" style="border-bottom: 1px solid #f3f3f3;" 
+                                    v-if="data.length > 0"
                                     v-for="(cart, indexCart) in data" v-bind:key="cart.id">
                                     <div class="single-comment-wrap mb-2">
                                         <input type="checkbox" 
@@ -73,6 +76,12 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div v-else class="text-center">
+                                    <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 400px;"/>
+                                    <h5>Waaah Keranjang belanjamu kosong!</h5>
+                                    <p>Dari pada kosong, yuk lihat Produk Lainnya barang untuk kamu. kali aja cocok :D</p>
+                                    <router-link to="/product" class="btn btn-primary">Lihat Produk Lainnya</router-link> 
+                                </div>
                             </div>
                         </div>
                         <div class="card-body" v-else="user">
@@ -125,11 +134,12 @@
 // import { useAttrs } from 'vue';
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import ElseLogin from '/src/components/ElseLogin.vue'
+import { ContentLoader } from 'vue-content-loader'
 
 export default {
     name: 'cart',
     components: {
-        ProductRecomend, ElseLogin
+        ProductRecomend, ElseLogin, ContentLoader
     },
     data() {
         return {

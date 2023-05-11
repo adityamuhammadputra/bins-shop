@@ -1,5 +1,5 @@
 <template>
-    <footer class="section footer-section">
+    <footer class="section footer-section" v-if="$route.meta.header !== 0">
         <!-- Footer Top Start -->
         <div class="footer-top section-padding">
             <div class="container">
@@ -100,7 +100,7 @@
         <!-- Footer Bottom End -->
     </footer>
 
-    <WindowsBottomNavigation :options="options" v-model="selected" v-if="isMobile()" style="height: 55px;"/>
+    <WindowsBottomNavigation :options="options" v-model="selected" v-if="isMobile() && $route.meta.header !== 0" style="height: 55px;"/>
 </template>
 
 

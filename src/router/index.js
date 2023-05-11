@@ -4,7 +4,9 @@ import ProductView from '../views/product/IndexView.vue'
 import ProductShow from '../views/product/ShowView.vue'
 import CartView from '../views/user/CartView.vue'
 import UserView from '../views/user/UserView.vue'
-import OrderView from '../views/user/OrderView.vue'
+import OrderView from '../views/order/IndexView.vue'
+import OrderShowView from '../views/order/ShowView.vue'
+import OrderPrintView from '../views/order/PrintView.vue'
 
 import PathNotFound from '../views/auth/PageNotFound.vue'
 
@@ -46,6 +48,19 @@ const routes = [
     path: '/order',
     name: 'order',
     component: OrderView
+  },
+  {
+    path: '/order/:order_id',
+    name: 'order-detail',
+    component: OrderShowView
+  },
+  {
+    path: '/order/:order_id/print',
+    name: 'order-print',
+    component: OrderPrintView,
+    meta: {
+      header: 0
+    }
   },
   { 
     path: '/:pathMatch(.*)*', 

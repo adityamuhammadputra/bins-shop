@@ -12,7 +12,8 @@
                     <div class="shop-top-bar-right">
                         <span class="mr-1">Urutkan: </span>
                         <div class="shop-short-by mr-4">
-                            <select class="nice-select" aria-label=".form-select-sm example">
+                            <select class="nice-select">
+                                <option value="">--Urutkan--</option>
                                 <option value="1">Penjualan Terbanyak</option>
                                 <option value="2">Terbaru</option>
                                 <option value="3">Harga Terendah</option>
@@ -24,8 +25,10 @@
                 <div class="form-group row" v-else>
                     <label for="staticEmail" class="col-6 col-form-label"><b>{{ this.meta.total }}</b> Produk</label>
                     <div class="col-6">
-                        <select class="nice-select" aria-label=".form-select-sm example">
-                            <option value="1">Urutkan Terjual</option>
+                        <select class="nice-select" aria-label=".form-select-sm example" @click="getIndex()" 
+                            v-model="this.$store.state.meta.sort">
+                            <option value="">--Urutkan--</option>
+                            <option value="1">Penjualan Terbanyak</option>
                             <option value="2">Terbaru</option>
                             <option value="3">Harga Terendah</option>
                             <option value="3">Harga Tertinggi</option>
@@ -68,18 +71,26 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <h4 class="sub-title" style="display: none;"><a href="single-product.html">{{ product.category }}</a></h4>
+                                <h4 class="sub-title" style="display: none;">
+                                    <a href="single-product.html">{{ product.category }}</a>
+                                </h4>
                                 <h5 class="title">
                                     <router-link :to="'/product/'+product.slug" class="image">
                                         {{ product.name }}
                                     </router-link>
                                 </h5>
                                 <span class="ratings">
-                                    <span class="rating-num"><i class="fa fa-star text-warning"></i> 4 &nbsp;|</span> <span class="rating-num ml-1">Terjual 100</span>
+                                    <span class="rating-num" v-if="product.rating > 0">
+                                        <i class="fa fa-star text-warning"></i> {{ product.rating }} &nbsp;|
+                                    </span> 
+                                    <span class="rating-num ml-1">Terjual {{ product.sold }}</span>
                                 </span>
-                                <span class="price">
-                                        <span class="new">{{ product.price_rp }}</span>
-                                <span class="old">{{ product.price_rp }}</span>
+                                <span class="price" v-if="product.discount">
+                                    <span class="new">{{ product.price_discount }}</span>
+                                    <span class="old">{{ product.price_rp }}</span>
+                                </span>
+                                <span class="price" v-else>
+                                    <span class="new">{{ product.price_rp }}</span>
                                 </span>
                                 <div class="shop-list-btn">
                                     <button class="btn btn-sm btn-outline-danger btn-hover-primary w-100" 

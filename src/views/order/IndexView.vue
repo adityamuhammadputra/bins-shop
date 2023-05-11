@@ -28,8 +28,17 @@
                             <!-- My Account Tab Menu End -->
 
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8">
+                            <div class="col-lg-9 col-md-8" v-if="this.loading === true">
+                                <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
+                                    secondaryColor="#ecebeb" >
+                                    <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
+                                    <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
+                                </content-loader>
+                            </div>
+
+                            <div class="col-lg-9 col-md-8" v-else>
                                 <div class="card mb-4 " 
+                                    v-if="dataOrder.length > 0"
                                     v-for="(order, indexOrder) in dataOrder" v-bind:key="order.id">
                                     <div class="card-header" style="background: white;border: none;">
                                         <i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}
@@ -104,13 +113,20 @@
                                             >
                                             <i class="pe-7s-chat"></i> Tanya Admin
                                         </a>
-                                        <a href="#" class="text-danger pull-right mr-1" 
-                                            v-if="order.status.id == 2"
-                                            >
+                                        <router-link :to="'/order/'+order.id" class="text-danger pull-right mr-1"
+                                            v-if="order.status.id == 2">
                                             <b>Lihat Detail</b>
-                                        </a>
+                                        </router-link>
                                     </div>
                                </div>
+                               <div class="card mb-4 text-center" v-else>
+                                    <div class="card-body">
+                                        <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 400px;"/>
+                                            <h5>Waaah Transaksi belanjamu kosong!</h5>
+                                            <p>Dari pada kosong, yuk lihat Produk Lainnya barang untuk kamu. kali aja cocok :D</p>
+                                            <router-link to="/product" class="btn btn-primary">Lihat Produk Lainnya</router-link> 
+                                    </div>
+                                </div>
                             </div> <!-- My Account Tab Content End -->
                         </div>
                     </div>
@@ -129,8 +145,15 @@
                 </div>
             </div>
 
+
+            <ProductRecomend 
+                v-bind:excludeProps="this.exlude"
+                v-bind:loadChart="true">
+            </ProductRecomend>
+
         </div>
     </div>
+
 </template>
 
 <style>
@@ -139,18 +162,22 @@
 
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
+import ProductRecomend from '/src/components/ProductRecomend.vue'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 
 export default {
     name: 'Header',
     components: {
         ElseLogin,
-        VueCountdown
+        VueCountdown,
+        ProductRecomend,
     },
     data() {
         return {
             dataOrder : [],
             user : null,
+            loading : true,
+            exlude: [],
         }
     },
     mounted() {
@@ -184,7 +211,9 @@ export default {
                     return false;
                 },
             })
-        }
-    }
+        },
+        
+    },
+    
 }
 </script>

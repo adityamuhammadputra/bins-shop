@@ -1,5 +1,5 @@
 <template>
-    <div class="header section" id="myHeader">
+    <div class="header section" id="myHeader" v-if="$route.meta.header !== 0">
     <!-- Header Bottom Start -->
         <div class="header-bottom">
             <div class="header-sticky">
@@ -25,11 +25,14 @@
                                     <li>
                                         <div class="error_form mt-6">
                                             <form class="search-form-error" @submit.prevent="search">
-                                                <input class="input-text" placeholder="Search..." type="text" 
-                                                    v-model="this.$store.state.meta.q">
-                                                <button class="submit-btn" type="button" @click="search">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
+                                                <router-link to="/product">
+                                                    <input class="input-text" placeholder="Search..." type="text" 
+                                                        v-model="this.$store.state.meta.q"
+                                                        >
+                                                    <button class="submit-btn" type="button" @click="search">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </router-link>
                                             </form>
                                         </div>
                                     </li>
@@ -81,10 +84,12 @@
                         <div class="col-10" style="padding-right: 20px;">
                             <div class="error_form mt-6">
                                 <form class="search-form-error" @submit.prevent="search">
-                                    <input class="input-text" placeholder="Search..." type="text" v-model="this.$store.state.meta.q">
-                                    <button class="submit-btn" type="button"  @click="search">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <router-link to="/product">
+                                        <input class="input-text" placeholder="Search..." type="text" v-model="this.$store.state.meta.q">
+                                        <button class="submit-btn" type="button"  @click="search">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </router-link>
                                 </form>
                             </div>
                         </div>
