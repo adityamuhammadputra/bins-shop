@@ -51,18 +51,24 @@
                                                 {{ dataOrder.status.name }} 
                                             </span>
                                         </h5>
-                                        
                                     </div>
+
+                                    
+                                    
                                     <div class="card-body comment-area-wrapper pt-1">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ul class="list-group list-group-horizontal">
-                                                    <li class="list-group-left">No Invoice</li>
-                                                    <li class="list-group-right" 
-                                                        v-if="this.dataOrder">
+                                                    <li class="list-group-left" style="cursor: pointer;">
+                                                        <b v-if="this.dataOrder" @click="copyInvoice(this.dataOrder.invoice)">
+                                                            {{ (this.dataOrder) ? this.dataOrder.invoice : '' }}
+                                                            <i class="pe-7s-copy-file"></i>
+                                                        </b>
+                                                    </li>
+                                                    <li class="list-group-right">
                                                         <router-link :to="'/order/' + this.dataOrder.id + '/print'"
                                                             target="_blank">
-                                                            {{ (this.dataOrder) ? this.dataOrder.invoice : '' }}
+                                                            Lihat Invoice
                                                         </router-link>
                                                     </li>
                                                 </ul>
@@ -70,51 +76,95 @@
                                                     <li class="list-group-left">Tanggal Pembelian</li>
                                                     <li class="list-group-right">{{ (this.dataOrder) ? dateTimeOuput2(this.dataOrder.created_at) : '' }}</li>
                                                 </ul>
-                                                <ul class="list-group list-group-horizontal">
-                                                    <li class="list-group-left">Pembayaran</li>
-                                                    <li class="list-group-right">{{ (this.dataOrder) ? this.dataOrder.transaction_midtrans.payment_type : '' }}</li>
-                                                </ul>
                                                 <hr>
+
                                                 <h5 style="font-size: 16px;font-weight: bold">Detail Produk</h5>
-                                                <div class="card-body comment-area-wrapper pt-1 px-0"><div class="single-comment-wrap mb-2"><a href="/product/lisensi-office-2016-pro-plus-original" class="image author-thumb"><img src="http://bins.local/api/v1/storage/2016_1.png" alt="Author"></a><div class="comments-info"><p class="mb-0" style="font-size: 14px;"><a href="/product/lisensi-office-2016-pro-plus-original" class="image">Lisensi Office 2016 Pro Plus Original</a></p><p>1 barang x <b>Rp99.000</b></p></div></div></div>
+                                                <div class="card-body comment-area-wrapper pt-1 px-0 pb-0" v-if="this.dataOrder">
+                                                    <div class="single-comment-wrap mb-2" 
+                                                        v-for="detail in this.dataOrder.transaction_details" v-bind:key="detail.id">
+                                                        <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
+                                                            <img :src="detail.product.file" alt="Author">
+                                                        </router-link>
+                                                        <div class="comments-info">
+                                                            <p class="mb-0" style="font-size: 14px;">
+                                                                <router-link :to="'/product/'+detail.product.slug" class="image">
+                                                                    {{ detail.name }}
+                                                                </router-link>
+                                                            </p>
+                                                            <p>
+                                                                {{ detail.qty }} barang x <b>{{ detail.price_rp }}</b>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="alert alert-warning d-flex align-items-center py-2 mt-1" role="alert"
+                                                        v-if="this.dataOrder && dataOrder.status.id == 1">
+                                                        <div>
+                                                            Lakukan pembayaran dalam waktu
+                                                            <vue-countdown :time="dataOrder.transaction_midtrans.payment_diff" v-slot="{ hours, minutes, seconds }">
+                                                                <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
+                                                            </vue-countdown> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="detail-pay">
+                                                        <ul class="list-group list-group-horizontal my-1">
+                                                            <li class="list-group-left">Metode Pembayaran</li>
+                                                            <li class="list-group-right">{{ this.dataOrder.transaction_midtrans.payment_type }}</li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-horizontal">
+                                                            <li class="list-group-left">Total Harga ({{ this.dataOrder.qty }} barang)</li>
+                                                            <li class="list-group-right">
+                                                                {{ this.dataOrder.price_rp }}
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-horizontal">
+                                                            <li class="list-group-left">Total Ongkos Kirim</li>
+                                                            <li class="list-group-right">
+                                                                Rp.0
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-horizontal">
+                                                            <li class="list-group-left">Diskon atau Promo</li>
+                                                            <li class="list-group-right">
+                                                                -Rp.{{ this.dataOrder.discount }}
+                                                            </li>
+                                                        </ul>
+                                                        <ul class="list-group list-group-horizontal my-1">
+                                                            <li class="list-group-left">
+                                                                <b>Total Belanja</b>
+                                                            </li>
+                                                            <li class="list-group-right">
+                                                                <b>{{ this.dataOrder.total_rp }}</b>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
                                                 <hr>
+                                                
                                                 <h5 style="font-size: 16px;font-weight: bold">Detail Transaksi</h5>
                                                 <!-- Section: Timeline -->
                                                 <section class="py-1">
-                                                    <ul class="timeline-with-icons  ml-3">
-                                                        <li class="timeline-item mb-5">
-                                                            <span class="timeline-icon">
-                                                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
+                                                    <ul class="timeline-with-icons  ml-3" v-if="this.dataOrder">
+                                                        <li class="timeline-item mb-5"
+                                                            v-for="(status, key) in this.dataOrder.transaction_statuses" v-bind:key="status.id">
+                                                            <span class="timeline-icon" 
+                                                                :style="(key === 0) ? 'background:#ff4545;' : 'background:#d1d1d1;'">
                                                             </span>
                                                             <div class="ml-1">
                                                                 <h5 class="fw-bold mb-0" style="font-size: 14px;">
-                                                                    Pesanan telah tiba di tujuan.
+                                                                    {{ status.name }}
                                                                 </h5>
                                                                 <p class="text-muted mb-1 fw-bold" style="font-size: 14px;font-weight: 400 !important;">
-                                                                    6 Mei 2023, 14:43 WIB
+                                                                    {{ status.date }}
                                                                 </p>
                                                                 <p class="text-muted" style="font-size: 14px;">
-                                                                    voluptas et corrupti distinctio maxime corporis optio?
+                                                                    {{ status.desc }}
                                                                 </p>
                                                             </div>
                                                         </li>
 
-                                                        <li class="timeline-item mb-5">
-                                                            <span class="timeline-icon">
-                                                                <i class="fas fa-hand-holding-usd text-primary fa-sm fa-fw"></i>
-                                                            </span>
-                                                            <div class="ml-1">
-                                                                <h5 class="fw-bold mb-0" style="font-size: 14px;">
-                                                                    Pesanan telah dikirim.
-                                                                </h5>
-                                                                <p class="text-muted mb-1 fw-bold" style="font-size: 14px;font-weight: 400 !important;">
-                                                                    6 Mei 2023, 14:43 WIB
-                                                                </p>
-                                                                <p class="text-muted" style="font-size: 14px;">
-                                                                    Phasellus suscipit porta mattis.
-                                                                </p>
-                                                            </div>
-                                                        </li>
                                                     </ul>
                                                 </section>
                                                 <!-- Section: Timeline -->
@@ -123,9 +173,32 @@
                                     </div>
 
                                     <div class="card-footer text-muted">
-                                        <button type="button" class="btn btn-primary btn-block pull-right">Selesaikan Pesanan</button>
-                                        <button type="button" class="btn btn-white btn-block mt-2 pull-right">Ajukan Refund</button>
-                                        <button type="button" class="btn btn-white btn-block mt-2 pull-right" @click="this.orderDetailModalProps = 'hide'">Kembali</button>
+                                        <template v-if="this.dataOrder.status.id == 1">
+                                            <button type="button" class="btn btn-primary btn-block pull-right"
+                                                @click="orderPay(this.dataOrder.transaction_midtrans.payment_token)">
+                                                Cara Bayar
+                                            </button>
+                                            <button type="button" class="btn btn-white btn-block mt-2 pull-right"
+                                                @click="orderCancelDoneRefund(this.dataOrder, 'cancel')">
+                                                Batalkan Pesanan
+                                            </button>
+                                        </template>
+                                        <template v-if="this.dataOrder.status.id == 2 || this.dataOrder.status.id == 3">
+                                            <button type="button" class="btn btn-primary btn-block pull-right"
+                                                @click="orderCancelDoneRefund(this.dataOrder, 'done')">
+                                                Selesaikan Pesanan
+                                            </button>
+                                            <button type="button" class="btn btn-white btn-block mt-2 pull-right"
+                                                @click="orderCancelDoneRefund(this.dataOrder, 'refund')">
+                                                Ajukan Refund
+                                            </button>
+                                        </template>
+                                        
+                                        <a target="_blank" class="btn btn-white btn-block mt-2 pull-right"
+                                            :href="'https://api.whatsapp.com/send/?phone=62816262439&text=' + this.dataOrder.invoice + '&type=phone_number&app_absent=0'"
+                                        >
+                                        <i class="fa fa-whatsapp"></i> Hubungi Penjual
+                                        </a>
                                     </div>
                                 </div>
                             </div> <!-- My Account Tab Content End -->
@@ -190,7 +263,7 @@ export default {
         this.orderShow();
     },
     methods: {
-        orderShow: function(id) {
+        orderShow: function() {
             this.axios.get('order/' + this.$route.params.order_id, this.$store.state.config)
             .then((response) => {
                 this.dataOrder = response.data.data
@@ -202,6 +275,68 @@ export default {
                 () => this.loading = false
             )
         },
+        orderPay: function(token) {
+            window.snap.pay(token, {
+                onSuccess: function(result){
+                },
+                onPending: function(result){
+                },
+                onError: function(result){
+                },
+                onClose: function(){
+                    return false;
+                },
+            })
+        },
+        orderCancelDoneRefund: function(row, type) {
+            let attr;
+            if (type == 'cancel') {
+                attr = {
+                    'type' : type,
+                    'textHtml' : 'Batalkan transaksi <b>' + row.invoice + '</b> ?',
+                    'textButton' : 'Ya, batalkan',
+                }
+            }
+            if (type == 'done') {
+                attr = {
+                    'type' : type,
+                    'textHtml' : 'Selesaikan transaksi <b>' + row.invoice + '</b> ? <p style="font-size: 14px;color: #8d8d8d;">Dana transaksi akan dilepas ke saldo penjual</p>',
+                    'textButton' : 'Ya, selesaikan',
+                }
+            }
+            if (type == 'refund') {
+                attr = {
+                    'type' : type,
+                    'textHtml' : 'Ajukan pengembalian dana,  transaksi <b>' + row.invoice + '</b> ?',
+                    'textButton' : 'Ya, Setuju',
+                }
+            }
+            this.$swal({
+                title: "Konfirmasi !",
+                html: attr.textHtml,
+                showCancelButton: true,
+                confirmButtonText: attr.textButton,
+                cancelButtonText: 'Kembali',
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    this.axios.patch('order/' + row.id, {
+                        order : row,
+                        type : attr.type,
+                        }, this.$store.state.config)
+                    .then((response) => {
+                        this.successNotif(response.data.message)
+                        this.orderShow();
+                    })
+                    .catch(error => {
+                        this.errorNotif(error)
+                    })
+                }
+            })
+        },
+        copyInvoice: function(env){
+            navigator.clipboard.writeText(env)
+            this.successNotif(env + " Berhasil disalin")
+        }
     },
     
 }

@@ -99,10 +99,10 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-muted">
-                                        <span class="pull-left" v-if="order.status.id == 1">
+                                        <span class="pull-left" v-if="order.status.id == 1 && !isMobile()">
                                             <small>Pembayaran : {{ order.transaction_midtrans.payment_type }} </small>
                                         </span>
-                                        <a href="#" class="btn btn-primary pull-right" 
+                                        <a href="#" class="btn btn-primary pull-right btn-sm" 
                                             v-if="order.status.id == 1"
                                             @click="orderPay(order.transaction_midtrans.payment_token)">
                                             Cara Bayar
@@ -114,7 +114,7 @@
                                             <i class="pe-7s-chat"></i> Tanya Admin
                                         </a>
                                         <router-link :to="'/order/'+order.id" class="text-danger pull-right mr-1"
-                                            v-if="order.status.id == 2">
+                                            >
                                             <b>Lihat Detail</b>
                                         </router-link>
                                     </div>

@@ -2,7 +2,7 @@
 <template>
     <div class="section mt-2 mb-5">
         <div class="container">
-            <div class="row align-items-center" v-if="user">
+            <div class="row align-items-center" v-if="user && this.dataOrder">
                 <div class="col-12 mb-2">
                     <div class="header-logo">
                         <router-link to="/">
@@ -20,29 +20,11 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-5">
-                    <b>Diterbitkan Atas Nama</b><br/>
-                    Penjual : <b>Bins Shop</b>
-                </div>
-
-                <div class="col-7">
-                    <b>Untuk</b><br/>
-                    <table>
-                        <tr>
-                            <td>Pembeli</td>
-                            <td>: </td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Pembelian</td>
-                            <td>: {{ (this.dataOrder) ? dateTimeOuput2(this.dataOrder.created_at) : '' }}</td>
-                        </tr>
-                    </table>
-                </div> -->
 
                 <div class="col-12">
                     <div class="card mb-4 " style="border: none;">
                         <div class="card-body comment-area-wrapper pt-1"
-                            style="background: url(https://assets.tokopedia.net/assets-tokopedia-lite/v2/atreus/kratos/d4ab6312.png) no-repeat center center;">
+                            :style="(this.dataOrder.status.id == 1 || this.dataOrder.status.id == 12 || this.dataOrder.status.id == 11) ? 'background: url(/assets/images/unpaid.png) no-repeat center center;background-size: 70% 40%;' : 'background: url(/assets/images/paid.png) no-repeat center center;background-size: 70% 40%;'">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div style="font-size: 14px;">
@@ -81,53 +63,81 @@
                                     </ul>
                                     <hr>
                                     <h5 style="font-size: 16px;font-weight: bold">Detail Produk</h5>
-                                    <div class="card-body comment-area-wrapper pt-1 px-0"><div class="single-comment-wrap mb-2"><a href="/product/lisensi-office-2016-pro-plus-original" class="image author-thumb"><img src="http://bins.local/api/v1/storage/2016_1.png" alt="Author"></a><div class="comments-info"><p class="mb-0" style="font-size: 14px;"><a href="/product/lisensi-office-2016-pro-plus-original" class="image">Lisensi Office 2016 Pro Plus Original</a></p><p>1 barang x <b>Rp99.000</b></p></div></div></div>
+                                    <div class="card-body comment-area-wrapper pt-1 px-0 pb-0">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Produk</th>
+                                                <th>Harga Satuan</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-right">Total Harga</th>
+                                            </tr>
+                                            <tr v-for="detail in this.dataOrder.transaction_details" v-bind:key="detail.id">
+                                                <td>
+                                                    <b>{{ detail.name }}</b>
+                                                </td>
+                                                <td>
+                                                    {{ detail.product.price_rp }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ detail.qty }}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{ detail.price_rp }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                     <hr>
-                                    <h5 style="font-size: 16px;font-weight: bold">Detail Transaksi</h5>
-                                    <!-- Section: Timeline -->
-                                    <section class="py-1">
-                                        <ul class="timeline-with-icons  ml-3">
-                                            <li class="timeline-item mb-5">
-                                                <span class="timeline-icon">
-                                                    <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                                                </span>
-                                                <div class="ml-1">
-                                                    <h5 class="fw-bold mb-0" style="font-size: 14px;">
-                                                        Pesanan telah tiba di tujuan.
-                                                    </h5>
-                                                    <p class="text-muted mb-1 fw-bold" style="font-size: 14px;font-weight: 400 !important;">
-                                                        6 Mei 2023, 14:43 WIB
-                                                    </p>
-                                                    <p class="text-muted" style="font-size: 14px;">
-                                                        voluptas et corrupti distinctio maxime corporis optio?
-                                                    </p>
-                                                </div>
-                                            </li>
-
-                                            <li class="timeline-item mb-5">
-                                                <span class="timeline-icon">
-                                                    <i class="fas fa-hand-holding-usd text-primary fa-sm fa-fw"></i>
-                                                </span>
-                                                <div class="ml-1">
-                                                    <h5 class="fw-bold mb-0" style="font-size: 14px;">
-                                                        Pesanan telah dikirim.
-                                                    </h5>
-                                                    <p class="text-muted mb-1 fw-bold" style="font-size: 14px;font-weight: 400 !important;">
-                                                        6 Mei 2023, 14:43 WIB
-                                                    </p>
-                                                    <p class="text-muted" style="font-size: 14px;">
-                                                        Phasellus suscipit porta mattis.
-                                                    </p>
-                                                </div>
+                                    <h5 style="font-size: 16px;font-weight: bold">Detail Pembayaran</h5>
+                                    <div class="detail-pay">
+                                        <ul class="list-group list-group-horizontal my-1">
+                                            <li class="list-group-left">Metode Pembayaran</li>
+                                            <li class="list-group-right">{{ this.dataOrder.transaction_midtrans.payment_type }}</li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal">
+                                            <li class="list-group-left">Total Harga ({{ this.dataOrder.qty }} barang)</li>
+                                            <li class="list-group-right">
+                                                {{ this.dataOrder.price_rp }}
                                             </li>
                                         </ul>
-                                    </section>
-                                    <!-- Section: Timeline -->
+                                        <ul class="list-group list-group-horizontal">
+                                            <li class="list-group-left">Total Ongkos Kirim</li>
+                                            <li class="list-group-right">
+                                                Rp.0
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal">
+                                            <li class="list-group-left">Diskon atau Promo</li>
+                                            <li class="list-group-right">
+                                                -Rp.{{ this.dataOrder.discount }}
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal my-1">
+                                            <li class="list-group-left">
+                                                <b>Total Belanja</b>
+                                            </li>
+                                            <li class="list-group-right">
+                                                <b>{{ this.dataOrder.total_rp }}</b>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div> <!-- My Account Tab Content End -->
+
+                <div class="col-12">
+                    <p style="font-size: 13px;">
+                        <span>
+                            Invoice ini sah dan diproses oleh komputer <br/>
+                        Silakan hubungi Admin apabila kamu membutuhkan bantuan.
+                        </span>
+                        <span class="pull-right">
+                            Dicetak pada: {{ dateNow() }}
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

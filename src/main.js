@@ -68,6 +68,9 @@ vueApp.mixin({
                 return string.substring(0, 4)
             return string
         },
+        dateNow: function() {
+            return moment(new Date()).format('DD MMMM YYYY') + ' Pukul ' + moment(new Date()).format('HH:II');
+        },
         dateOuput: function(date) {
             return moment(date).format('DD/MM/YYYY');
         },
