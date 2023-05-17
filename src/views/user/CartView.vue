@@ -282,7 +282,10 @@ export default {
             }
             that.axios.post('order', dataSumm, that.$store.state.config)
             .then((response) => {
-                console.log(response);
+                // console.log(response);
+                console.log('masuk order');
+                this.$router.push('/order');
+
             })
             .catch(error => {
                 that.errorNotif(error)

@@ -69,7 +69,7 @@ vueApp.mixin({
             return string
         },
         dateNow: function() {
-            return moment(new Date()).format('DD MMMM YYYY') + ' Pukul ' + moment(new Date()).format('HH:II');
+            return moment(new Date()).format('DD MMMM YYYY') + ' Pukul ' + moment(new Date()).format('HH:mm');
         },
         dateOuput: function(date) {
             return moment(date).format('DD/MM/YYYY');
@@ -81,7 +81,7 @@ vueApp.mixin({
             return moment(date).format('DD/MM/YYYY HH:II');
         },
         dateTimeOuput2: function(date) {
-            return moment(date).format('DD MMMM YYYY') + ' Pukul ' + moment(date).format('HH:II');
+            return moment(date).format('DD MMMM YYYY') + ' Pukul ' + moment(date).format('HH:mm');
         },
         findString: function(str) {
             console.log(str);

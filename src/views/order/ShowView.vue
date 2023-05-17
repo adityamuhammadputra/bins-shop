@@ -193,11 +193,21 @@
                                                 Ajukan Refund
                                             </button>
                                         </template>
+
+
+                                        
+                                        <template v-if="this.dataOrder.status.id == 4">
+                                            <button type="button" class="btn btn-primary btn-block mt-2 pull-right"
+                                                @click="orderPay(this.dataOrder.transaction_midtrans.payment_token)">
+                                                Beri Ulasan
+                                            </button>
+                                        </template>
+
                                         
                                         <a target="_blank" class="btn btn-white btn-block mt-2 pull-right"
                                             :href="'https://api.whatsapp.com/send/?phone=62816262439&text=' + this.dataOrder.invoice + '&type=phone_number&app_absent=0'"
                                         >
-                                        <i class="fa fa-whatsapp"></i> Hubungi Penjual
+                                            <i class="fa fa-whatsapp"></i> Hubungi Penjual
                                         </a>
                                     </div>
                                 </div>
@@ -227,9 +237,6 @@
 
         </div>
     </div>
-
-    
-
 
 </template>
 

@@ -33,31 +33,53 @@
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h3 class="title">Account Details</h3>
-                                            <div class="account-details-form">
-                                                <form action="#">
+                                            <h3 class="title">Informasi Akun</h3>
+                                            <div class="alert alert-info mb-5" role="alert">
+                                                Silahkan lengkapi profile akun
+                                            </div>
+
+                                            <div class="account-details-form ">
+                                                <form action="#" class="mt-5 pt-3">
                                                     <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="single-input-item mb-3">
-                                                                <label for="first-name" class="required mb-1">First Name</label>
-                                                                <input type="text" id="first-name" placeholder="First Name">
-                                                            </div>
+                                                        <div class="col-3">
+                                                            <img :src="user.avatar"  referrerpolicy="no-referrer"
+                                                             style="border-radius: 100%; width: 100%;" v-if="user">
                                                         </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="single-input-item mb-3">
-                                                                <label for="last-name" class="required mb-1">Last Name</label>
-                                                                <input type="text" id="last-name" placeholder="Last Name">
+                                                        <div class="col-9">
+                                                            <div class="form-floating mb-5">
+                                                                <input type="text" class="form-control" 
+                                                                    id="email" 
+                                                                    placeholder="Email"
+                                                                    v-model="this.user.email"
+                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
+                                                                <label for="email" style="padding-top: 7px;">Email </label>
                                                             </div>
+                                                            
+                                                            <div class="form-floating mb-5">
+                                                                <input type="text" class="form-control" 
+                                                                    id="name" 
+                                                                    placeholder="Nama Lengkap"
+                                                                    v-model="this.user.name"
+                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
+                                                                <label for="name" style="padding-top: 7px;">Nama Lengkap </label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-5">
+                                                                <input type="number" class="form-control" 
+                                                                    id="phone" 
+                                                                    placeholder="Nomor Hp"
+                                                                    v-model="this.user.phone"
+                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
+                                                                <label for="phone" style="padding-top: 7px;">Nomor Hp </label>
+                                                            </div>
+                                                            
+                                                            <!-- <div class="single-input-item mb-3">
+                                                                <label for="phone" class="required mb-1">Nomor Hp</label>
+                                                                <input type="number" v-model="this.user.phone">
+                                                            </div> -->
                                                         </div>
                                                     </div>
-                                                    <div class="single-input-item mb-3">
-                                                        <label for="display-name" class="required mb-1">Display Name</label>
-                                                        <input type="text" id="display-name" placeholder="Display Name">
-                                                    </div>
-                                                    <div class="single-input-item mb-3">
-                                                        <label for="email" class="required mb-1">Email Addres</label>
-                                                        <input type="email" id="email" placeholder="Email Address">
-                                                    </div>
+
                                                     <fieldset>
                                                         <legend>Password change</legend>
                                                         <div class="single-input-item mb-3">
@@ -127,8 +149,11 @@ export default {
         }
     },
     mounted() {
-        if (this.$store.state.auth.user) 
+        if (this.$store.state.auth.user) {
             this.user = this.$store.state.auth.user.user;
+            this.user.phone = (this.user.phone) ? this.user.phone : '+62'; 
+        }
+
     },
     methods: {
        

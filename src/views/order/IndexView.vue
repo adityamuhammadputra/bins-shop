@@ -113,9 +113,16 @@
                                             >
                                             <i class="pe-7s-chat"></i> Tanya Admin
                                         </a>
+
+                                        <a href="#" class="btn btn-primary pull-right btn-sm" 
+                                            v-if="order.status.id == 4"
+                                            @click="orderPay(order.transaction_midtrans.payment_token)">
+                                            Beli Ulasan
+                                        </a>
+
                                         <router-link :to="'/order/'+order.id" class="text-danger pull-right mr-1"
                                             >
-                                            <b>Lihat Detail</b>
+                                            <b>Lihat Detail </b>
                                         </router-link>
                                     </div>
                                </div>

@@ -34,7 +34,13 @@
                                         </router-link>
                                     </h5>
                                     <span class="ratings">
-                                        <span class="rating-num"><i class="fa fa-star text-warning"></i> 4 &nbsp;|</span> <span class="rating-num ml-1">Terjual 100</span>
+                                        <span class="rating-num" v-if="product.rating > 0">
+                                            <i class="fa fa-star text-warning"></i> 
+                                            {{ product.rating }} &nbsp;|
+                                        </span> 
+                                        <span class="rating-num ml-1">
+                                            Terjual {{ product.sold }}
+                                        </span>
                                     </span>
                                     <span class="price">
                                         <span class="new">{{ product.price_rp }}</span>

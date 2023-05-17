@@ -12,12 +12,13 @@
                     <div class="shop-top-bar-right">
                         <span class="mr-1">Urutkan: </span>
                         <div class="shop-short-by mr-4">
-                            <select class="nice-select">
+                            <select class="nice-select" @change="getIndex()"
+                                v-model="this.$store.state.meta.sort">
                                 <option value="">--Urutkan--</option>
                                 <option value="1">Penjualan Terbanyak</option>
                                 <option value="2">Terbaru</option>
                                 <option value="3">Harga Terendah</option>
-                                <option value="3">Harga Tertinggi</option>
+                                <option value="4">Harga Tertinggi</option>
                             </select>
                         </div>
                     </div>
@@ -25,13 +26,13 @@
                 <div class="form-group row" v-else>
                     <label for="staticEmail" class="col-6 col-form-label"><b>{{ this.meta.total }}</b> Produk</label>
                     <div class="col-6">
-                        <select class="nice-select" aria-label=".form-select-sm example" @click="getIndex()" 
+                        <select class="nice-select" aria-label=".form-select-sm example" @change="getIndex()" 
                             v-model="this.$store.state.meta.sort">
                             <option value="">--Urutkan--</option>
                             <option value="1">Penjualan Terbanyak</option>
                             <option value="2">Terbaru</option>
                             <option value="3">Harga Terendah</option>
-                            <option value="3">Harga Tertinggi</option>
+                            <option value="4">Harga Tertinggi</option>
                         </select>
                     </div>
                 </div>
