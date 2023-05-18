@@ -96,7 +96,21 @@
                                                     {{ detail.qty }} barang x <b>{{ detail.price_rp }}</b>
                                                 </p>
                                             </div>
+                                            <!-- <star-rating v-model:rating="rating" v-if="order.status.id == 4"></star-rating> -->
                                         </div>
+                                        <p v-if="order.status.id == 4" 
+                                            style="font-size: 14px;font-style: italic;">
+                                            <template v-if="order.transaction_rating">
+                                                <star-rating v-model:rating="order.transaction_rating.rating" 
+                                                    :star-size="17" 
+                                                    read-only="true">
+                                                </star-rating>
+                                                {{ order.transaction_rating.desc }}
+                                            </template>
+                                            <template v-else>
+                                                Belum diulas
+                                            </template>
+                                        </p>
                                     </div>
                                     <div class="card-footer text-muted">
                                         <span class="pull-left" v-if="order.status.id == 1 && !isMobile()">
@@ -113,10 +127,9 @@
                                             >
                                             <i class="pe-7s-chat"></i> Tanya Admin
                                         </a>
-
                                         <a href="#" class="btn btn-primary pull-right btn-sm" 
-                                            v-if="order.status.id == 4"
-                                            @click="orderPay(order.transaction_midtrans.payment_token)">
+                                            v-if="order.status.id == 4 && !order.transaction_rating"
+                                            @click="rating.transaction_id = order.id; modal = ''; rating.order = order">
                                             Beli Ulasan
                                         </a>
 
@@ -161,6 +174,38 @@
         </div>
     </div>
 
+
+    <ModalRating 
+        v-bind:ratingProps="this.rating"
+        v-bind:modalProps="this.modal">
+    </ModalRating>
+
+    <!-- <div class="swal2-container swal2-center swal2-backdrop-show" 
+        style="overflow-y: auto;"
+        :style="modal">
+        <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;">
+            <h2 class="swal2-title" id="swal2-title" style="display: block;">Beri Ulasan</h2>
+            <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
+                Tulis ulasan untuk transaksi <br/><b>{{ (rating.order) ? rating.order.invoice : '' }}</b>
+                <div class="mt-2 swal2-wrap-rating">
+                    <star-rating v-model:rating="rating.value" animate="true"></star-rating>
+                </div>
+            </div>
+            <textarea class="swal2-textarea mt-1" v-model="rating.desc"></textarea>
+            <span class="swal2-html-container" style="font-size: 14px;">Ulasan kamu sangat berati untuk kami :)</span>
+            <div class="swal2-actions" style="display: flex;">
+                <button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;"
+                    @click="orderRating()">
+                    Kirim Ulasan
+                </button>
+                <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: inline-block;"
+                    @click="modal = 'display: none;'">
+                    Batal
+                </button>
+            </div>
+        </div>
+    </div> -->
+
 </template>
 
 <style>
@@ -170,7 +215,10 @@
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
 import ProductRecomend from '/src/components/ProductRecomend.vue'
+import ModalRating from '/src/components/ModalRating.vue'
+
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import StarRating from 'vue-star-rating'
 
 export default {
     name: 'Header',
@@ -178,6 +226,8 @@ export default {
         ElseLogin,
         VueCountdown,
         ProductRecomend,
+        ModalRating,
+        StarRating,
     },
     data() {
         return {
@@ -185,6 +235,13 @@ export default {
             user : null,
             loading : true,
             exlude: [],
+            rating : {
+                value : 5,
+                desc : '',
+                transaction_id: '',
+                order : '',
+            },
+            modal: 'display: none;',
         }
     },
     mounted() {
@@ -219,6 +276,19 @@ export default {
                 },
             })
         },
+        // orderRating: function() {
+        //     this.modal = 'display: none;';
+        //     this.axios.post('order-rating', this.rating, this.$store.state.config)
+        //         .then((response) => {
+        //             this.successNotif(response.data.message)
+        //         })
+        //         .catch(error => {
+        //             this.errorNotif(error)
+        //         })
+        //         .finally(
+        //             () => this.loadingButton = false
+        //         )
+        // }
         
     },
     

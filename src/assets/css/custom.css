@@ -62,12 +62,29 @@
     border-bottom: 1px solid #f9f9f9;
 }
 
-.modal.show {
+/* .modal.show {
     display: none;
-}
+} */
 .modal.show {
     background: rgba(0,0,0,0.6);
     display: block;
+    z-index: 111111;
+}
+
+
+
+
+/* html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; height: auto!important;} */
+
+.vue-star-rating-rating-text {
+    display: none;
+}
+
+.swal2-wrap-rating {
+    justify-content: center; 
+    display: flex;
+    overflow: hidden;
+    height: 62px;
 }
 .sticky {
     position: fixed;

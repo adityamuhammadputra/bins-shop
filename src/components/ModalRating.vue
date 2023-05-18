@@ -1,0 +1,68 @@
+<template>
+    <div class="swal2-container swal2-center swal2-backdrop-show" 
+        style="overflow-y: auto;"
+        :style="modal">
+        <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;">
+            <h2 class="swal2-title" id="swal2-title" style="display: block;">Beri Ulasan</h2>
+            <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
+                Tulis ulasan untuk transaksi <br/><b>{{ (rating.order) ? rating.order.invoice : '' }}</b>
+                <div class="mt-2 swal2-wrap-rating">
+                    <!-- <star-rating v-model:rating="rating.value" animate="true"></star-rating> -->
+                    <star-rating v-model:rating="rating.value"></star-rating>
+                </div>
+            </div>
+            <textarea class="swal2-textarea mt-1" v-model="rating.desc"></textarea>
+            <span class="swal2-html-container" style="font-size: 14px;">Ulasan kamu sangat berati untuk kami :)</span>
+            <div class="swal2-actions" style="display: flex;">
+                <button type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;"
+                    @click="orderRating()">
+                    Kirim Ulasan
+                </button>
+                <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: inline-block;"
+                    @click="modal = 'display: none;'; modalProps = 'display: none;'">
+                    Batal
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+import StarRating from 'vue-star-rating'
+
+export default {
+    name: 'ModalOrder',
+    props : ['ratingProps', 'modalProps'],
+    data() {
+        return {
+            rating: this.ratingProps ?? null,
+            modal : this.modalProps
+            // modalClass: this.orderModalProps
+        }
+    },
+    components: {
+        StarRating,
+    },
+    watch:{
+        modalProps(newVal, oldVal) {
+            this.modal = newVal;
+        },
+    },
+    methods: {
+        orderRating: function() {
+            this.modal = 'display: none;';
+            this.axios.post('order-rating', this.rating, this.$store.state.config)
+                .then((response) => {
+                    this.successNotif(response.data.message)
+                })
+                .catch(error => {
+                    this.errorNotif(error)
+                })
+                .finally(
+                    () => this.loadingButton = false
+                )
+        }
+    }
+}
+</script>

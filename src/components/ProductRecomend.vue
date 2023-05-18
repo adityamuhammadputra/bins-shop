@@ -78,7 +78,7 @@ export default {
         return {
             dataRekomends: [],
             loadTheChart : this.loadChart ?? false,
-            exclude: this.excludeProps ?? '-'
+            exclude: this.excludeProps ?? this.$store.state.default.exlude,
         }
     },
     mounted() {
@@ -86,9 +86,8 @@ export default {
     },
     methods: {
         getRecomend: function() {
-            console.log(this.exclude);
             this.loading = true
-            this.axios.get('product?exclude='+this.exclude)
+            this.axios.get('product?exclude='+localStorage.getItem('exlude'))
             .then((response) => {
                 this.dataRekomends = response.data.data;
                 // this.$emit('modal-pick', this.resultModal)

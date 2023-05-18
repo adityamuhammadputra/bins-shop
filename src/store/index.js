@@ -21,6 +21,7 @@ export default createStore({
     default : {
       cart : (localStorage.getItem('cartLocal')) ? parseInt(localStorage.getItem('cartLocal')) : 0,
       cartLoading : false,
+      exclude : '',
       trx: 0,
     }
   },

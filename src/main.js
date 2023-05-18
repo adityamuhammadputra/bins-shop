@@ -114,7 +114,7 @@ vueApp.mixin({
         countChart : function() {
             this.axios.get('chart-count', this.$store.state.config)
             .then((response) => {
-                this.$store.state.default.cart = response.data.message
+                // this.$store.state.default.cart = response.data.message
                 localStorage.setItem('cartLocal', response.data.message)
             })
             .catch(error => {
@@ -161,7 +161,8 @@ vueApp.mixin({
                 for(var key in response.data.data) {
                     resultExlude.push(response.data.data[key].product.slug);
                 }
-                this.exlude = resultExlude.join()
+                // this.exclude = resultExlude.join();
+                localStorage.setItem('exlude', resultExlude.join())
                 this.$store.state.default.cartLoading = false
             })
             .catch(error => {

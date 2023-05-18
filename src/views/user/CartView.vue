@@ -93,7 +93,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="cart-calculate-items">
-                                <h6 class="title">Ringkasan Belanja</h6>
+                                <h6 class="title">Ringkasan Belanja </h6>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
@@ -122,7 +122,7 @@
             </div>
 
             <ProductRecomend 
-                v-bind:excludeProps="this.exlude"
+                v-bind:excludeProps="null"
                 v-bind:loadChart="true">
             </ProductRecomend>
 
@@ -144,7 +144,6 @@ export default {
     data() {
         return {
             data: [],
-            exlude: [],
             totalBarang: 0,
             totalHarga: 0,
             loading: true,
@@ -162,15 +161,20 @@ export default {
     },
     created() {
         this.cartData();
+        // console.log(this.datax);
+        // console.log(this.data);
+        // console.log(this.$store.state.default.exlude);
     },
     computed: {
         setCartLoading() {
             return this.$store.state.default.cartLoading;
         }
+        
     },
     mounted() {
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
+        // console.log(this.data);
     },
     methods: {
         cartCheck: function (data) {
@@ -208,6 +212,7 @@ export default {
         },
         chartDelete: function(row) {
             this.$swal({
+                heightAuto: false,
                 title: "Konfirmasi !",
                 text: 'Hapus ' + row.product.name + ' dari keranjang ?',
                 showCancelButton: true,
