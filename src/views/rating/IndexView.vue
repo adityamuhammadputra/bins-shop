@@ -8,7 +8,6 @@
                 </div>
             </div>
 
-
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
@@ -18,12 +17,13 @@
                                     <router-link to="/user">
                                         <i class="pe-7s-user"></i> Pengaturan Akun
                                     </router-link>
-                                    <router-link to="/order" class="active">
+                                    <router-link to="/order">
                                         <i class="pe-7s-news-paper"></i> Daftar Transaksi
                                     </router-link>
-                                    <router-link to="/rating">
+                                    <router-link to="/rating" class="active">
                                         <i class="pe-7s-star"></i> Ulasan
                                     </router-link>
+                                    <!-- <a href="#" data-bs-toggle="tab" class=""><i class="pe-7s-star"></i> Ulasan</a> -->
                                     <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
                                 </div>
                             </div>
@@ -94,27 +94,25 @@
                                                         {{ detail.name }}
                                                     </router-link>
                                                 </p>
-                                                <p class="mb-0">
+                                                <p>
                                                     {{ detail.qty }} barang x <b>{{ detail.price_rp }}</b>
-                                                </p>
-
-                                                <p v-if="order.status.id == 4" 
-                                                    style="font-size: 14px;font-style: italic;">
-                                                    <template v-if="order.transaction_rating">
-                                                        <star-rating v-model:rating="order.transaction_rating.rating" 
-                                                            :star-size="17" 
-                                                            read-only="true">
-                                                        </star-rating>
-                                                        {{ order.transaction_rating.desc }}
-                                                    </template>
-                                                    <template v-else>
-                                                        Belum diulas
-                                                    </template>
                                                 </p>
                                             </div>
                                             <!-- <star-rating v-model:rating="rating" v-if="order.status.id == 4"></star-rating> -->
                                         </div>
-                                       
+                                        <p v-if="order.status.id == 4" 
+                                            style="font-size: 14px;font-style: italic;">
+                                            <template v-if="order.transaction_rating">
+                                                <star-rating v-model:rating="order.transaction_rating.rating" 
+                                                    :star-size="17" 
+                                                    read-only="true">
+                                                </star-rating>
+                                                {{ order.transaction_rating.desc }}
+                                            </template>
+                                            <template v-else>
+                                                Belum diulas
+                                            </template>
+                                        </p>
                                     </div>
                                     <div class="card-footer text-muted">
                                         <span class="pull-left" v-if="order.status.id == 1 && !isMobile()">
