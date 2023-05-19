@@ -143,6 +143,26 @@
 
                                                 <hr>
                                                 
+                                                <template v-if="this.dataOrder.status.id == 4" >
+                                                    <h5 style="font-size: 16px;font-weight: bold">Ulasan Transaksi</h5>
+                                                    <section class="py-1">
+                                                        <p style="font-size: 14px;font-style: italic;">
+                                                            <template v-if="this.dataOrder.transaction_rating">
+                                                                <star-rating v-model:rating="this.dataOrder.transaction_rating.rating" 
+                                                                    :star-size="17" 
+                                                                    read-only="true">
+                                                                </star-rating>
+                                                                {{ this.dataOrder.transaction_rating.desc }}
+                                                            </template>
+                                                            <template v-else>
+                                                                Belum diulas
+                                                            </template>
+                                                        </p>
+                                                    </section>
+                                                </template>
+
+                                                <hr>
+
                                                 <h5 style="font-size: 16px;font-weight: bold">Detail Transaksi</h5>
                                                 <!-- Section: Timeline -->
                                                 <section class="py-1">
@@ -167,6 +187,8 @@
 
                                                     </ul>
                                                 </section>
+
+                                                
                                                 <!-- Section: Timeline -->
                                             </div>
                                         </div>
@@ -195,13 +217,11 @@
                                         </template>
 
 
-                                        
-                                        <template v-if="this.dataOrder.status.id == 4">
-                                            <button type="button" class="btn btn-primary btn-block mt-2 pull-right"
-                                                @click="orderPay(this.dataOrder.transaction_midtrans.payment_token)">
-                                                Beri Ulasan
-                                            </button>
-                                        </template>
+                                        <ModalRating 
+                                            v-if="this.dataOrder.status.id == 4 && !this.dataOrder.transaction_rating"
+                                            v-bind:order="this.dataOrder"
+                                            v-bind:type="'show'">
+                                        </ModalRating>
 
                                         
                                         <a target="_blank" class="btn btn-white btn-block mt-2 pull-right"
@@ -248,6 +268,9 @@
 import ElseLogin from '/src/components/ElseLogin.vue'
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import VueCountdown from '@chenfengyuan/vue-countdown';
+import ModalRating from '/src/components/ModalRating.vue'
+import StarRating from 'vue-star-rating'
+
 
 export default {
     name: 'Header',
@@ -255,6 +278,8 @@ export default {
         ElseLogin,
         VueCountdown,
         ProductRecomend,
+        ModalRating,
+        StarRating,
     },
     data() {
         return {

@@ -1,4 +1,10 @@
 <template>
+    <a href="#" class="btn btn-primary" 
+        :class="(type == 'show') ? ' btn-block mt-2' : 'pull-right btn-sm'"
+        @click="rating.transaction_id = order.id; modal = ''; rating.order = order">
+        Beli Ulasan
+    </a>
+
     <div class="swal2-container swal2-center swal2-backdrop-show" 
         style="overflow-y: auto;"
         :style="modal">
@@ -19,7 +25,8 @@
                     Kirim Ulasan
                 </button>
                 <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: inline-block;"
-                    @click="modal = 'display: none;'; modalProps = 'display: none;'">
+                    @click="modal = 'display: none;'; $emit('modal')"
+                    >
                     Batal
                 </button>
             </div>
@@ -33,28 +40,38 @@ import StarRating from 'vue-star-rating'
 
 export default {
     name: 'ModalOrder',
-    props : ['ratingProps', 'modalProps'],
-    data() {
-        return {
-            rating: this.ratingProps ?? null,
-            modal : this.modalProps
-            // modalClass: this.orderModalProps
-        }
-    },
+    props : ['order', 'type'],
     components: {
         StarRating,
     },
-    watch:{
-        modalProps(newVal, oldVal) {
-            this.modal = newVal;
-        },
+    data() {
+        return {
+            rating : {
+                value : 5,
+                desc : '',
+                transaction_id: '',
+                order : '',
+            },
+            modal: 'display: none;',
+        }
     },
+    // watch:{
+    //     modalProps(newVal, oldVal) {
+    //         this.modal = newVal;
+    //     },
+    // },
     methods: {
         orderRating: function() {
+            console.log(this.$props.type);
             this.modal = 'display: none;';
             this.axios.post('order-rating', this.rating, this.$store.state.config)
                 .then((response) => {
                     this.successNotif(response.data.message)
+                    if (this.$props.type == 'show') {
+                        this.$parent.orderShow();
+                    } else {
+                        this.$parent.orderIndex();
+                    }
                 })
                 .catch(error => {
                     this.errorNotif(error)

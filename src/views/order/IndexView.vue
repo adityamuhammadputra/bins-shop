@@ -127,11 +127,12 @@
                                             >
                                             <i class="pe-7s-chat"></i> Tanya Admin
                                         </a>
-                                        <a href="#" class="btn btn-primary pull-right btn-sm" 
+
+                                        <ModalRating 
                                             v-if="order.status.id == 4 && !order.transaction_rating"
-                                            @click="rating.transaction_id = order.id; modal = ''; rating.order = order">
-                                            Beli Ulasan
-                                        </a>
+                                            v-bind:order="order"
+                                            v-bind:type="'index'">
+                                        </ModalRating>
 
                                         <router-link :to="'/order/'+order.id" class="text-danger pull-right mr-1"
                                             >
@@ -175,10 +176,7 @@
     </div>
 
 
-    <ModalRating 
-        v-bind:ratingProps="this.rating"
-        v-bind:modalProps="this.modal">
-    </ModalRating>
+   
 
     <!-- <div class="swal2-container swal2-center swal2-backdrop-show" 
         style="overflow-y: auto;"
@@ -235,13 +233,6 @@ export default {
             user : null,
             loading : true,
             exlude: [],
-            rating : {
-                value : 5,
-                desc : '',
-                transaction_id: '',
-                order : '',
-            },
-            modal: 'display: none;',
         }
     },
     mounted() {
