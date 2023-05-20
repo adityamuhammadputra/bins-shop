@@ -3,62 +3,60 @@
     <div class="row mt-5">
         <div class="col-12">
             <div class="section-title mb-5">
-                <h3 class="pb-3">Produk Lainnya</h3>
+                <h5 class="pb-1">Produk Lainnya</h5>
                 <span></span>
                 <div class="title-border-bottom"></div>
             </div>
         </div>
         <div class="col">
-            <div class="">
-                <Carousel :items-to-show="(isMobile()) ? 2 : 5">
-                    <Slide v-for="product in this.dataRekomends" :key="product.id">
-                        <div class="product">
-                            <div class="product-inner">
-                                <div class="thumb">
-                                    <router-link :to="'/product/'+product.slug" class="image">
-                                        <img class="first-image" :src="product.file" alt="Product">
-                                        <img class="second-image" :src="product.file" alt="Product">
-                                    </router-link>
+            <Carousel :items-to-show="(isMobile()) ? 2 : 5">
+                <Slide v-for="product in this.dataRekomends" :key="product.id">
+                    <div class="product">
+                        <div class="product-inner">
+                            <div class="thumb">
+                                <router-link :to="'/product/'+product.slug" class="image">
+                                    <img class="first-image" :src="product.file" alt="Product">
+                                    <img class="second-image" :src="product.file" alt="Product">
+                                </router-link>
 
-                                    <div class="actions">
-                                        <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="#" title="Quickview" class="action quickview" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                        <a href="compare.html" title="Compare" class="action compare"><i class="pe-7s-shuffle"></i></a>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <h4 class="sub-title" style="display: none;"><a href="single-product.html">{{ product.category }}</a></h4>
-                                    <h5 class="title">
-                                        <router-link :to="'/product/'+product.slug" class="image">
-                                            {{ product.name }}
-                                        </router-link>
-                                    </h5>
-                                    <span class="ratings">
-                                        <span class="rating-num" v-if="product.rating > 0">
-                                            <i class="fa fa-star text-warning"></i> 
-                                            {{ product.rating }} &nbsp;|
-                                        </span> 
-                                        <span class="rating-num ml-1">
-                                            Terjual {{ product.sold }}
-                                        </span>
-                                    </span>
-                                    <span class="price">
-                                        <span class="new">{{ product.price_rp }}</span>
-                                        <span class="old">{{ product.price_rp }}</span>
-                                    </span>
-                                    <button class="btn btn-sm btn-outline-danger btn-hover-danger w-100" title="Add To Cart"
-                                        @click="addChart(product.id, this.loadTheChart)"
-                                        >+ Keranjang 
-                                    </button>
+                                <div class="actions">
+                                    <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="pe-7s-like"></i></a>
+                                    <a href="#" title="Quickview" class="action quickview" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
+                                    <a href="compare.html" title="Compare" class="action compare"><i class="pe-7s-shuffle"></i></a>
                                 </div>
                             </div>
+                            <div class="content">
+                                <h4 class="sub-title" style="display: none;"><a href="single-product.html">{{ product.category }}</a></h4>
+                                <h5 class="title">
+                                    <router-link :to="'/product/'+product.slug" class="image">
+                                        {{ product.name }}
+                                    </router-link>
+                                </h5>
+                                <span class="ratings">
+                                    <span class="rating-num" v-if="product.rating_avg > 0">
+                                        <i class="fa fa-star text-warning"></i> 
+                                        {{ product.rating_avg }} &nbsp;|
+                                    </span> 
+                                    <span class="rating-num ml-1">
+                                        Terjual {{ product.sold }}
+                                    </span>
+                                </span>
+                                <span class="price">
+                                    <span class="new">{{ product.price_rp }}</span>
+                                    <span class="old">{{ product.price_rp }}</span>
+                                </span>
+                                <button class="btn btn-sm btn-outline-danger btn-hover-danger w-100" title="Add To Cart"
+                                    @click="addChart(product.id, this.loadTheChart)"
+                                    >+ Keranjang 
+                                </button>
+                            </div>
                         </div>
-                    </Slide>
-                    <template #addons>
-                    <Navigation />
-                    </template>
-                </Carousel>
-            </div>
+                    </div>
+                </Slide>
+                <template #addons>
+                <Navigation />
+                </template>
+            </Carousel>
         </div>
 
     </div>
