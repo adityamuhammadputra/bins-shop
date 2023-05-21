@@ -133,11 +133,43 @@
                         </div>
                         <!-- Social Shear Start -->
                         <div class="social-share">
-                            <span>Bagikan :</span>
-                            <a href="#"><i class="fa fa-facebook-square facebook-color"></i></a>
-                            <a href="#"><i class="fa fa-twitter-square twitter-color"></i></a>
-                            <a href="#"><i class="fa fa-linkedin-square linkedin-color"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-square pinterest-color"></i></a>
+                            <span>Bagikan : {{  }}</span>
+                            <!--  -->
+                            <a @click="copyLink(currentBaseUrl()+$route.fullPath)" style="cursor: pointer;">
+                                <i class="fa fa-copy text-primary"></i>
+                            </a>
+
+                            <ShareNetwork
+                                network="whatsapp"
+                                :url="currentBaseUrl()+$route.fullPath"
+                                :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
+                            >
+                                <i class="fa fa-whatsapp whatsapp-color"></i>
+                            </ShareNetwork>
+                            <ShareNetwork
+                                network="facebook"
+                                :url="currentBaseUrl()+$route.fullPath"
+                                :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
+                                hashtags="binsshop"
+                            >
+                                <i class="fa fa-facebook-square facebook-color"></i>
+                            </ShareNetwork>
+                            <ShareNetwork
+                                network="twitter"
+                                :url="currentBaseUrl()+$route.fullPath"
+                                :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
+                                hashtags="binsshop"
+                            >
+                                <i class="fa fa-twitter twitter-color"></i>
+                            </ShareNetwork>
+                            <ShareNetwork
+                                network="linkedin"
+                                :url="currentBaseUrl()+$route.fullPath"
+                                :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
+                                hashtags="binsshop"
+                            >
+                                <i class="fa fa-linkedin-square linkedin-color"></i>
+                            </ShareNetwork>
                         </div>
                        
 
@@ -537,24 +569,10 @@ export default {
                 () => this.loadingButton = false
             )
         },
-        // discusPostReply: function(product, parent = null) {
-        //     this.loadingButton = true
-        //     this.discus.product_id = product.id
-        //     this.discus.parent = parent
-        //     this.axios.post('product-discus', this.discus, this.$store.state.config)
-        //     .then((response) => {
-        //         this.successNotif(response.data.message)
-        //         this.getData(true);
-        //         this.discus.desc = ''
-
-        //     })
-        //     .catch(error => {
-        //         this.errorNotif(error)
-        //     })
-        //     .finally(
-        //         () => this.loadingButton = false
-        //     )
-        // },
+        copyLink: function(url){
+            navigator.clipboard.writeText(url)
+            this.successNotif("Url berhasil disalin")
+        }
 
     }
 }

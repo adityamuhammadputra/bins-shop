@@ -29,6 +29,9 @@ import "vue-toastification/dist/index.css";
 import { useToast } from "vue-toastification";
 import bottomNavigationVue from "bottom-navigation-vue";
 import "bottom-navigation-vue/dist/style.css";
+import VueSocialSharing from 'vue-social-sharing'
+
+const currentBaseUrl = 'http://localhost:8080'
 
 const optionToast = {
     timeout: 5500,
@@ -36,8 +39,6 @@ const optionToast = {
 };
 
 const toast = useToast();
-
-
 const vueApp = createApp(App)
                 .use(store)
                 .use(router)
@@ -46,16 +47,21 @@ const vueApp = createApp(App)
                 .use(bottomNavigationVue)
                 .use(ContentLoader)
                 .use(VueAxios, axios)
+                .use(VueSocialSharing)
                 .use(vue3GoogleLogin, {
                     clientId: '178946568807-5tfh6j07huih5h53eiun11s6pf19iu2d.apps.googleusercontent.com'
                 })
 
 vueApp.component("content-loader", ContentLoader)
 
+
 vueApp.mixin({
     methods: {
         testAh: function (){
             console.log('test');
+        },
+        currentBaseUrl: function () {
+            return currentBaseUrl;
         },
         globalAlert: function (message) {
             this.$swal(message);
