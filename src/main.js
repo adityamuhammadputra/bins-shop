@@ -114,7 +114,7 @@ vueApp.mixin({
         countChart : function() {
             this.axios.get('chart-count', this.$store.state.config)
             .then((response) => {
-                // this.$store.state.default.cart = response.data.message
+                this.$store.state.default.cart = response.data.message
                 localStorage.setItem('cartLocal', response.data.message)
             })
             .catch(error => {

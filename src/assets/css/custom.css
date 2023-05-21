@@ -39,6 +39,20 @@
     margin-left: 5rem;
 }
 
+.mt-6 {
+    margin-top: 6rem;
+}
+
+.pl-0 {
+    padding-left: 0px !important;
+}
+.pl-1 {
+    padding-left: 1rem;
+}
+.pl-2 {
+    padding-left: 2rem;
+}
+
 .bg-danger {
     color: white !important;
 }
@@ -54,6 +68,8 @@
 .text-left {
     text-align: left;
 }
+
+
 
 
 .btn-block {
@@ -352,6 +368,12 @@ input[type="checkbox"] {
 
   .nav-link.active {
     border-bottom: 2px solid !important;
+  }
+
+  .replay {
+    background: #f9f9f9;
+    padding: 10px;
+    padding-bottom: 1px;
   }
 
   @media only screen and (max-width: 575px) {

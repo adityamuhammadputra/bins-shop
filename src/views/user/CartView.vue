@@ -244,6 +244,7 @@ export default {
                 qty : this.totalBarang,
                 product: this.data,
             }
+            // console.log(dataSumm); return false;
             this.axios.post('checkout', dataSumm, this.$store.state.config)
                 .then((response) => {
                     // console.log(response.data.token);
@@ -288,9 +289,7 @@ export default {
             that.axios.post('order', dataSumm, that.$store.state.config)
             .then((response) => {
                 // console.log(response);
-                console.log('masuk order');
                 this.$router.push('/order');
-
             })
             .catch(error => {
                 that.errorNotif(error)

@@ -75,15 +75,9 @@
                         </div>
 
                         <div class="col-lg-12 col-custom single-product-tab">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active">Detail</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" >Ulasan</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">Diskusi</a>
+                            <ul class="nav nav-tabs pt-1" style="border-top: none;">
+                                <li class="nav-item pl-0">
+                                    <a class="nav-link active">Detail Produk</a>
                                 </li>
                             </ul>
                         </div>
@@ -137,8 +131,6 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- Cart & Wishlist Button End -->
-
                         <!-- Social Shear Start -->
                         <div class="social-share">
                             <span>Bagikan :</span>
@@ -150,14 +142,13 @@
                        
 
                     </div>
-                    <!-- Product Summery End -->
 
                 </div>
             </div>
 
-            <div class="row section-margin" v-if="detail">
+            <div class="row section-margin" style="margin-top: 3rem !important; margin-bottom: 3rem;" v-if="detail">
                 <div class="col-lg-12 col-custom single-product-tab">
-                    <ul class="nav nav-tabs" style="padding-bottom: 0px;">
+                    <ul class="nav nav-tabs" style="padding-bottom: 0px; border-top: 0px; border-bottom: 1px solid #ebebeb;">
                         <li class="nav-item">
                             <a class="nav-link" :class="(activeTab == 'rating') ? 'active' : ''" @click="activeTab = 'rating'">
                                 Ulasan Pembeli ({{ detail.ratings.length }})
@@ -173,7 +164,7 @@
                     <div class="tab-content mb-text pt-0">
                         <div class="tab-pane " :class="(activeTab == 'rating') ? 'active fade show' : ''">
                             <div class="desc-content p-3">
-                                <div class="row">
+                                <div class="row" v-if="detail.rating_count > 0">
                                     <div class="col-md-3">
                                         <div class="card">
                                             <div class="card-body">
@@ -188,23 +179,23 @@
                                     <div class="col-md-9">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="section-title row mb-0">
-                                                    <div class="col-md-4">
-                                                        <p>Menampilkan {{ detail.rating_count }} Ulasan</p>
+                                                <div class="shop_toolbar_wrapper flex-column flex-md-row mb-5" style="border: none; padding: 0px;">
+                                                    <div class="shop-top-bar-left mb-md-0 mb-2">
+                                                        <div class="shop-top-show">
+                                                            <span>Menampilakan <b>{{ detail.rating_count }}</b> Produk</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <div class="mb-3 row">
-                                                            <label for="filter" class="col-sm-8 col-form-label text-right">Urutkan</label>
-                                                            <div class="col-sm-4">
-                                                                <select class="form-select" aria-label="Default select example">
-                                                                    <option selected value="1">Terbaru</option>
-                                                                    <option value="2">Rating Tertinggi</option>
-                                                                    <option value="3">Rating Terendah</option>
-                                                                </select>
-                                                            </div>
+                                                    <div class="shop-top-bar-right">
+                                                        <span class="mr-1">Urutkan: </span>
+                                                        <div class="shop-short-by mr-0">
+                                                            <select class="nice-select">
+                                                                <option value="1" selected>Terbaru</option>
+                                                                <option value="2">Terlama</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="section-body mb-5">
                                                     <div class="single-review d-flex mb-4"
                                                         v-for="rating in detail.ratings" :key="rating.id">
@@ -238,6 +229,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" v-else>
+                                    <div class="card">
+                                        <div class="card-body" >
+                                            <i class="pe-7s-info"></i> Belum ada ulasan Produk ini
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -252,7 +250,8 @@
                                             referrerpolicy="no-referrer" style="border-radius: 100%; width: 45px;">
                                     </div>
                                     <div class="review_details ml-0 p-0" style="width: 100%;">
-                                        <textarea class="form-control" v-model="discus.desc" style="border: none; padding-right: 125px;"></textarea>
+                                        <textarea class="form-control" style="border: none; padding-right: 125px;" placeholder="Tulis diskusi disini"
+                                            v-model="discus.desc"></textarea>
                                         <button class="btn btn-outline-primary btn-hover-primary" style="position: absolute;right: 10px;top: 11px;"
                                             @click="discusPost(detail)"> 
                                             Kirim 
@@ -261,45 +260,84 @@
                                 </div>
 
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="section-title row mb-0">
-                                            <div class="col-md-4">
-                                                <p>Menampilkan {{ detail.discussions.length }} Diskusi</p>
+                                    <div class="card-body" v-if="detail.discussions.length > 0">
+
+                                        <div class="shop_toolbar_wrapper flex-column flex-md-row mb-5" style="border: none; padding: 0px;">
+                                            <div class="shop-top-bar-left mb-md-0 mb-2">
+                                                <div class="shop-top-show">
+                                                    <span>Menampilakan <b>{{ detail.discussions.length }}</b> Diskusi</span>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="mb-3 row">
-                                                    <label for="filter" class="col-sm-8 col-form-label text-right">Urutkan</label>
-                                                    <div class="col-sm-4">
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected value="1">Terbaru</option>
-                                                            <option value="2">Terlama</option>
-                                                        </select>
-                                                    </div>
+                                            <div class="shop-top-bar-right">
+                                                <span class="mr-1">Urutkan: </span>
+                                                <div class="shop-short-by mr-0">
+                                                    <select class="nice-select">
+                                                        <option selected value="1">Terbaru</option>
+                                                        <option value="2">Terlama</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="section-body mb-2">
                                             <div class="single-review d-flex mb-2 pb-3" style="border-bottom: 1px solid #e7e7e7;"
-                                                v-for="discussion in detail.discussions" :key="discussion.id">
-                                                <div class="review_thumb">
-                                                    <img :src="discussion.user.avatar"  
-                                                        referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
-                                                </div>
-                                                <div class="review_details ml-0">
-                                                    <div class="review_info mb-2">
-                                                        <div class="review-title-date d-flex">
-                                                            <h5 class="title" style="font-size: 16px;">{{ discussion.user.name }} </h5>
-                                                            <span class="ml-1"> {{ dateOuput2(discussion.created_at) }}</span>
+                                                v-for="(discussion, index) in detail.discussions" v-bind:key="discussion.id">
+                                                <template v-if="detail.parent != 'null'">
+                                                    <div class="review_thumb">
+                                                        <img :src="discussion.user.avatar"  
+                                                            referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
+                                                    </div>
+                                                    <div class="review_details ml-0" style="width: 100%;">
+                                                        <div class="review_info mb-2">
+                                                            <div class="review-title-date d-flex">
+                                                                <h5 class="title" style="font-size: 16px;">{{ discussion.user.name }} </h5>
+                                                                <span class="ml-1"> {{ dateOuput2(discussion.created_at) }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <p>
+                                                            {{ discussion.desc }}
+                                                        </p>
+                                                        <div class="replay">
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" 
+                                                                    style="background: transparent;border: none; padding-left: 0px;"
+                                                                    v-if="user">
+                                                                    <img :src="user.avatar"  
+                                                                        referrerpolicy="no-referrer" style="border-radius: 100%; width: 30px;">
+                                                                </span>
+                                                                <input type="text" class="form-control" placeholder="Isi komentar disini"
+                                                                    v-model="discus.desc_parent[index]">
+                                                                <span class="input-group-text" style="background: #ff4545;cursor: pointer;"
+                                                                    @click="discusPost(detail, discussion.id, index)">
+                                                                    <button class="btn btn-primary btn-hover-primary btn-sm"> Kirim </button>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="input-group mb-2 ml-2"
+                                                                v-for=" replay in discussion.replay">
+                                                                <span class="input-group-text" 
+                                                                    style="background: transparent;border: none;padding-top: 0px;"
+                                                                    v-if="replay">
+                                                                    <img :src="replay.user.avatar"  
+                                                                        referrerpolicy="no-referrer" style="border-radius: 100%; width: 30px;">
+                                                                </span>
+                                                                <p> 
+                                                                    <span class="mr-1" style="font-size: 16px;">
+                                                                        {{ replay.user.name }}
+                                                                    </span>
+                                                                    <span style="color:#7e7e7e;">{{ dateOuput2(replay.created_at) }}</span><br/>
+                                                                    {{ replay.desc }}
+                                                                </p> 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <p>
-                                                        {{ discussion.desc }}
-                                                    </p>
-                                                </div>
+                                                </template>
                                             </div>
                                         
                                         </div>
+                                    </div>
+                                    <div class="card-body" v-else>
+                                        <i class="pe-7s-info"></i> Belum ada diskusi Produk ini
                                     </div>
                                 </div>
                             </div>
@@ -308,11 +346,9 @@
                 </div>
             </div>
 
-            <!-- Products Recomend -->
             <ProductRecomend 
                 v-bind:excludeProps="this.$route.params.slug">
             </ProductRecomend>
-            <!-- Products End -->
 
         </div>
     </div>
@@ -348,14 +384,18 @@ export default {
             data: [],
             detail: '',
             activeImg: 'img1',
-            activeTab: 'discus',
+            activeTab: 'rating',
             discus: {
                 parent : '',
-                product : '',
+                product_id : '',
                 desc : '',
+                desc_parent : [],
+                desc_key : '',
             },
             form: {
                 qty: 1,
+                price: '',
+                product: '',
             },
             loading: true,
             errored: false,
@@ -385,8 +425,9 @@ export default {
             this.activeImg = e.target.name;
             this.detail.file = e.target.src;
         },
-        getData: function() {
-            this.loading = true
+        getData: function(loadingBypass = false) {
+            if (loadingBypass == false) 
+                this.loading = true
             this.axios.get('product/'+this.$route.params.slug)
             .then((response) => {
                 this.detail = response.data.data;
@@ -402,13 +443,33 @@ export default {
         },
         cartCheckout: function(product) {
             this.loadingButton = true
-            const data = {
+            this.form.product = product;
+            const dataSumm = {
                 amount : product.price * this.form.qty,
                 qty : this.form.qty,
+                product: this.form.product,
+                direct: true,
             }
-            this.axios.post('checkout', data, this.$store.state.config)
+            this.axios.post('checkout', dataSumm, this.$store.state.config)
             .then((response) => {
-                window.snap.pay(response.data.token);
+                var that = this;
+                window.snap.pay(response.data.token, {
+                    onSuccess: function(result){
+                        that.successNotif('Pembayaran berhasil... Pesanan dalam proses')
+                        that.cartCreated(that, result, response.data.token);
+                    },
+                    onPending: function(result){
+                        that.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
+                        that.cartCreated(that, result, response.data.token);
+                    },
+                    onError: function(result){
+                        that.successNotif('Pesanan gagal, Silahkan muat ulang halaman')
+                    },
+                    onClose: function(){
+                        return false;
+                    },
+                })
+                // window.snap.pay(response.data.token);
             })
             .catch(error => {
                 this.errorNotif(error)
@@ -417,15 +478,57 @@ export default {
                 () => this.loadingButton = false
             )
         },
-        discusPost: function(product, parent = null) {
+        cartCreated: function (that, result, snap) {
+            const dataSumm = {
+                amount : that.form.product.price * that.form.qty,
+                qty : that.form.qty,
+                product: that.form.product,
+                snapData: snap,
+                midtrans: result,
+                direct: true,
+            }
+            that.axios.post('order', dataSumm, that.$store.state.config)
+            .then((response) => {
+                // console.log(response);
+                console.log('masuk order');
+                this.$router.push('/order');
+            })
+            .catch(error => {
+                that.errorNotif(error)
+            })
+            
+            that.totalHarga = 0;
+            that.totalBarang = 0;
+            that.data.map(function(cart, key){                
+                // delete cart & insert order 
+                if (cart.status === true || cart.status === false) {
+                    if (cart.status === true) {
+                        that.axios.delete('chart/' + cart.id, that.$store.state.config)
+                        .then((response) => {
+                            that.cartData(false)
+                            that.countChart();
+                        })
+                        .catch(error => { })
+                    } 
+                }
+            });
+        },
+       
+        discusPost: function(product, parent = null, key = null) {
             this.loadingButton = true
             this.discus.product_id = product.id
             this.discus.parent = parent
+            this.discus.desc_key = key
+            // console.log(parent);
+            // console.log(this.discus);
+            // return false;
             this.axios.post('product-discus', this.discus, this.$store.state.config)
             .then((response) => {
-                this.discus.desc = ''
                 this.successNotif(response.data.message)
-                this.getData();
+                this.getData(true);
+                this.discus.desc = ''
+                this.discus.desc_parent = [];
+                this.discus.desc_key = '';
             })
             .catch(error => {
                 this.errorNotif(error)
@@ -434,6 +537,25 @@ export default {
                 () => this.loadingButton = false
             )
         },
+        // discusPostReply: function(product, parent = null) {
+        //     this.loadingButton = true
+        //     this.discus.product_id = product.id
+        //     this.discus.parent = parent
+        //     this.axios.post('product-discus', this.discus, this.$store.state.config)
+        //     .then((response) => {
+        //         this.successNotif(response.data.message)
+        //         this.getData(true);
+        //         this.discus.desc = ''
+
+        //     })
+        //     .catch(error => {
+        //         this.errorNotif(error)
+        //     })
+        //     .finally(
+        //         () => this.loadingButton = false
+        //     )
+        // },
+
     }
 }
 </script>
