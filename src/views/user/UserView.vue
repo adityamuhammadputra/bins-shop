@@ -33,78 +33,103 @@
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
-                                            <h3 class="title">Informasi Akun</h3>
+                                            <h3 class="title mb-3">Informasi Akun</h3>
                                             <div class="alert alert-info mb-5" role="alert">
-                                                Silahkan lengkapi profile akun
+                                                Kelengkapan profile kamu, <b>80%</b>
                                             </div>
 
                                             <div class="account-details-form ">
-                                                <form action="#" class="mt-5 pt-3">
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <img :src="user.avatar"  referrerpolicy="no-referrer"
-                                                             style="border-radius: 100%; width: 100%;" v-if="user">
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center">
+                                                        <img :src="user.avatar" referrerpolicy="no-referrer" class="img-user-avatar"
+                                                            style="border-radius: 100%;" v-if="user">
+                                                        
+                                                        <span class="badge badge-user-avatar bg-dark">Silver Member</span>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="form-floating mb-2">
+                                                            <input type="text" class="form-control" 
+                                                                id="email" 
+                                                                placeholder="Email"
+                                                                v-model="this.user.email"
+                                                                style="height: 45px;border-radius: 0px;padding-top: 1rem;border: none;cursor: not-allowed;">
+                                                            <label for="email" style="padding-top: 7px;">Email </label>
                                                         </div>
-                                                        <div class="col-9">
-                                                            <div class="form-floating mb-5">
-                                                                <input type="text" class="form-control" 
-                                                                    id="email" 
-                                                                    placeholder="Email"
-                                                                    v-model="this.user.email"
-                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
-                                                                <label for="email" style="padding-top: 7px;">Email </label>
-                                                            </div>
-                                                            
-                                                            <div class="form-floating mb-5">
-                                                                <input type="text" class="form-control" 
-                                                                    id="name" 
-                                                                    placeholder="Nama Lengkap"
-                                                                    v-model="this.user.name"
-                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
-                                                                <label for="name" style="padding-top: 7px;">Nama Lengkap </label>
-                                                            </div>
-
-                                                            <div class="form-floating mb-5">
-                                                                <input type="number" class="form-control" 
-                                                                    id="phone" 
-                                                                    placeholder="Nomor Hp"
-                                                                    v-model="this.user.phone"
-                                                                    style="height: 45px;border-radius: 0px;padding-top: 1rem;">
-                                                                <label for="phone" style="padding-top: 7px;">Nomor Hp </label>
-                                                            </div>
-                                                            
-                                                            <!-- <div class="single-input-item mb-3">
-                                                                <label for="phone" class="required mb-1">Nomor Hp</label>
-                                                                <input type="number" v-model="this.user.phone">
-                                                            </div> -->
+                                                        
+                                                        <div class="form-floating mb-5">
+                                                            <input type="text" class="form-control" 
+                                                                id="name" 
+                                                                placeholder="Nama Lengkap"
+                                                                v-model="this.user.name"
+                                                                style="height: 45px;border-radius: 0px;padding-top: 1rem;border: none;cursor: not-allowed;">
+                                                            <label for="name" style="padding-top: 7px;">Nama Lengkap </label>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <fieldset>
-                                                        <legend>Password change</legend>
-                                                        <div class="single-input-item mb-3">
-                                                            <label for="current-pwd" class="required mb-1">Current Password</label>
-                                                            <input type="password" id="current-pwd" placeholder="Current Password">
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item mb-3">
-                                                                    <label for="new-pwd" class="required mb-1">New Password</label>
-                                                                    <input type="password" id="new-pwd" placeholder="New Password">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="single-input-item mb-3">
-                                                                    <label for="confirm-pwd" class="required mb-1">Confirm Password</label>
-                                                                    <input type="password" id="confirm-pwd" placeholder="Confirm Password">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                    <div class="single-input-item single-item-button">
-                                                        <button class="btn btn btn-dark btn-hover-primary rounded-0">Save Changes</button>
+                                                <fieldset class="mt-2">
+                                                    <legend class="mt-0 mb-5">Info Pribadi</legend>
+                                                    <div class="form-floating mb-5">
+                                                        <input type="text" class="form-control" id="phone" 
+                                                            placeholder="Nomor Hp"
+                                                            v-model="this.user.phone"
+                                                            style="height: 45px;border-radius: 0px;padding-top: 1rem;">
+                                                        <label for="phone" style="padding-top: 7px;">Nomor Hp </label>
                                                     </div>
-                                                </form>
+
+                                                    <div class="form-floating mb-5">
+                                                        <select class="form-control" id="gender" placeholder="Jenis Kelamin"
+                                                            v-model="this.user.gender"
+                                                            style="height: 45px; padding-top: 0.6rem;">
+                                                            <option value="">--Pilih--</option>
+                                                            <option value="1">Pria</option>
+                                                            <option value="2">Wanita</option>
+                                                        </select>
+                                                        <label for="gender" style="padding-top: 7px;">Jenis Kelamin </label>
+                                                    </div>
+                                                    
+                                                    <div class="form-floating mb-5">
+                                                        <datepicker
+                                                            v-model="this.user.birth"
+                                                            :clearable="false"
+                                                            inputFormat="dd MMMM yyyy"
+                                                            class="form-control" 
+                                                            placeholder="Tanggal Lahir"
+                                                            id="birth"
+                                                            style="height: 45px;border-radius: 0px;padding-top: 1rem;background: white;"
+                                                        />
+                                                        <label for="birth" style="padding-top: 7px;opacity: unset;transform: scale(0.85) translateY(-1.45rem) translateX(0.15rem);background: white;color: #9f9f9f;">
+                                                            Tanggal Lahir 
+                                                        </label>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset class="mt-2 mb-5">
+                                                    <legend class="mt-0 mb-2">Info Lainnya</legend>
+                                                    <table>
+                                                        <tr>
+                                                            <td>bergabung</td>
+                                                            <td> <span class="text-dark">
+                                                                <i class="fa fa-check"></i> {{ dateOuput2(user.created_at) }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="vertical-align: text-bottom;padding-right: 15px;">Transkasi berhasil</td>
+                                                            <td> 
+                                                                <span class="badge bg-dark">10 Transkasi</span>
+                                                                <p style="font-size: 12px;font-style: italic;">
+                                                                    Tingakatkan jumlah transaksi dan dapatkan potongan harga
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </fieldset>
+                                                <div class="single-input-item">
+                                                    <button class="btn btn-outline-primary mt-3 btn-block"
+                                                        @click="updateProfile">
+                                                        Simpan Profile
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div> <!-- Single Tab Content End -->
@@ -137,11 +162,12 @@
 
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
+import Datepicker from 'vue3-datepicker'
 
 export default {
     name: 'Header',
     components: {
-        ElseLogin
+        ElseLogin, Datepicker
     },
     data() {
         return {
@@ -152,11 +178,19 @@ export default {
         if (this.$store.state.auth.user) {
             this.user = this.$store.state.auth.user.user;
             this.user.phone = (this.user.phone) ? this.user.phone : '+62'; 
+            console.log(this.user);
         }
-
     },
     methods: {
-       
+        updateProfile: function () {
+            this.axios.patch('auth/user/' + this.user.id, this.user, this.$store.state.config)
+            .then((response) => {
+                this.successNotif('Profile berhasil diperharaui')
+            })
+            .catch(error => {
+                this.errorNotif(error)
+            })
+        }
     }
 }
 </script>
