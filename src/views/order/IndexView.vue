@@ -95,7 +95,10 @@
                                                     </router-link>
                                                 </p>
                                                 <p class="mb-0">
-                                                    {{ detail.qty }} barang x <b>{{ detail.price_rp }}</b>
+                                                    {{ detail.qty }} barang x <b>{{ detail.price_discount_rp }}</b> &nbsp;
+                                                    <del v-if="detail.discount > 0" style="font-size: 12px;"> 
+                                                        {{ detail.price_rp }} ({{ detail.discount }}%)
+                                                    </del>
                                                 </p>
 
                                                 <p v-if="order.status.id == 4" 

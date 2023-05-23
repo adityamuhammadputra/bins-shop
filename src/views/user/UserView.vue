@@ -34,8 +34,11 @@
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                                         <div class="myaccount-content">
                                             <h3 class="title mb-3">Informasi Akun</h3>
-                                            <div class="alert alert-info mb-5" role="alert">
-                                                Kelengkapan profile kamu, <b>80%</b>
+                                            <div class="progress  mb-5">
+                                                <div class="progress-bar" role="progressbar" 
+                                                    style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                    Kelengkapan profile kamu, 80%
+                                                </div>
                                             </div>
 
                                             <div class="account-details-form ">
@@ -43,7 +46,6 @@
                                                     <div class="col-md-2 text-center">
                                                         <img :src="user.avatar" referrerpolicy="no-referrer" class="img-user-avatar"
                                                             style="border-radius: 100%;" v-if="user">
-                                                        
                                                         <span class="badge badge-user-avatar bg-dark">Silver Member</span>
                                                     </div>
                                                     <div class="col-md-10">
@@ -114,11 +116,20 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="vertical-align: text-bottom;padding-right: 15px;">Transkasi berhasil</td>
+                                                            <td style="vertical-align: top;padding-right: 15px;">Transkasi berhasil</td>
                                                             <td> 
                                                                 <span class="badge bg-dark">10 Transkasi</span>
-                                                                <p style="font-size: 12px;font-style: italic;">
-                                                                    Tingakatkan jumlah transaksi dan dapatkan potongan harga
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="vertical-align: top;">Badge Member</td>
+                                                            <td> 
+                                                                <span class="badge badge-user-avatar bg-dark mt-3" style="width: fit-content;">
+                                                                    <i class="fa fa-badge"></i>
+                                                                    Silver Member
+                                                                </span>
+                                                                <p style="font-size: 12px;font-style: italic;" class="mt-0">
+                                                                    Anda mendapatkan potongan Rp.5.000 untuk 10 transaksi
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -126,7 +137,7 @@
                                                 </fieldset>
                                                 <div class="single-input-item">
                                                     <button class="btn btn-outline-primary mt-3 btn-block"
-                                                        @click="updateProfile">
+                                                        @click="profileUpdate">
                                                         Simpan Profile
                                                     </button>
                                                 </div>
@@ -163,6 +174,7 @@
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
 import Datepicker from 'vue3-datepicker'
+import moment from 'moment';
 
 export default {
     name: 'Header',
@@ -172,17 +184,32 @@ export default {
     data() {
         return {
             user : null,
+            // picked: new Date(),
+            // picked: null,
         }
     },
     mounted() {
         if (this.$store.state.auth.user) {
             this.user = this.$store.state.auth.user.user;
-            this.user.phone = (this.user.phone) ? this.user.phone : '+62'; 
-            console.log(this.user);
         }
     },
+    
+    created() {
+        this.profileGet()
+        // console.log(new Date());
+    },
     methods: {
-        updateProfile: function () {
+        profileGet: function () {
+            this.axios.get('auth/user', this.$store.state.config)
+            .then((response) => {
+                this.user = response.data;
+                this.user.birth = moment(response.data.birth, 'YYYY-MM-DD').toDate();
+            })
+            .catch(error => {
+                this.errorNotif(error)
+            })
+        },
+        profileUpdate: function () {
             this.axios.patch('auth/user/' + this.user.id, this.user, this.$store.state.config)
             .then((response) => {
                 this.successNotif('Profile berhasil diperharaui')

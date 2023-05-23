@@ -40,7 +40,12 @@
                                                 </router-link>
                                             </p>
                                             <p>
-                                                <b>{{ data[indexCart].product.price_rp }}</b>
+                                                <b v-if="data[indexCart].product.price_discount">
+                                                    {{ data[indexCart].product.price_discount }}
+                                                </b>
+                                                <b v-else>
+                                                    {{ data[indexCart].product.price_rp }}
+                                                </b>
                                             </p>
                                         </div>
                                         <a href="#" style="font-weight: 500;font-size: 20px; margin-right: 10px;"
@@ -186,10 +191,10 @@ export default {
                 if (value.status === true || value.status === false) {
                     if (value.status === true) {
                         totalBarang = totalBarang + value.qty
-                        totalHarga = totalHarga + parseInt(value.product.price) * parseInt(value.qty)
+                        totalHarga = totalHarga + parseInt(value.product.price_final) * parseInt(value.qty)
                     } else {
                         totalBarang - parseInt(value.qty)
-                        totalHarga - parseInt(value.product.price) * parseInt(value.qty)
+                        totalHarga - parseInt(value.product.price_final) * parseInt(value.qty)
                     }
                 }
             });

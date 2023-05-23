@@ -76,13 +76,13 @@
                                                     <b>{{ detail.name }}</b>
                                                 </td>
                                                 <td>
-                                                    {{ detail.product.price_rp }}
+                                                    {{ detail.price_discount_rp }}
                                                 </td>
                                                 <td class="text-center">
                                                     {{ detail.qty }}
                                                 </td>
                                                 <td class="text-right">
-                                                    {{ detail.price_rp }}
+                                                    {{ detail.total_rp }}
                                                 </td>
                                             </tr>
                                         </table>

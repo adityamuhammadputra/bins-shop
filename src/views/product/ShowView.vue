@@ -65,9 +65,10 @@
                         <!-- Product Head End -->
 
                         <!-- Price Box Start -->
+
                         <div class="price-box mb-2" v-if="detail.discount">
-                            <span class="regular-price">{{ detail.price_rp }}</span>
-                            <span class="old-price"><del>{{ detail.price_discount }}</del></span>
+                            <span class="regular-price">{{ detail.price_discount }}</span>
+                            <span class="old-price"><del>{{ detail.price_rp }}</del></span>
                         </div>
 
                         <div class="price-box mb-2" v-else>

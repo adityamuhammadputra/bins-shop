@@ -41,10 +41,14 @@
                                         Terjual {{ product.sold }}
                                     </span>
                                 </span>
-                                <span class="price">
-                                    <span class="new">{{ product.price_rp }}</span>
+                                <span class="price" v-if="product.discount">
+                                    <span class="new">{{ product.price_discount }}</span>
                                     <span class="old">{{ product.price_rp }}</span>
                                 </span>
+                                <span class="price" v-else>
+                                    <span class="new">{{ product.price_rp }}</span>
+                                </span>
+                                
                                 <button class="btn btn-sm btn-outline-danger btn-hover-danger w-100" title="Add To Cart"
                                     @click="addChart(product.id, this.loadTheChart)"
                                     >+ Keranjang 

@@ -84,7 +84,7 @@ vueApp.mixin({
             return moment(date).format('DD MMMM YYYY');
         },
         dateTimeOuput: function(date) {
-            return moment(date).format('DD/MM/YYYY HH:II');
+            return moment(date).format('DD/MM/YYYY HH:mm');
         },
         dateTimeOuput2: function(date) {
             return moment(date).format('DD MMMM YYYY') + ' Pukul ' + moment(date).format('HH:mm');
