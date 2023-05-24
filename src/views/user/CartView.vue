@@ -217,9 +217,10 @@ export default {
         },
         chartDelete: function(row) {
             this.$swal({
-                heightAuto: false,
+                // heightAuto: false,
                 title: "Konfirmasi !",
-                text: 'Hapus ' + row.product.name + ' dari keranjang ?',
+                html: 'Hapus ' + row.product.name + ' dari keranjang ?',
+                // text: 'Hapus ' + row.product.name + ' dari keranjang ?',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, Hapus',
                 cancelButtonText: 'Batal',

@@ -2,30 +2,13 @@
     <div class="section mt-5 mb-5">
         <div class="container">
 
-            <div class="row">
-                <div class="col-12">
-                    <h5 class="title mb-3">Transaksi </h5>
-                </div>
-            </div>
-
-
             <div class="row" v-if="user">
+                
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
-                                <div class="myaccount-tab-menu nav" role="tablist">
-                                    <router-link to="/user">
-                                        <i class="pe-7s-user"></i> Pengaturan Akun
-                                    </router-link>
-                                    <router-link to="/order" class="active">
-                                        <i class="pe-7s-news-paper"></i> Daftar Transaksi
-                                    </router-link>
-                                    <router-link to="/rating">
-                                        <i class="pe-7s-star"></i> Ulasan
-                                    </router-link>
-                                    <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
-                                </div>
+                                <TabMenu v-bind:url="'order'"></TabMenu>
                             </div>
                             <!-- My Account Tab Menu End -->
 
@@ -39,6 +22,25 @@
                             </div>
 
                             <div class="col-lg-9 col-md-8" v-else>
+                                <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
+                                    <div class="shop-top-bar-left ">
+                                        <div class="shop-top-show">
+                                            <span>Menampilakan <b>{{ dataOrder.length }}</b> Transaksi</span>
+                                        </div>
+                                    </div>
+                                    <div class="shop-top-bar-right">
+                                        <span class="mr-1">Filter: </span>
+                                        <div class="shop-short-by mr-4">
+                                            <select class="nice-select" v-model="status" @change="orderIndex">
+                                                <option value="">--Semua Transaksi--</option>
+                                                <option value="1,2,3,9">Sedang Berlangsung</option>
+                                                <option value="4">Transaksi Selesai</option>
+                                                <option value="10,11,12">Transaksi Batal</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="card mb-4 " 
                                     v-if="dataOrder.length > 0"
                                     v-for="(order, indexOrder) in dataOrder" v-bind:key="order.id">
@@ -129,10 +131,12 @@
                                             Cara Bayar
                                         </a>
 
-                                        <a href="#" class="btn btn-primary btn-sm pull-right" 
+                                        <a class="btn btn-primary btn-sm pull-right" 
+                                            :href="'https://api.whatsapp.com/send/?phone=62816262439&text=Hai admin, mau tanya ' + order.invoice + '&type=phone_number&app_absent=0'"
+                                            target="_blank"
                                             v-if="order.status.id == 2"
                                             >
-                                            <i class="pe-7s-chat"></i> Tanya Admin
+                                            <i class="fa fa-whatsapp"></i> Tanya Admin
                                         </a>
 
                                         <ModalRating 
@@ -221,6 +225,7 @@
 import ElseLogin from '/src/components/ElseLogin.vue'
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import ModalRating from '/src/components/ModalRating.vue'
+import TabMenu from '/src/components/TabMenu.vue'
 
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
@@ -232,6 +237,7 @@ export default {
         VueCountdown,
         ProductRecomend,
         ModalRating,
+        TabMenu,
         StarRating,
     },
     data() {
@@ -239,6 +245,7 @@ export default {
             dataOrder : [],
             user : null,
             loading : true,
+            status: '',
             exlude: [],
         }
     },
@@ -250,7 +257,7 @@ export default {
     },
     methods: {
         orderIndex: function() {
-            this.axios.get('order', this.$store.state.config)
+            this.axios.get('order?status='+this.status, this.$store.state.config)
             .then((response) => {
                 this.dataOrder = response.data.data
             })

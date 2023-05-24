@@ -22,7 +22,7 @@
                 </div>
                 <div class="mt-2 swal2-wrap-rating">
                     <!-- <star-rating v-model:rating="rating.value" animate="true"></star-rating> -->
-                    <star-rating v-model:rating="rating.value"></star-rating>
+                    <star-rating v-model:rating="rating.value" :animate=true></star-rating>
                 </div>
             </div>
             <textarea class="swal2-textarea mt-1" v-model="rating.desc"></textarea>

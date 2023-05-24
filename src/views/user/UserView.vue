@@ -1,14 +1,6 @@
 <template>
     <div class="section mt-5 mb-5">
         <div class="container">
-
-            <div class="row">
-                <div class="col-12">
-                    <h5 class="title mb-3">Akun dan History </h5>
-                </div>
-            </div>
-
-
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
@@ -18,10 +10,6 @@
                                     <router-link to="/user" class="active">
                                         <i class="pe-7s-user"></i> Pengaturan Akun
                                     </router-link>
-                                    <router-link to="/order">
-                                        <i class="pe-7s-news-paper"></i> Daftar Transaksi
-                                    </router-link>
-                                    <a href="#" data-bs-toggle="tab" class=""><i class="pe-7s-star"></i> Ulasan</a>
                                     <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
                                 </div>
                             </div>

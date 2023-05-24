@@ -7,7 +7,7 @@ import UserView from '../views/user/UserView.vue'
 import OrderView from '../views/order/IndexView.vue'
 import OrderShowView from '../views/order/ShowView.vue'
 import OrderPrintView from '../views/order/PrintView.vue'
-import RatingView from '../views/rating/IndexView.vue'
+import RatingView from '../views/user/RatingView.vue'
 
 import PathNotFound from '../views/auth/PageNotFound.vue'
 

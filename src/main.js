@@ -137,11 +137,12 @@ vueApp.mixin({
             };
             this.axios.post('chart', data, this.$store.state.config)
             .then((response) => {
-                this.successNotif(response.data.message)
                 this.countChart();
                 if (loadChart == true) {
                     this.$store.state.default.cartLoading = true
-                    // console.log('loadData...');
+                    this.successNotif(response.data.message)
+                } else {
+                    this.swalToCart(response.data.message)
                 }
                 // if (loadChart == true) {
                 //     console.log('loading...');
@@ -177,6 +178,27 @@ vueApp.mixin({
             .finally(
                 () => this.loading = false
             )
+        },
+        swalToCart: function(msg) {
+            // let timerInterval
+            this.$swal({
+              title: msg,
+              html: 'Anda akan dialihkan kehalaman Keranjang',
+              timer: 111000,
+              icon: 'success',
+              timerProgressBar: true,
+              didOpen: () => {
+                this.$swal.showLoading()
+              },
+              willClose: () => {
+                // clearInterval(timerInterval)
+              }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === this.$swal.DismissReason.timer) {
+                    this.$router.push('/cart');
+                }
+            })
         },
         formatRibu: function(num){
             if (num) {

@@ -478,7 +478,7 @@ export default {
             this.loadingButton = true
             this.form.product = product;
             const dataSumm = {
-                amount : product.price * this.form.qty,
+                amount : product.price_final * this.form.qty,
                 qty : this.form.qty,
                 product: this.form.product,
                 direct: true,
@@ -513,7 +513,7 @@ export default {
         },
         cartCreated: function (that, result, snap) {
             const dataSumm = {
-                amount : that.form.product.price * that.form.qty,
+                amount : that.form.product.price_final * that.form.qty,
                 qty : that.form.qty,
                 product: that.form.product,
                 snapData: snap,

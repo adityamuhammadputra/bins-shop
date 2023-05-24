@@ -2,29 +2,13 @@
 <template>
     <div class="section mt-5 mb-5">
         <div class="container">
-
-            <div class="row">
-                <div class="col-12">
-                    <h5 class="title mb-3">Transaksi </h5>
-                </div>
-            </div>
-
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <router-link to="/user">
-                                        <i class="pe-7s-user"></i> Pengaturan Akun
-                                    </router-link>
-                                    <router-link to="/order" class="active">
-                                        <i class="pe-7s-news-paper"></i> Daftar Transaksi
-                                    </router-link>
-                                    <router-link to="/rating">
-                                        <i class="pe-7s-star"></i> Ulasan
-                                    </router-link>
-                                    <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <TabMenu v-bind:url="'order'"></TabMenu>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -224,9 +208,9 @@
 
                                         
                                         <a target="_blank" class="btn btn-white btn-block mt-2 pull-right"
-                                            :href="'https://api.whatsapp.com/send/?phone=62816262439&text=' + this.dataOrder.invoice + '&type=phone_number&app_absent=0'"
+                                            :href="'https://api.whatsapp.com/send/?phone=62816262439&text=Hai admin, mau tanya ' + this.dataOrder.invoice + '&type=phone_number&app_absent=0'"
                                         >
-                                            <i class="fa fa-whatsapp"></i> Hubungi Penjual
+                                            <i class="fa fa-whatsapp"></i> Hubungi Admin
                                         </a>
                                     </div>
                                 </div>
@@ -268,6 +252,7 @@ import ElseLogin from '/src/components/ElseLogin.vue'
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import ModalRating from '/src/components/ModalRating.vue'
+import TabMenu from '/src/components/TabMenu.vue'
 import StarRating from 'vue-star-rating'
 
 
@@ -278,6 +263,7 @@ export default {
         VueCountdown,
         ProductRecomend,
         ModalRating,
+        TabMenu,
         StarRating,
     },
     data() {
@@ -315,7 +301,9 @@ export default {
                 onError: function(result){
                 },
                 onClose: function(){
+                    this.$router.push(this.$route.fullPath);
                     return false;
+
                 },
             })
         },

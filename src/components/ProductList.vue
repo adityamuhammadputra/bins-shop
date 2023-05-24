@@ -66,9 +66,9 @@
                                 </router-link>
 
                                 <div class="actions">
-                                    <a href="wishlist.html" title="Wishlist" class="action wishlist"><i class="pe-7s-like"></i></a>
-                                    <a href="#" title="Quickview" class="action quickview" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="pe-7s-search"></i></a>
-                                    <a href="compare.html" title="Compare" class="action compare"><i class="pe-7s-shuffle"></i></a>
+                                    <a @click="copyLink('/product/'+product.slug)" title="Salin Halaman" class="action compare">
+                                        <i class="fa fa-copy"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="content">
@@ -152,6 +152,10 @@ export default {
                 () => this.loading = false
             )
         },
+        copyLink: function(url){
+            navigator.clipboard.writeText(url)
+            this.successNotif("Url berhasil disalin")
+        }
         // , this.config
     }
 }

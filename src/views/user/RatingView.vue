@@ -2,29 +2,13 @@
     <div class="section mt-5 mb-5">
         <div class="container">
 
-            <div class="row">
-                <div class="col-12">
-                    <h5 class="title mb-3">Ulasan </h5>
-                </div>
-            </div>
-
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
                                 <div class="myaccount-tab-menu nav" role="tablist">
-                                    <router-link to="/user">
-                                        <i class="pe-7s-user"></i> Pengaturan Akun
-                                    </router-link>
-                                    <router-link to="/order">
-                                        <i class="pe-7s-news-paper"></i> Daftar Transaksi
-                                    </router-link>
-                                    <router-link to="/rating" class="active">
-                                        <i class="pe-7s-star"></i> Ulasan
-                                    </router-link>
-                                    <!-- <a href="#" data-bs-toggle="tab" class=""><i class="pe-7s-star"></i> Ulasan</a> -->
-                                    <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <TabMenu v-bind:url="'rating'"></TabMenu>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -39,6 +23,24 @@
                             </div>
 
                             <div class="col-lg-9 col-md-8" v-else>
+                                <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
+                                    <div class="shop-top-bar-left ">
+                                        <div class="shop-top-show">
+                                            <span>Menampilakan <b>{{ dataRating.length }}</b> Ulasan</span>
+                                        </div>
+                                    </div>
+                                    <div class="shop-top-bar-right">
+                                        <span class="mr-1">Filter: </span>
+                                        <div class="shop-short-by mr-4">
+                                            <select class="nice-select" v-model="status" @change="ratingIndex">
+                                                <option value="">--Semua Ulasan--</option>
+                                                <option value="1">Sudah Diulas</option>
+                                                <option value="2">Belum Diulas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="card mb-4 " 
                                     v-if="dataRating.length > 0"
                                     v-for="(order, indexOrder) in dataRating" v-bind:key="order.id">
@@ -56,7 +58,7 @@
                                     
 
                                     <div class="card-body comment-area-wrapper pt-1" 
-                                        v-for="detail in order.transaction_rating">
+                                        v-for="detail in order.transaction_details">
                                         <div class="single-comment-wrap mb-2">
                                             <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
                                                 <img :src="detail.product.file" alt="Author">
@@ -64,15 +66,21 @@
                                             <div class="comments-info">
                                                 <p class="mb-0" style="font-size: 14px;">
                                                     <router-link :to="'/product/'+detail.product.slug" class="image">
-                                                        {{ detail.product.name }}
+                                                        {{ detail.name }}
                                                     </router-link>
                                                 </p>
-                                                <p>
-                                                    <star-rating v-model:rating="detail.rating" 
-                                                        :star-size="17" 
-                                                        read-only="true">
-                                                    </star-rating>
-                                                    {{ detail.desc }}
+                                                <p v-if="order.status.id == 4" 
+                                                    style="font-size: 14px;font-style: italic;">
+                                                    <template v-if="order.transaction_rating">
+                                                        <star-rating v-model:rating="order.transaction_rating.rating" 
+                                                            :star-size="17" 
+                                                            read-only="true">
+                                                        </star-rating>
+                                                        {{ order.transaction_rating.desc }}
+                                                    </template>
+                                                    <template v-else>
+                                                        Belum diulas
+                                                    </template>
                                                 </p>
                                             </div>
                                         </div>
@@ -129,6 +137,7 @@
 import ElseLogin from '/src/components/ElseLogin.vue'
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import ModalRating from '/src/components/ModalRating.vue'
+import TabMenu from '/src/components/TabMenu.vue'
 
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import StarRating from 'vue-star-rating'
@@ -140,13 +149,15 @@ export default {
         VueCountdown,
         ProductRecomend,
         ModalRating,
+        TabMenu,
         StarRating,
     },
     data() {
         return {
-            dataRating : [],
-            user : null,
-            loading : true,
+            dataRating: [],
+            user: null,
+            loading: true,
+            status: '',
             exlude: [],
         }
     },
@@ -158,7 +169,7 @@ export default {
     },
     methods: {
         ratingIndex: function() {
-            this.axios.get('rating', this.$store.state.config)
+            this.axios.get('order?rating='+this.status, this.$store.state.config)
             .then((response) => {
                 this.dataRating = response.data.data
             })

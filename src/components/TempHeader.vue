@@ -48,11 +48,42 @@
                         <div class="col-xl-2 col-6">
                             <div class="header-actions">
 
-                                <router-link to="/cart" class="header-action-btn header-action-btn-cart">
+                                <router-link to="/order" class="header-action-btn header-action-btn-cart"
+                                    @mouseover="notif = 'show'">
                                     <i class="pe-7s-bell"></i>
                                     <span class="header-action-num">0</span>
                                 </router-link> 
-                                <router-link to="/cart" class="header-action-btn header-action-btn-cart">
+                                <div class="dropdown-menu notification-ui_dd" :class="notif" @mouseleave="notif = ''" aria-labelledby="navbarDropdown">
+                                    <div class="notification-ui_dd-header">
+                                        <b>Notification</b> 
+                                        <span class="badge pull-right bg-primary">0</span>
+                                    </div>
+                                    <div class="notification-ui_dd-content">
+                                        <div class="notification-list notification-list--unread">
+                                            <router-link to="/rating">
+                                                <div class="notification-list_detail">
+                                                    <i class="pe-7s-star"></i> Ulasan <small class="pull-right">1 hari lalu</small>
+                                                    <p><b><small>INV20230524175505</small></b> </p>
+                                                    <p><small>Ada Lisensi Office 2021 Pro Plus Original dan 1 barang lainnya belum kamu kasih ulasan, yuk lengkapi ulasan kamu</small></p>
+                                                </div>
+                                            </router-link> 
+
+                                        </div>
+                                        <div class="notification-list notification-list--unread">
+                                            <div class="notification-list_detail">
+                                                <i class="pe-7s-news-paper"></i> Transaksi <small class="pull-right">1 hari lalu</small>
+                                                <p><b><small>INV20230524175505</small></b> </p>
+                                                <p><small>Pesanan Lisensi Office 2021 Pro Plus Original Pemesanan berhasil, menunggu verifikasi pembayaran</small></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notification-ui_dd-footer">
+                                        <a href="#!" class="btn btn-primary btn-sm btn-block">Lihat Semua</a>
+                                    </div>
+                                </div>
+
+                                <router-link to="/cart" class="header-action-btn header-action-btn-cart"
+                                    @mouseover="notif = ''">
                                     <i class="pe-7s-cart"></i>
                                     <span class="header-action-num">{{ this.$store.state.default.cart }}</span>
                                 </router-link> 
@@ -113,6 +144,7 @@ export default {
         return {
             q : null,
             user : null,
+            notif: '',
             default: {
                 cart : '',
             }
