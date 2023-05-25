@@ -6,7 +6,7 @@
         <router-link to="/rating" :class="(url == 'rating') ? 'active' : ''">
             <i class="pe-7s-star"></i> Ulasan {{  }}
         </router-link>
-        <router-link to="/discus" :class="(url == 'discus') ? 'active' : ''">
+        <router-link to="/discuss" :class="(url == 'discuss') ? 'active' : ''">
             <i class="pe-7s-chat"></i> Dikusi
         </router-link>
     </div>

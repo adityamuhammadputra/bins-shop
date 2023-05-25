@@ -29,7 +29,7 @@
                                         </div>
                                     </div>
                                     <div class="shop-top-bar-right">
-                                        <span class="mr-1">Filter: </span>
+                                        <span class="mr-1">Tampilkan: </span>
                                         <div class="shop-short-by mr-4">
                                             <select class="nice-select" v-model="status" @change="orderIndex">
                                                 <option value="">--Semua Transaksi--</option>

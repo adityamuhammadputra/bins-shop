@@ -38,8 +38,6 @@
                                             </span>
                                         </h5>
                                     </div>
-
-                                    
                                     
                                     <div class="card-body comment-area-wrapper pt-1">
                                         <div class="row">

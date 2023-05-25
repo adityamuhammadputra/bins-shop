@@ -555,7 +555,7 @@ export default {
             // console.log(parent);
             // console.log(this.discus);
             // return false;
-            this.axios.post('product-discus', this.discus, this.$store.state.config)
+            this.axios.post('discuss', this.discus, this.$store.state.config)
             .then((response) => {
                 this.successNotif(response.data.message)
                 this.getData(true);

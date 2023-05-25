@@ -1,5 +1,4 @@
 <template>
-
     <div class="row mt-5">
         <div class="col-12">
             <div class="section-title mb-5">

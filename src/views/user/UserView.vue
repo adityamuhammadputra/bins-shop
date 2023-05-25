@@ -1,6 +1,7 @@
 <template>
     <div class="section mt-5 mb-5">
-        <div class="container">
+        <div class="container mb-5">
+            <div class="row"><div class="col-12"><h5 class="title mb-3">Informasi Akun </h5></div></div>
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
@@ -20,15 +21,13 @@
                                 <div class="tab-content" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
-                                        <div class="myaccount-content">
-                                            <h3 class="title mb-3">Informasi Akun</h3>
-                                            <div class="progress  mb-5">
-                                                <div class="progress-bar" role="progressbar" 
-                                                    style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                    Kelengkapan profile kamu, 80%
-                                                </div>
+                                        <div class="progress  mb-0">
+                                            <div class="progress-bar" role="progressbar" 
+                                                style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                Kelengkapan profile kamu, 80%
                                             </div>
-
+                                        </div>
+                                        <div class="myaccount-content">
                                             <div class="account-details-form ">
                                                 <div class="row">
                                                     <div class="col-md-2 text-center">
@@ -56,6 +55,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <fieldset class="mt-2 mb-5">
+                                                    <legend class="mt-0 mb-2">Akun yang terhubung</legend>
+                                                    <div class="form-group">
+                                                        <span aria-hidden="true" class="NA_Img dkWypw"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="24" width="24"><path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z"></path><path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z"></path><path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z"></path><path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"></path></svg></span>
+                                                        {{ this.user.email }}
+                                                    </div>
+                                                </fieldset>
 
                                                 <fieldset class="mt-2">
                                                     <legend class="mt-0 mb-5">Info Pribadi</legend>
@@ -96,7 +103,7 @@
 
                                                 <fieldset class="mt-2 mb-5">
                                                     <legend class="mt-0 mb-2">Info Lainnya</legend>
-                                                    <table>
+                                                    <table style="font-size: 14px;">
                                                         <tr>
                                                             <td>bergabung</td>
                                                             <td> <span class="text-dark">

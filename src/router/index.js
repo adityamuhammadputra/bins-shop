@@ -8,6 +8,7 @@ import OrderView from '../views/order/IndexView.vue'
 import OrderShowView from '../views/order/ShowView.vue'
 import OrderPrintView from '../views/order/PrintView.vue'
 import RatingView from '../views/user/RatingView.vue'
+import DiscussView from '../views/user/DiscussView.vue'
 
 import PathNotFound from '../views/auth/PageNotFound.vue'
 
@@ -67,6 +68,11 @@ const routes = [
     path: '/rating',
     name: 'rating',
     component: RatingView
+  },
+  {
+    path: '/discuss',
+    name: 'discuss',
+    component: DiscussView
   },
   { 
     path: '/:pathMatch(.*)*', 

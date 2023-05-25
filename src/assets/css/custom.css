@@ -71,7 +71,6 @@
 
 
 
-
 .btn-block {
     width: 100%;
 }
@@ -95,7 +94,9 @@
 }
 
 
-
+p>a:hover {
+    color: #ff4545;
+}
 
 /* html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; height: auto!important;} */
 
@@ -228,6 +229,9 @@
     left: 12px;
 }
 
+.myaccount-content fieldset legend {
+    font-size: 17px;
+}
 @media (min-width: 900px) {
     .notification-ui_icon .unread-notification {
         left: 20px;
@@ -247,7 +251,7 @@
     .notification-ui_dd {
         min-width: 400px;
         position: absolute;
-        right: 0px;
+        right: 30px;
         left: unset;
         top: 70px;
     }
