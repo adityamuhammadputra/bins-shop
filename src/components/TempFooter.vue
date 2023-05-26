@@ -1,18 +1,16 @@
 <template>
     <footer class="section footer-section" v-if="$route.meta.header !== 0">
         <!-- Footer Top Start -->
-        <div class="footer-top pt-5 pb-5">
+        <div class="footer-top pt-7 pb-7">
             <div class="container">
                 <div class="row mb-n10">
-                    
-
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Kontak Kami</h2>
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui :</p>
                             <!-- Contact Address Start -->
                             <ul class="widget-address">
-                                <li><span>Email: </span> <a href="#"> admin@bins,shop</a></li>
+                                <li><span>Email: </span> <a href="#"> admin@bins.shop</a></li>
                             </ul>
                             <!-- Contact Address End -->
 
@@ -34,12 +32,13 @@
 
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
                         <div class="single-footer-widget">
-                            <h2 class="widget-title mb-3">Yang sering ditanyakan</h2>
+                            <h2 class="widget-title mb-3">Eksplor</h2>
                             <ul class="widget-list">
+                                <li><a href="contact.html">Tentang</a></li>
+                                <li><a href="contact.html">Faq</a></li>
+                                <li><a href="contact.html">Tutorial & Link Download</a></li>
                                 <li><a href="contact.html">Cara Refund ?</a></li>
-                                <li><a href="contact.html">Cara Membatalkan Pesanan ?</a></li>
-                                <li><a href="contact.html">Saya Belum Terima Pesanan ?</a></li>
-                                <li><a href="contact.html">Jika Ada Kendala Terknis ?</a></li>
+                                <li><a href="contact.html">Ingin Produk Fisik Seperti di foto produk ?</a></li>
                             </ul>
                         </div>
                     </div>
@@ -68,7 +67,7 @@
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
                         <div class="copyright-content">
-                            <p class="mb-0">Copyright © 2023 <a href="https://bins.shop/">Bins Shop.</a> All Rights Reserved.</p>
+                            <p class="mb-0">Copyright © 2023 <a href="https://bins.shop/">Bins Shop.</a> <span class="text-danger"> 100% Aktivasi online, bukan by phone!</span>.</p>
                         </div>
                     </div>
                 </div>

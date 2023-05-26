@@ -50,7 +50,7 @@
                         </div>
                         <div class="content ps-0 w-100">
                             <h5 class="title mb-2">Support 24/7</h5>
-                            <p v-if="!isMobile()">Admin kamis yang selalu fast response, jika ada kendala kita bantu sampai solved</p>
+                            <p v-if="!isMobile()">Admin yang fast response! Ada kendala? kita bantu sampai solved & Free remote Teamviewer / anydesk</p>
                         </div>
                     </div>
                 </div>

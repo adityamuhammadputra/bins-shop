@@ -98,6 +98,9 @@ p>a:hover {
     color: #ff4545;
 }
 
+.single-footer-widget .widget-list li a {
+    margin-bottom: 2px;
+}
 /* html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; height: auto!important;} */
 
 .vue-star-rating-rating-text {

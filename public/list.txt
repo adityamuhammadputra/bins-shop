@@ -7,10 +7,10 @@
 - halaman diskusi x
 - footer x
 - menu transaksi dan ulasan dan diskusi terpisah x
+- halaman pengaturan akun x
 
-- halaman pengaturan akun
 - halaman tentang
 - icon notif masuk kehalam transaksi dan ulasan dan diskusi dan menghitung transaksi
 - email transaksi 
-- icon rel link
+- icon rel link meta
 - tampilan mobile 

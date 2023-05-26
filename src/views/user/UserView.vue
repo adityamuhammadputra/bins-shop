@@ -23,8 +23,8 @@
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                                         <div class="progress  mb-0">
                                             <div class="progress-bar" role="progressbar" 
-                                                style="width: 80%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                Kelengkapan profile kamu, 80%
+                                                :style="'width: '+user.percen +'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                Kelengkapan profile kamu, {{ user.percen }}%
                                             </div>
                                         </div>
                                         <div class="myaccount-content">
@@ -106,14 +106,23 @@
                                                     <table style="font-size: 14px;">
                                                         <tr>
                                                             <td>bergabung</td>
-                                                            <td> <span class="text-dark">
-                                                                <i class="fa fa-check"></i> {{ dateOuput2(user.created_at) }}</span>
+                                                            <td> 
+                                                                <b>
+                                                                    <i class="fa fa-check text-success"></i> {{ dateOuput2(user.created_at) }}
+                                                                </b>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="vertical-align: top;padding-right: 15px;">Transkasi berhasil</td>
                                                             <td> 
-                                                                <span class="badge bg-dark">10 Transkasi</span>
+                                                                <b> 
+                                                                    <i class="fa fa-check" :class="(user.transaction_count > 10) ? 'text-success' : ''"></i> 
+                                                                    {{ user.transaction_count }} Transkasi 
+                                                                </b>
+                                                                <p style="font-size: 11px;font-style: italic;" class="mt-0">
+                                                                    Dapatkan Cashback langsung Rp 50.000 setiap 10 transaksi.
+                                                                    {{ 10 - user.transaction_count }} transaksi lagi, untuk mendapatkan casback Rp. 50.000
+                                                                </p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -123,9 +132,7 @@
                                                                     <i class="fa fa-badge"></i>
                                                                     Silver Member
                                                                 </span>
-                                                                <p style="font-size: 12px;font-style: italic;" class="mt-0">
-                                                                    Anda mendapatkan potongan Rp.5.000 untuk 10 transaksi
-                                                                </p>
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -179,6 +186,7 @@ export default {
     data() {
         return {
             user : null,
+
             // picked: new Date(),
             // picked: null,
         }
@@ -199,6 +207,22 @@ export default {
             .then((response) => {
                 this.user = response.data;
                 this.user.birth = moment(response.data.birth, 'YYYY-MM-DD').toDate();
+                this.user.percen = 0
+                
+                if (this.user.phone) {
+                    this.user.percen = this.user.percen + 35;
+                }
+                if (this.user.gender) {
+                    this.user.percen = this.user.percen + 30;
+                }
+                
+                if (this.user.birth) {
+                    this.user.percen = this.user.percen + 25;
+                }
+
+                if (this.user.transaction_count > 10) {
+                    this.user.percen = this.user.percen + 10;
+                }
             })
             .catch(error => {
                 this.errorNotif(error)

@@ -1,285 +1,128 @@
 <template>
-  <div class="section section-margin overflow-hidden">
-    <div class="container">
-        <div class="row mb-n6">
-            <div class="col-lg-6 align-self-center mb-6 aos-init aos-animate" data-aos="fade-right" data-aos-delay="600">
-                <div class="about_content">
-                    <h2 class="title">Tentang Bins Shop</h2>
-                    <h3 class="sub-title">We believe that every project existing in digital world is a result of an idea and every idea has a cause.</h3>
-                    <p>For this reason, our each design serves an idea. Our strength in design is reflected by our name, our care for details. Our specialist won't be afraid to go extra miles just to approach near perfection. We don't require everything to be perfect, but we need them to be perfectly cared for. That's a reason why we are willing to give contributions at best. Not a single detail is missed out under Billey's professional eyes.The amount of dedication and effort equals to the level of passion and by.</p>
+    <div class="section mt-5 pt-2 mb-5">
+        <div class="container">
+            <div class="row mb-n6">
+                <div class="col-lg-6 align-self-center mb-6 aos-init aos-animate" data-aos="fade-right" data-aos-delay="600">
+                    <div class="about_content">
+                        <h2 class="title">Cerita Kami</h2>
+                        <h3 class="sub-title">Kenapa kami membuat bins.shop ?</h3>
+                        <p>Bins shop dibuat sebagai alternatif untuk penjualan lisensi original yang berkualitas, karena sebelumnya kita fokus berjualan di tokopedia dan shopee. Akan tetapi entah ada yang iri atau mungkin hanya sekedar iseng, produk kita selalu hilang di dua marcket place raksasa tersebut</p>
+                        <h3 class="sub-title">Sudah Terjual Ribuan ? </h3>
+                        <p>Ya, sudah terjual ribuan di tokopedia dan shoope dengan berbagai ulasan Positif, tapi apa daya namanya dalam dunia bisnis ada saja kendala dan itu menjadi alasan kami kenapa harus membuat Bins Shop</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-6 aos-init aos-animate" data-aos="fade-left" data-aos-delay="600">
-                <div class="about_thumb">
-                    <img class="fit-image" src="assets/images/about/1.jpg" alt="About Image">
+                <div class="col-lg-6 mb-6 aos-init aos-animate" data-aos="fade-left" data-aos-delay="600">
+                    <div class="about_thumb">
+                        <img class="fit-image" src="assets/images/about/1.jpg" alt="About Image">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-  </div>
 
-  <div class="section section-margin">
+    <div class="section section-margin row-2" :class="(isMobile()) ? 'pb-4 pt-5 mt-3 mb-5' : ''">
         <div class="container">
-            <div class="row mb-n10">
-                <div class="col-12 col-lg-8 mb-10">
-                    <!-- Section Title Start -->
-                    <div class="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                        <h2 class="title pb-3">Metode Pembayaran</h2>
-                        <span></span>
-                        <div class="title-border-bottom"></div>
+            <h2 class="title text-center mb-5 pb-5 pt-5">Apa yang kamu dapatkan?</h2>
+            <div class="row mb-n5 pt-5">
+                <div class="col-lg-3 col-md-6 col-6 mb-5">
+                    <div class="feature flex-column text-center">
+                        <div class="icon w-100 mb-4">
+                            <img src="assets/images/icons/feature-icon-2.png" alt="Feature Icon">
+                        </div>
+                        <div class="content ps-0 w-100">
+                            <h5 class="title mb-2">Gratis Ongkir</h5>
+                            <p>Produk digital, tanpa ongkos kirim pastinya. Jika ingin fisik seperti foto produk, bisa request juga kok</p>
+                        </div>
                     </div>
-                    <!-- Section Title End -->
-                    <!-- Contact Form Wrapper Start -->
-                    <div class="contact-form-wrapper contact-form">
-                        <form action="https://htmlmail.hasthemes.com/rezaul/destry.php" id="contact-form" method="post">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                                            <div class="input-item mb-4">
-                                                <input class="input-item" type="text" placeholder="Your Name *" name="name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                                            <div class="input-item mb-4">
-                                                <input class="input-item" type="email" placeholder="Email *" name="email">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                                            <div class="input-item mb-4">
-                                                <input class="input-item" type="text" placeholder="Subject *" name="subject">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                                            <div class="input-item mb-8">
-                                                <textarea class="textarea-item" name="message" placeholder="Message"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-                                            <button type="submit" id="submit" name="submit" class="btn btn-dark btn-hover-primary rounded-0">Send A Message</button>
-                                        </div>
-                                        <p class="col-8 form-message mb-0"></p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-6 mb-5">
+                    <div class="feature flex-column text-center">
+                        <div class="icon w-100 mb-4">
+                            <img src="assets/images/icons/feature-icon-3.png" alt="Feature Icon">
+                        </div>
+                        <div class="content ps-0 w-100">
+                            <h5 class="title mb-2">Support 24/7</h5>
+                            <p>Admin yang fast response! Ada kendala? kita bantu sampai solved & Free remote Teamviewer / anydesk</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 mb-5">
+                    <div class="feature flex-column text-center">
+                        <div class="icon w-100 mb-4">
+                            <img src="assets/images/icons/feature-icon-4.png" alt="Feature Icon">
+                        </div>
+                        <div class="content ps-0 w-100">
+                            <h5 class="title mb-2">Garansi Refund</h5>
+                            <p>Produk kami semua Garansi Life time, jika ada kendala kita bisa refund pastinya</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 mb-5">
+                    <div class="feature flex-column text-center">
+                        <div class="icon w-100 mb-4">
+                            <img src="assets/images/icons/feature-icon-1.png" alt="Feature Icon">
+                        </div>
+                        <div class="content ps-0 w-100">
+                            <h5 class="title mb-2">Promo Menarik</h5>
+                            <p>Selalu ada promo menarik untuk pelanggan terpilih, seperti pembelian banyak atau pelanggan kita</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-margin mt-0">
+        <div class="container">
+            <h2 class="title text-center mb-5 pb-5 pt-5">Ulasan pelanggan kami</h2>
+            <p></p>
+            <div class="row mb-n6 pt-2">
+                <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile()) ? 1 : 3">
+                    <Slide v-for="slide in 12" :key="slide">
+                        <div class="carousel__item">
+                            <div class="banner ">
+                                <div class="banner-image">
+                                    <a href=""><img src="assets/images/banner/banner-1.jpg" alt=""></a>
+                                </div>
+                                <div class="info">
+                                    <div class="small-banner-content">
+                                        <h4 class="sub-title">{{ slide }}</h4>
+                                        <h3 class="title">Get Offer <br>For Summer</h3>
+                                        <a href="shop-grid.html" class="btn btn-dark btn-sm">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <p class="form-messege"></p>
-                    </div>
-                    <!-- Contact Form Wrapper End -->
-                </div>
-                <div class="col-12 col-lg-4 mb-10">
-                    <!-- Section Title Start -->
-                    <div class="section-title aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                        <h2 class="title pb-3">Contact Info</h2>
-                        <span></span>
-                        <div class="title-border-bottom"></div>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <!-- Contact Information Wrapper Start -->
-                    <div class="row contact-info-wrapper mb-n6">
-
-                        <!-- Single Contact Information Start -->
-                        <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-
-                            <!-- Single Contact Icon Start -->
-                            <div class="single-contact-icon">
-                                <i class="fa fa-map-marker"></i>
-                            </div>
-                            <!-- Single Contact Icon End -->
-
-                            <!-- Single Contact Title Content Start -->
-                            <div class="single-contact-title-content">
-                                <h4 class="title">Postal Address</h4>
-                                <p class="desc-content">PO Box 123456, Street/Road <br>Country-State</p>
-                            </div>
-                            <!-- Single Contact Title Content End -->
-
                         </div>
-                        <!-- Single Contact Information End -->
-
-                        <!-- Single Contact Information Start -->
-                        <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-
-                            <!-- Single Contact Icon Start -->
-                            <div class="single-contact-icon">
-                                <i class="fa fa-mobile"></i>
-                            </div>
-                            <!-- Single Contact Icon End -->
-
-                            <!-- Single Contact Title Content Start -->
-                            <div class="single-contact-title-content">
-                                <h4 class="title">Contact Us Anytime</h4>
-                                <p class="desc-content">Mobile: 012 345 678 <br>Fax: 123 456 789</p>
-                            </div>
-                            <!-- Single Contact Title Content End -->
-
-                        </div>
-                        <!-- Single Contact Information End -->
-
-                        <!-- Single Contact Information Start -->
-                        <div class="col-lg-12 col-md-6 col-sm-12 col-12 single-contact-info mb-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-
-                            <!-- Single Contact Icon Start -->
-                            <div class="single-contact-icon">
-                                <i class="fa fa-envelope-o"></i>
-                            </div>
-                            <!-- Single Contact Icon End -->
-
-                            <!-- Single Contact Title Content Start -->
-                            <div class="single-contact-title-content">
-                                <h4 class="title">Support Overall</h4>
-                                <p class="desc-content"><a href="#">Support24/7@example.com</a> <br><a href="#">info@example.com</a> </p>
-                            </div>
-                            <!-- Single Contact Title Content End -->
-
-                        </div>
-                        <!-- Single Contact Information End -->
-
-                    </div>
-                    <!-- Contact Information Wrapper End -->
-                </div>
+                    </Slide>
+                    <template #addons>
+                    <Navigation />
+                    <Pagination />
+                    </template>
+                </Carousel>
             </div>
         </div>
     </div>
 
-  <div class="section section-margin">
-
-    <!-- Faq Content Start  -->
-    <div class="faq_content_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="faq_content_wrapper aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                        <h4 class="title">Below are frequently asked questions, you may find the answer for yourself</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id erat sagittis, faucibus metus malesuada, eleifend turpis. Mauris semper augue id nisl aliquet, a porta lectus mattis. Nulla at tortor augue. In eget enim diam. Donec gravida tortor sem, ac fermentum nibh rutrum sit amet. Nulla convallis mauris vitae congue consequat. Donec interdum nunc purus, vitae vulputate arcu fringilla quis. Vivamus iaculis euismod dui.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Faq Content End -->
-
-
-    <!--Accordion area-->
-    <div class="accordion_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div id="accordionExample" class="accordion mb-n4">
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                            <div class="card-header card_accor" id="headingOne">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Mauris congue euismod purus at semper. Morbi et vulputate massa?<i class="fa fa-plus"></i><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseOne" class="accordion-collapse border-0 collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                            <div class="card-header card_accor" id="headingTwo">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Donec mattis finibus elit ut tristique?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseTwo" class="accordion-collapse border-0 collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-                            <div class="card-header card_accor" id="headingThree">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Aenean elit orci, efficitur quis nisl at, accumsan?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseThree" class="collapse accordion-collapse border-0" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
-                            <div class="card-header card_accor" id="headingfour">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    Pellentesque habitant morbi tristique senectus et netus?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseFour" class="collapse accordion-collapse border-0" aria-labelledby="headingfour" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                            <div class="card-header card_accor" id="headingfive">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    Nam pellentesque aliquam metus?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseFive" class="collapse accordion-collapse border-0" aria-labelledby="headingfive" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            <div class="card-header card_accor" id="headingsix">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                    Aenean elit orci, efficitur quis nisl at?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseSix" class="collapse accordion-collapse border-0" aria-labelledby="headingsix" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                            <div class="card-header card_accor" id="headingseven">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                    Morbi gravida, nisi id fringilla ultricies, elit lorem?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseSeven" class="collapse accordion-collapse border-0" aria-labelledby="headingseven" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                            <div class="card-header card_accor" id="headingeight">
-                                <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                    Aenean elit orci, efficitur quis nisl at, accumsan?
-                                    <i class="fa fa-plus"></i>
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <div id="collapseEight" class="collapse accordion-collapse border-0" aria-labelledby="headingeight" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </template>
+
+
+
+<script>
+// @ is an alias to /src
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import ProductList from '/src/components/ProductList.vue'
+
+export default {
+    name: 'HomeView',
+    components: {  
+        Carousel, Slide, Pagination, Navigation, ProductList, 
+    }, 
+    data() {
+        return {
+           
+        }
+    },
+}
+</script>
