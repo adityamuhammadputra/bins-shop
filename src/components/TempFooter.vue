@@ -34,11 +34,32 @@
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Eksplor</h2>
                             <ul class="widget-list">
-                                <li><a href="contact.html">Tentang</a></li>
-                                <li><a href="contact.html">Faq</a></li>
-                                <li><a href="contact.html">Tutorial & Link Download</a></li>
-                                <li><a href="contact.html">Cara Refund ?</a></li>
-                                <li><a href="contact.html">Ingin Produk Fisik Seperti di foto produk ?</a></li>
+                                <li>
+                                    <router-link to="/about">
+                                        Tentang    
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/faq">
+                                        Sering Ditanyakan    
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/tutorial">
+                                        Tutorial & Link Download  
+                                    </router-link>
+                                    
+                                </li>
+                                <li>
+                                    <router-link to="/faq">
+                                        Cara Refund ?    
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/faq">
+                                        Ingin Produk Fisik Seperti di foto produk ? 
+                                    </router-link>
+                                </li>
                             </ul>
                         </div>
                     </div>

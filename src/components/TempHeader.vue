@@ -55,8 +55,8 @@
                                 </router-link> 
                                 <div class="dropdown-menu notification-ui_dd" :class="notif" @mouseleave="notif = ''" aria-labelledby="navbarDropdown">
                                     <div class="notification-ui_dd-header">
-                                        <b>Notification</b> 
-                                        <span class="badge pull-right bg-primary">0</span>
+                                        <b>Notification</b>
+                                        <i class="pe-7s-close pull-right" @click="notif = ''" style="font-size: 32px; cursor: pointer; font-weight: bolder;"></i>
                                     </div>
                                     <div class="notification-ui_dd-content">
                                         <div class="notification-list notification-list--unread">
