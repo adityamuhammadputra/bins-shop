@@ -3,14 +3,22 @@
         <div class="container">
             <div class="faq_content_area">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="faq_content_wrapper aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                                <h4 class="title">Below are frequently asked questions, you may find the answer for yourself</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id erat sagittis, faucibus metus malesuada, eleifend turpis. Mauris semper augue id nisl aliquet, a porta lectus mattis. Nulla at tortor augue. In eget enim diam. Donec gravida tortor sem, ac fermentum nibh rutrum sit amet. Nulla convallis mauris vitae congue consequat. Donec interdum nunc purus, vitae vulputate arcu fringilla quis. Vivamus iaculis euismod dui.</p>
+                    <div class="row mb-n6">
+                        <div class="col-lg-6 align-self-center mb-6">
+                            <div class="about_content">
+                                <h2 class="title">Hal yang sering ditanyakan</h2>
+                                <p>Beberapa hal sering ditanyakan oleh pelanggan kami, kami coba rangkum dibawah ini untuk menjadi refensi jika tidak bertanya kepada admin kami.
+                                    Namun, jika masih bingung tanyakan apapun kepada admin kami. kami usahakan berikan pelayan terbaik kami :)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-6">
+                            <div class="about_thumb">
+                                <img class="fit-image" src="assets/images/about/1.jpg" alt="About Image">
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -19,112 +27,73 @@
                 <div class="row">
                     <div class="col-12">
                         <div id="accordionExample" class="accordion mb-n4">
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                                <div class="card-header card_accor" id="headingOne">
-                                    <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Mauris congue euismod purus at semper. Morbi et vulputate massa?<i class="fa fa-plus"></i><i class="fa fa-minus"></i>
+                            <div class="card_dipult accordion-item mb-4">
+                                <div class="card-header card_accor" id="headingOne" @click="collapsed = '', show='show'">
+                                    <button class="btn btn-link" :class="collapsed">
+                                        Apa bedanya dengan produk yang di bins.shop dengan produk lain di shopee atau tokopedia ?
+                                        <i class="fa fa-plus"></i><i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
                                     </button>
                                 </div>
-                                <div id="collapseOne" class="collapse accordion-collapse show border-0" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="collapse accordion-collapse border-0" :class="show" 
+                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
+                                        <p>Tentu beda, karena yang kami jual adalah produk Original. Aktivasi pada produk kami semua langsung By Internet, bukan harus kirim validasi Screen Shoot (ss) by telephone kemudian divalidasi oleh Admin Toko tesebut </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                                <div class="card-header card_accor" id="headingTwo">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Donec mattis finibus elit ut tristique?
-                                        <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
+                            <div class="card_dipult accordion-item mb-4">
+                                <div class="card-header card_accor" id="headingTwo" @click="collapsed = '', show='show'">
+                                    <button class="btn btn-link" :class="collapsed">
+                                        Saya lihat kok harganya toko lain atau Marketplace lain lebih murah, bahkan ada yang dibawah 30K ?
+                                        <i class="fa fa-plus"></i><i class="fa fa-minus" @click="collapsed = 'collapsed', show=''"></i>
                                     </button>
                                 </div>
-                                <div id="collapseTwo" class="collapse accordion-collapse border-0" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse accordion-collapse border-0" :class="show">
                                     <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
+                                        <p>Ada harga ada rupa :). bisa dipastikan produk tersebut menggunakan Aktivasi By Phone yang harus kirim SS untuk validasi. Perlu diketahui, lisensi office original aktivasi langsung by internet. </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-                                <div class="card-header card_accor" id="headingThree">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Aenean elit orci, efficitur quis nisl at, accumsan?
+                            <div class="card_dipult accordion-item mb-4">
+                                <div class="card-header card_accor" id="headingThree" @click="collapsed = '', show='show'">
+                                    <button class="btn btn-link" :class="collapsed" >
+                                        Bagaimana jika produk yang saya beli di Bins.Shop bermasalah ? 
                                         <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
+                                        <i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
                                     </button>
                                 </div>
-                                <div id="collapseThree" class="collapse accordion-collapse border-0" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div id="collapseThree" class="collapse accordion-collapse border-0" :class="show">
                                     <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
+                                        <p>Jika ada kendala terkait produk kami, tahap pertama tentu kami akan bantu dengan menjawab kendala apa terjadi. Jika belum solved kami akan bantu Remote menggunakan Teamviewer / Anydesk</p>
+                                        <p>sampai pada akhirnya kami akan refund langsung kerening Pembeli, jika memang masih belum bisa untuk kendala terkait</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
-                                <div class="card-header card_accor" id="headingfour">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        Pellentesque habitant morbi tristique senectus et netus?
+                            <div class="card_dipult accordion-item mb-4">
+                                <div class="card-header card_accor" id="headingfour" @click="collapsed = '', show='show'">
+                                    <button class="btn btn-link" :class="collapsed" >
+                                        Bagaiaman Cara Refund
                                         <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
+                                        <i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
                                     </button>
                                 </div>
-                                <div id="collapseFour" class="collapse accordion-collapse border-0" aria-labelledby="headingfour" data-bs-parent="#accordionExample">
+                                <div id="collapseFour" class="collapse accordion-collapse border-0" :class="show" >
                                     <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
+                                        <p>Jika produk bermasalah, tinggal ajukan saya di sistem kami saat transaksi. atau bisa langsung by chat kepada Admin kami</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-                                <div class="card-header card_accor" id="headingfive">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                        Nam pellentesque aliquam metus?
+                            <div class="card_dipult accordion-item mb-4">
+                                <div class="card-header card_accor" id="headingfive" @click="collapsed = '', show='show'">
+                                    <button class="btn btn-link" :class="collapsed" >
+                                        Saya ingin produk fisik seperti difoto Produk
                                         <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
+                                        <i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
                                     </button>
                                 </div>
-                                <div id="collapseFive" class="collapse accordion-collapse border-0" aria-labelledby="headingfive" data-bs-parent="#accordionExample">
+                                <div id="collapseFive" class="collapse accordion-collapse border-0" :class="show">
                                     <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                                <div class="card-header card_accor" id="headingsix">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                        Aenean elit orci, efficitur quis nisl at?
-                                        <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div id="collapseSix" class="collapse accordion-collapse border-0" aria-labelledby="headingsix" data-bs-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                                <div class="card-header card_accor" id="headingseven">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                        Morbi gravida, nisi id fringilla ultricies, elit lorem?
-                                        <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div id="collapseSeven" class="collapse accordion-collapse border-0" aria-labelledby="headingseven" data-bs-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_dipult accordion-item mb-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                                <div class="card-header card_accor" id="headingeight">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                        Aenean elit orci, efficitur quis nisl at, accumsan?
-                                        <i class="fa fa-plus"></i>
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div id="collapseEight" class="collapse accordion-collapse border-0" aria-labelledby="headingeight" data-bs-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <p>Donec mattis finibus elit ut tristique. Nullam tempus nunc eget arcu vulputate, eu porttitor tellus commodo. Aliquam erat volutpat. Aliquam consectetur lorem eu viverra lobortis. Morbi gravida, nisi id fringilla ultricies, elit lorem eleifend lorem</p>
+                                        <p>Bisa kami kirim langsung menggunakan Kurir atau Jasa kirim yang telah dispakati oleh pembeli. ongkos kirim tergantung daerah masing masing yaa :) </p>
                                     </div>
                                 </div>
                             </div>
@@ -146,12 +115,14 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import ProductList from '/src/components/ProductList.vue'
 
 export default {
-    name: 'HomeView',
+    name: 'faq',
     components: {  
         Carousel, Slide, Pagination, Navigation, ProductList, 
     }, 
     data() {
         return {
+            collapsed: 'collapsed',
+            show: null,
            
         }
     },

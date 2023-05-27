@@ -39,6 +39,9 @@
                                     <li>
                                         <router-link to="/about">Tentang</router-link> 
                                     </li>
+                                    <li>
+                                        <router-link to="/faq">Faq ?</router-link> 
+                                    </li>
                                 </ul>
                             </div>
                         </div>

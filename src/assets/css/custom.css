@@ -84,6 +84,10 @@
     border-bottom: 1px solid #f9f9f9;
 }
 
+
+li a.router-link-active {
+    color: #ff4545 !important;
+}
 /* .modal.show {
     display: none;
 } */
