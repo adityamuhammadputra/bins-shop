@@ -40,11 +40,6 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/faq">
-                                        Sering Ditanyakan    
-                                    </router-link>
-                                </li>
-                                <li>
                                     <router-link to="/tutorial">
                                         Tutorial & Link Download  
                                     </router-link>
@@ -52,12 +47,7 @@
                                 </li>
                                 <li>
                                     <router-link to="/faq">
-                                        Cara Refund ?    
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/faq">
-                                        Ingin Produk Fisik Seperti di foto produk ? 
+                                        Cara Refund, Ingin Produk Fisik Seperti di foto produk
                                     </router-link>
                                 </li>
                             </ul>

@@ -88,6 +88,10 @@
 li a.router-link-active {
     color: #ff4545 !important;
 }
+
+.sidebar-list li a.active {
+    color: #ff4545 !important;
+}
 /* .modal.show {
     display: none;
 } */

@@ -9,8 +9,15 @@
 - menu transaksi dan ulasan dan diskusi terpisah x
 - halaman pengaturan akun x
 
-- email transaksi 
+- email transaksi x
 - halaman tentang
 - icon notif masuk kehalam transaksi dan ulasan dan diskusi dan menghitung transaksi
 - icon rel link meta
 - tampilan mobile 
+
+
+halaman admin
+-list order
+-list user
+-email transaksi
+-realtime order masuk

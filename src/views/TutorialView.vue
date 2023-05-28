@@ -1,128 +1,119 @@
 <template>
     <div class="section mt-5 pt-2 mb-5">
         <div class="container">
-            <div class="row mb-n6">
-                <div class="col-lg-6 align-self-center mb-6 aos-init aos-animate" data-aos="fade-right" data-aos-delay="600">
-                    <div class="about_content">
-                        <h2 class="title">Cerita Kami</h2>
-                        <h3 class="sub-title">Kenapa kami membuat bins.shop ?</h3>
-                        <p>Bins shop dibuat sebagai alternatif untuk penjualan lisensi original yang berkualitas, karena sebelumnya kita fokus berjualan di tokopedia dan shopee. Akan tetapi entah ada yang iri atau mungkin hanya sekedar iseng, produk kita selalu hilang di dua marcket place raksasa tersebut</p>
-                        <h3 class="sub-title">Sudah Terjual Ribuan ? </h3>
-                        <p>Ya, sudah terjual ribuan di tokopedia dan shoope dengan berbagai ulasan Positif, tapi apa daya namanya dalam dunia bisnis ada saja kendala dan itu menjadi alasan kami kenapa harus membuat Bins Shop</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-6 aos-init aos-animate" data-aos="fade-left" data-aos-delay="600">
-                    <div class="about_thumb">
-                        <img class="fit-image" src="assets/images/about/1.jpg" alt="About Image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <!-- <div class="row"><div class="col-12"> -->
 
-    <div class="section section-margin row-2" :class="(isMobile()) ? 'pb-4 pt-5 mt-3 mb-5' : ''">
-        <div class="container">
-            <h2 class="title text-center mb-5 pb-5 pt-5">Apa yang kamu dapatkan?</h2>
-            <div class="row mb-n5 pt-5">
-                <div class="col-lg-3 col-md-6 col-6 mb-5">
-                    <div class="feature flex-column text-center">
-                        <div class="icon w-100 mb-4">
-                            <img src="assets/images/icons/feature-icon-2.png" alt="Feature Icon">
-                        </div>
-                        <div class="content ps-0 w-100">
-                            <h5 class="title mb-2">Gratis Ongkir</h5>
-                            <p>Produk digital, tanpa ongkos kirim pastinya. Jika ingin fisik seperti foto produk, bisa request juga kok</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-6 mb-5">
-                    <div class="feature flex-column text-center">
-                        <div class="icon w-100 mb-4">
-                            <img src="assets/images/icons/feature-icon-3.png" alt="Feature Icon">
-                        </div>
-                        <div class="content ps-0 w-100">
-                            <h5 class="title mb-2">Support 24/7</h5>
-                            <p>Admin yang fast response! Ada kendala? kita bantu sampai solved & Free remote Teamviewer / anydesk</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 mb-5">
-                    <div class="feature flex-column text-center">
-                        <div class="icon w-100 mb-4">
-                            <img src="assets/images/icons/feature-icon-4.png" alt="Feature Icon">
-                        </div>
-                        <div class="content ps-0 w-100">
-                            <h5 class="title mb-2">Garansi Refund</h5>
-                            <p>Produk kami semua Garansi Life time, jika ada kendala kita bisa refund pastinya</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 mb-5">
-                    <div class="feature flex-column text-center">
-                        <div class="icon w-100 mb-4">
-                            <img src="assets/images/icons/feature-icon-1.png" alt="Feature Icon">
-                        </div>
-                        <div class="content ps-0 w-100">
-                            <h5 class="title mb-2">Promo Menarik</h5>
-                            <p>Selalu ada promo menarik untuk pelanggan terpilih, seperti pembelian banyak atau pelanggan kita</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section section-margin mt-0">
-        <div class="container">
-            <h2 class="title text-center mb-5 pb-5 pt-5">Ulasan pelanggan kami</h2>
-            <p></p>
-            <div class="row mb-n6 pt-2">
-                <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile()) ? 1 : 3">
-                    <Slide v-for="slide in 12" :key="slide">
-                        <div class="carousel__item">
-                            <div class="banner ">
-                                <div class="banner-image">
-                                    <a href=""><img src="assets/images/banner/banner-1.jpg" alt=""></a>
-                                </div>
-                                <div class="info">
-                                    <div class="small-banner-content">
-                                        <h4 class="sub-title">{{ slide }}</h4>
-                                        <h3 class="title">Get Offer <br>For Summer</h3>
-                                        <a href="shop-grid.html" class="btn btn-dark btn-sm">Shop Now</a>
-                                    </div>
+            <div class="row">
+                <div class="col-lg-3 col-12 order-2 order-lg-1">
+                    <!-- Sidebar Widget Start -->
+                    <aside class="sidebar_widget mt-10 mt-lg-0">
+                        <div class="widget_inner">
+                            <div class="widget-list mb-10">
+                                <h3 class="widget-title">Tutorial Aktivasi</h3>
+                                <div class="sidebar-body">
+                                    <ul class="sidebar-list">
+                                        <template v-for="(tutorial, index) in dataTutorial" v-if="dataTutorial.length > 0">
+                                        <li
+                                            v-if="tutorial.desc !== null">
+                                            <a href="#" :class="(active.name == tutorial.name ? 'active' : '')" 
+                                                @click="active.name = tutorial.name; 
+                                                        active.pdf = this.axios.defaults.baseURL + 'storage/' + tutorial.pdf">
+                                                {{ tutorial.desc }}
+                                            </a>
+                                        </li>
+                                        <li v-else
+                                            style="font-size: 14px;color: #b5b5b5;font-weight: 500;">{{ tutorial.name }}
+                                        </li>
+                                        </template>
+<!-- 
+                                        <li>
+                                            <a href="#" :class="(active == 'key' ? 'active' : '')" @click="active = 'key'">
+                                                Key Office 2016, 2019, 2021
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" :class="(active == '365' ? 'active' : '')" @click="active = '365'">
+                                                Office 365
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" :class="(active == 'windows' ? 'active' : '')" @click="active = 'windows'">
+                                                key Windows 10/11
+                                            </a>
+                                        </li>
+                                        <li><a href="#">Visio & Project</a></li>
+                                        <li><a href="#">Hapus Key KMS /crack </a></li>
+                                        <li style="font-size: 14px;color: #b5b5b5;font-weight: 500;">MAC OS</li>
+                                        <li><a href="#">Office 365 </a></li>
+                                        <li><a href="#">Office 2016, 2019, 2021</a></li> -->
+                                    </ul>
                                 </div>
                             </div>
+                            
+                            <div class="widget-list mb-10">
+                                <h3 class="widget-title mb-4">Link Download for Windows</h3>
+                                <div class="sidebar-body">
+                                    <ul class="tags mb-n2">
+                                        <li><a href="#">Office </a></li>
+                                        <li><a href="#">Visio </a></li>
+                                        <li><a href="#">Project</a></li>
+                                        <li><a href="#">Windows OS</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
                         </div>
-                    </Slide>
-                    <template #addons>
-                    <Navigation />
-                    <Pagination />
-                    </template>
-                </Carousel>
+                    </aside>
+                    <!-- Sidebar Widget End -->
+                </div>
+
+                <div class="col-lg-9 col-12 order-1 order-lg-2">
+                    <embed :src="active.pdf" width="105%" height="2100px" />
+                </div>
             </div>
         </div>
     </div>
-
+   
 </template>
 
 
 
 <script>
 // @ is an alias to /src
-import 'vue3-carousel/dist/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import ProductList from '/src/components/ProductList.vue'
+// 
 
 export default {
-    name: 'HomeView',
-    components: {  
-        Carousel, Slide, Pagination, Navigation, ProductList, 
-    }, 
+    name: 'turoial',
+    // components: {  
+    //     Carousel, Slide, Pagination, Navigation, ProductList, 
+    // }, 
     data() {
         return {
-           
+            active: {
+                name: '',
+                pdf: '',
+            },
+            dataTutorial: [],
         }
     },
+    mounted() {
+        this.tutorialIndex();
+    },
+    methods: {
+        tutorialIndex: function() {
+            this.axios.get('tutorial', this.$store.state.config)
+            .then((response) => {
+                this.dataTutorial = response.data
+                this.active.name = response.data[1].name
+                this.active.pdf = this.axios.defaults.baseURL + 'storage/' + response.data[1].pdf
+            }) 
+            .catch(error => {
+                this.errorNotif(error)
+            })
+            .finally(
+                () => this.loading = false
+            )
+        },
+    }
 }
 </script>
