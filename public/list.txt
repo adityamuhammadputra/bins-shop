@@ -10,9 +10,8 @@
 - halaman pengaturan akun x
 
 - email transaksi x
-- halaman tentang
-- icon notif masuk kehalam transaksi dan ulasan dan diskusi dan menghitung transaksi
-- icon rel link meta
+- halaman tentang x 
+- icon rel link meta  x
 - tampilan mobile 
 
 

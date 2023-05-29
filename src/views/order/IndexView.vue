@@ -25,7 +25,7 @@
                                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
                                     <div class="shop-top-bar-left ">
                                         <div class="shop-top-show">
-                                            <span>Menampilakan <b>{{ dataOrder.length }}</b> Transaksi</span>
+                                            <span>Menampilkan <b>{{ dataOrder.length }}</b> Transaksi, <b>{{ this.$store.state.default.notif }}</b> Transaksi Berlangsung</span>
                                         </div>
                                     </div>
                                     <div class="shop-top-bar-right">

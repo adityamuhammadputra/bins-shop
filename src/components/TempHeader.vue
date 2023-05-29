@@ -54,9 +54,9 @@
                                 <router-link to="/order" class="header-action-btn header-action-btn-cart"
                                     @mouseover="notif = 'show'">
                                     <i class="pe-7s-bell"></i>
-                                    <span class="header-action-num">0</span>
+                                    <span class="header-action-num">{{ this.$store.state.default.notif }}</span>
                                 </router-link> 
-                                <div class="dropdown-menu notification-ui_dd" :class="notif" @mouseleave="notif = ''" aria-labelledby="navbarDropdown">
+                                <!-- <div class="dropdown-menu notification-ui_dd" :class="notif" @mouseleave="notif = ''" aria-labelledby="navbarDropdown">
                                     <div class="notification-ui_dd-header">
                                         <b>Notification</b>
                                         <i class="pe-7s-close pull-right" @click="notif = ''" style="font-size: 32px; cursor: pointer; font-weight: bolder;"></i>
@@ -83,7 +83,7 @@
                                     <div class="notification-ui_dd-footer">
                                         <a href="#!" class="btn btn-primary btn-sm btn-block">Lihat Semua</a>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <router-link to="/cart" class="header-action-btn header-action-btn-cart"
                                     @mouseover="notif = ''">
@@ -160,6 +160,7 @@ export default {
     },
     created() {
         this.countChart();
+        this.countNotif();
     },
     methods: {
         stickyScroll: function() {

@@ -295,6 +295,7 @@ export default {
             that.axios.post('order', dataSumm, that.$store.state.config)
             .then((response) => {
                 // console.log(response);
+                that.countNotif();
                 this.$router.push('/order');
             })
             .catch(error => {

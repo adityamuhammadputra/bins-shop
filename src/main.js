@@ -130,6 +130,19 @@ vueApp.mixin({
                 () => this.loading = false
             )
         },
+        countNotif : function() {
+            this.axios.get('notif-count?status=1,2,3,9', this.$store.state.config)
+            .then((response) => {
+                this.$store.state.default.notif = response.data.message
+                localStorage.setItem('notifLocal', response.data.message)
+            })
+            .catch(error => {
+                this.errorNotif(error)
+            })
+            .finally(
+                () => this.loading = false
+            )
+        },
         addChart: function(id, loadChart = false) {
             this.loadingButton = true
             const data = {
