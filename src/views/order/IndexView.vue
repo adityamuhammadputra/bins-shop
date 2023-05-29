@@ -1,5 +1,5 @@
 <template>
-    <div class="section mt-5 mb-5">
+    <div class="section mt-5 mb-5 mt-1-mobile">
         <div class="container">
 
             <div class="row" v-if="user">

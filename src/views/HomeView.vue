@@ -2,7 +2,7 @@
 
     <div class="section row-1">
         <div :class="(isMobile()) ? '' : 'container'">
-            <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="1">
+            <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile() ? '1.1' : '1')">
                 <Slide v-for="slide in 3" :key="slide">
                     <div class="carousel__item">
                         <div class="banner">
@@ -20,7 +20,7 @@
                     </div>
                 </Slide>
                 <template #addons>
-                <Navigation />
+                <Navigation v-if="!isMobile()"/>
                 <Pagination />
                 </template>
             </Carousel>

@@ -16,12 +16,15 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/user',
     name: 'user',
-    component: UserView
+    component: UserView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/product',
@@ -31,17 +34,26 @@ const routes = [
   {
     path: '/product/:slug',
     name: 'produt-detail',
-    component: ProductShow
+    component: ProductShow,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/cart',
     name: 'cart',
-    component: CartView
+    component: CartView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/order',
     name: 'order',
-    component: OrderView
+    component: OrderView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/order/:order_id',
@@ -53,18 +65,25 @@ const routes = [
     name: 'order-print',
     component: OrderPrintView,
     meta: {
-      header: 0
+      header: 0,
+      hideMobile: 1,
     }
   },
   {
     path: '/rating',
     name: 'rating',
-    component: RatingView
+    component: RatingView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/discuss',
     name: 'discuss',
-    component: DiscussView
+    component: DiscussView,
+    meta: {
+      hideMobile: 1
+    }
   },
   {
     path: '/about',

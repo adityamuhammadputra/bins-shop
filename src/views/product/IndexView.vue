@@ -1,5 +1,5 @@
 <template>
-<div class="section mb-5 mt-5">
+<div class="section mb-5 mt-5 m-0-mobile">
     <ProductList>
     </ProductList>
     </div>

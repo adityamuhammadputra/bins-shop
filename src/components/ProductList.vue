@@ -25,8 +25,9 @@
                 </div>
                 <div class="form-group row" v-else>
                     <label for="staticEmail" class="col-6 col-form-label"><b>{{ this.meta.total }}</b> Produk</label>
-                    <div class="col-6">
-                        <select class="nice-select" aria-label=".form-select-sm example" @change="getIndex()" 
+                    <div class="col-6 shop-short-by">
+                        <select class="nice-select" @change="getIndex()" 
+                            style="width: 100%;"
                             v-model="this.$store.state.meta.sort">
                             <option value="">--Urutkan--</option>
                             <option value="1">Penjualan Terbanyak</option>
@@ -56,7 +57,8 @@
                         </content-loader>
                     </div>
                     <!-- Single Product Start -->
-                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 product" v-else 
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 product" 
+                        v-else 
                         v-for="product in this.meta.data" :key="product.id">
                         <div class="product-inner">
                             <div class="thumb">

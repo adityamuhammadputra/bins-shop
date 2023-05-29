@@ -1,10 +1,10 @@
 <template>
-    <footer class="section footer-section" v-if="$route.meta.header !== 0">
+    <footer class="section footer-section">
         <!-- Footer Top Start -->
-        <div class="footer-top pt-7 pb-7">
+        <div class="footer-top pt-7 pb-7" :class="(isMobile() ? 'mb-7' : '')">
             <div class="container">
                 <div class="row mb-n10">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10" v-if="$route.meta.hideMobile !== 1"  >
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Kontak Kami</h2>
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui :</p>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10" v-if="$route.meta.hideMobile !== 1">
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Eksplor</h2>
                             <ul class="widget-list">
@@ -54,8 +54,8 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                        <div class="single-footer-widget aos-init aos-animate">
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10">
+                        <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Pembayaran</h2>
                             <p class="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran :</p>
                             <div class="widget-social justify-content-start">
@@ -73,7 +73,7 @@
         <!-- Footer Top End -->
 
         <!-- Footer Bottom Start -->
-        <div class="footer-bottom">
+        <div class="footer-bottom" :style="(isMobile() ? 'display:none;' : '')">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 text-center">
@@ -87,7 +87,7 @@
         <!-- Footer Bottom End -->
     </footer>
 
-    <WindowsBottomNavigation :options="options" v-model="selected" v-if="isMobile() && $route.meta.header !== 0" style="height: 55px;"/>
+    <WindowsBottomNavigation :options="options" v-model="selected" v-if="isMobile()" style="height: 47px;"/>
 </template>
 
 
@@ -105,11 +105,12 @@ export default {
         return {
             selected: 1,
             options: [
-                { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home", query: { bookmark: "important" } }},
-                { id: 2, icon: 'pe-7s-bookmarks', title: 'Blog', color: '#2e2e2e' },
-                { id: 3, icon: 'pe-7s-shopbag', title: 'Keranjang', color: '#2e2e2e', badge: 2 },
-                { id: 4, icon: 'pe-7s-news-paper', title: 'Transaksi', color: '#2e2e2e', badge: '0' },
-                { id: 5, icon: 'pe-7s-user', title: 'Akun', color: '#2e2e2e', path: { name: "about", query: { bookmark: "important" } }}
+                // { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home", query: { bookmark: "important" } }},
+                { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home" }},
+                { id: 2, icon: 'pe-7s-bookmarks', title: 'Blog', color: '#2e2e2e', path: { name: "about"} },
+                { id: 3, icon: 'pe-7s-shopbag', title: 'Keranjang', color: '#2e2e2e', badge: this.$store.state.default.cart, path: { name: "cart" }},
+                { id: 4, icon: 'pe-7s-news-paper', title: 'Transaksi', color: '#2e2e2e', badge: this.$store.state.default.notif, path: { name: "order" } },
+                { id: 5, icon: 'pe-7s-user', title: 'Akun', color: '#2e2e2e', path: { name: "user" }}
             ]
         }
     },

@@ -13,6 +13,7 @@
 - halaman tentang x 
 - icon rel link meta  x
 - tampilan mobile 
+- login google
 
 
 halaman admin

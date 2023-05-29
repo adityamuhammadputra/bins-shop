@@ -1,5 +1,5 @@
 <template>
-    <div class="header section" id="myHeader" v-if="$route.meta.header !== 0">
+    <div class="header section" id="myHeader" v-if="$route.meta.hideMobile !== 1">
     <!-- Header Bottom Start -->
         <div class="header-bottom">
             <div class="header-sticky">
@@ -26,7 +26,7 @@
                                         <div class="error_form mt-6">
                                             <form class="search-form-error" @submit.prevent="search">
                                                 <router-link to="/product">
-                                                    <input class="input-text" placeholder="Search..." type="text" 
+                                                    <input class="input-text" placeholder="Cari..." type="text" 
                                                         v-model="this.$store.state.meta.q"
                                                         >
                                                     <button class="submit-btn" type="button" @click="search">
@@ -118,8 +118,8 @@
                         <div class="col-10" style="padding-right: 20px;">
                             <div class="error_form mt-6">
                                 <form class="search-form-error" @submit.prevent="search">
-                                    <router-link to="/product">
-                                        <input class="input-text" placeholder="Search..." type="text" v-model="this.$store.state.meta.q">
+                                    <router-link to="/product"> 
+                                        <input class="input-text" placeholder="Cari..." type="text" v-model="this.$store.state.meta.q">
                                         <button class="submit-btn" type="button"  @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>

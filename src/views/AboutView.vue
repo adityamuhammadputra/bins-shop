@@ -1,5 +1,5 @@
 <template>
-    <div class="section mt-5 pt-2 mb-5">
+    <div class="section pt-2 mb-5" :class="(isMobile() ? '' : 'mt-5')">
         <div class="container">
             <div class="row mb-n6">
                 <div class="col-lg-6 align-self-center mb-6 aos-init aos-animate" data-aos="fade-right" data-aos-delay="600">

@@ -197,7 +197,7 @@ vueApp.mixin({
             this.$swal({
               title: msg,
               html: 'Anda akan dialihkan kehalaman Keranjang',
-              timer: 111000,
+              timer: 2500,
               icon: 'success',
               timerProgressBar: true,
               didOpen: () => {

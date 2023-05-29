@@ -1,5 +1,5 @@
 <template>
-    <div class="section mt-5 mb-5">
+    <div class="section mt-5 mb-5 mt-1-mobile">
         <div class="container">
 
             <div class="row" v-if="user">
@@ -7,9 +7,7 @@
                     <div class="myaccount-page-wrapper">
                         <div class="row">
                             <div class="col-lg-3 col-md-4">
-                                <div class="myaccount-tab-menu nav" role="tablist">
-                                    <TabMenu v-bind:url="'rating'"></TabMenu>
-                                </div>
+                                <TabMenu v-bind:url="'rating'"></TabMenu>
                             </div>
                             <!-- My Account Tab Menu End -->
 

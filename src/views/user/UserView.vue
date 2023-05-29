@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4">
+                            <div class="col-lg-3 col-md-4" v-if="!isMobile()">
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <router-link to="/user" class="active">
                                         <i class="pe-7s-user"></i> Pengaturan Akun
@@ -17,8 +17,8 @@
                             <!-- My Account Tab Menu End -->
 
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8">
-                                <div class="tab-content" id="myaccountContent">
+                            <div class="col-lg-9 col-md-8 ">
+                                <div class="tab-content m-0-mobile" id="myaccountContent">
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade active show" id="account-info" role="tabpanel">
                                         <div class="progress  mb-0">
@@ -137,10 +137,20 @@
                                                         </tr>
                                                     </table>
                                                 </fieldset>
-                                                <div class="single-input-item">
+                                                <div class="single-input-item" v-if="!isMobile()">
                                                     <button class="btn btn-outline-primary mt-3 btn-block"
                                                         @click="profileUpdate">
                                                         Simpan Profile
+                                                    </button>
+                                                </div>
+                                                <div class="single-input-item" v-else>
+                                                    <button class="btn btn-primary mt-3 btn-block"
+                                                        @click="profileUpdate">
+                                                        Simpan Profile
+                                                    </button>
+                                                    <button class="btn btn-outline-primary mt-3 btn-block"
+                                                        @click="this.logOut()">
+                                                        Logout
                                                     </button>
                                                 </div>
                                             </div>

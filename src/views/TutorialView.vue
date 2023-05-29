@@ -1,12 +1,10 @@
 <template>
-    <div class="section mt-5 pt-2 mb-5">
+    <div class="section pt-2 mb-5" :class="(isMobile() ? '' : 'mt-5')">
         <div class="container">
-            <!-- <div class="row"><div class="col-12"> -->
-
             <div class="row">
-                <div class="col-lg-3 col-12 order-2 order-lg-1">
+                <div class="col-lg-3 col-12 order-1 order-lg-1">
                     <!-- Sidebar Widget Start -->
-                    <aside class="sidebar_widget mt-10 mt-lg-0">
+                    <aside class="sidebar_widget mt-10 mt-lg-0 m-0-mobile">
                         <div class="widget_inner">
                             <div class="widget-list mb-10">
                                 <h3 class="widget-title">Tutorial Aktivasi</h3>
@@ -67,8 +65,8 @@
                     <!-- Sidebar Widget End -->
                 </div>
 
-                <div class="col-lg-9 col-12 order-1 order-lg-2">
-                    <embed :src="active.pdf" width="105%" height="2100px" />
+                <div class="col-lg-9 col-12 order-2 order-lg-2">
+                    <iframe :src="active.pdf" width="100%" height="2100px"></iframe>
                 </div>
             </div>
         </div>
