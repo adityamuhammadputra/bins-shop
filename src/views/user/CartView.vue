@@ -60,7 +60,7 @@
                                                     v-model="data[indexCart].notes"
                                                     @blur="chartUpdate(cart)" placeholder="Catatan" 
                                                         style="height: 45px;border-radius: 0px;padding-top: 1rem;">
-                                                <label :for="'floatingInputGrid' + indexCart" style="padding-top: 7px;">Catatan </label>
+                                                <label :for="'floatingInputGrid' + indexCart" style="padding-top: 5px;">Catatan </label>
                                             </div>
                                         </span>
                                         <a href="#" class="btn-reply">
