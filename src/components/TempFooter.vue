@@ -71,6 +71,10 @@
 
                 <div class="row mb-n10" v-else>
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10" v-if="!$route.meta.hideMobile">
+                        <div class="single-footer-widget mb-2" v-if="isMobile() && !this.$store.state.auth.user">
+                            <h2 class="widget-title mb-3">Silahkan login</h2>
+                            <GoogleLogin :callback="handleLogin" prompt auto-login/>
+                        </div>
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Kontak Kami</h2>
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui :</p>

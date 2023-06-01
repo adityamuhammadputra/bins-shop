@@ -492,6 +492,10 @@ export default {
             )
         },
         cartCheckout: function(product) {
+            if (!this.$store.state.auth.user) {
+                this.errorNotifMsg('Opps... anda belum login')
+                return false;
+            }
             this.loadingButton = true
             this.form.product = product;
             const dataSumm = {
@@ -565,6 +569,10 @@ export default {
         },
        
         discusPost: function(product, parent = null, key = null) {
+            if (!this.$store.state.auth.user) {
+                this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
+                return false;
+            }
             this.loadingButton = true
             this.discus.product_id = product.id
             this.discus.parent = parent

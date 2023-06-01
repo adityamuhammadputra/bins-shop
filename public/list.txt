@@ -12,8 +12,8 @@
 - email transaksi x
 - halaman tentang x 
 - icon rel link meta  x
-- tampilan mobile 
-- login google
+- tampilan mobile x
+- login google 
 
 
 halaman admin

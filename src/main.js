@@ -30,6 +30,7 @@ import { useToast } from "vue-toastification";
 import bottomNavigationVue from "bottom-navigation-vue";
 import "bottom-navigation-vue/dist/style.css";
 import VueSocialSharing from 'vue-social-sharing'
+import { decodeCredential } from 'vue3-google-login'
 
 const currentBaseUrl = 'http://localhost:8080'
 
@@ -105,6 +106,20 @@ vueApp.mixin({
         errorNotifMsg: function(msg) {
             toast.error(msg);
         },
+        handleLogin: function(response) {
+            console.log(response);
+            const userData = decodeCredential(response.credential)
+            // console.log(userData);
+            // return false;
+            this.$store.dispatch("auth/login", userData).then(
+                () => {
+                    window.location.reload()
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        },
         userLogin: function(){
             return (this.$store.state.auth) ? this.$store.state.auth.user.user : null;
         },
@@ -144,6 +159,10 @@ vueApp.mixin({
             )
         },
         addChart: function(id, loadChart = false) {
+            if (!this.$store.state.auth.user) {
+                this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
+                return false;
+            }
             this.loadingButton = true
             const data = {
                 product_id: id,

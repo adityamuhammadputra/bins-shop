@@ -9,8 +9,8 @@
 
             <div class="row">
                 <div class="col-md-8 col-12">
-                    <div class="card border-none-trl-mobile">
-                        <div class="card-body p-0-mobile" v-if="user">
+                    <div class="card border-none-trl-mobile" v-if="user">
+                        <div class="card-body p-0-mobile" >
                             <div class="comment-area-wrapper" v-if="this.loading === true">
                                 <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
                                     secondaryColor="#ecebeb" >
@@ -89,7 +89,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body" v-else="user">
+                    </div>
+                    <div class="card mb-3" v-else>
+                        <div class="card-body p-0-mobile">
                             <ElseLogin></ElseLogin>
                         </div>
                     </div>
@@ -165,7 +167,8 @@ export default {
         },
     },
     created() {
-        this.cartData();
+        if (this.$store.state.auth.user) 
+            this.cartData();
         // console.log(this.datax);
         // console.log(this.data);
         // console.log(this.$store.state.default.exlude);

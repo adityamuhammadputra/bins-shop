@@ -99,8 +99,12 @@ export default {
     }, 
     data() {
         return {
-           
+            user : null,
         }
+    },
+    mounted() {
+        if (this.$store.state.auth.user) 
+            this.user = this.$store.state.auth.user.user;
     },
 }
 </script>

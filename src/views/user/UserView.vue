@@ -168,7 +168,7 @@
             <div class="row" v-else>
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body p-0-mobile">
                             <ElseLogin></ElseLogin>
                         </div>
                     </div>
@@ -213,30 +213,33 @@ export default {
     },
     methods: {
         profileGet: function () {
-            this.axios.get('auth/user', this.$store.state.config)
-            .then((response) => {
-                this.user = response.data;
-                this.user.birth = moment(response.data.birth, 'YYYY-MM-DD').toDate();
-                this.user.percen = 0
-                
-                if (this.user.phone) {
-                    this.user.percen = this.user.percen + 35;
-                }
-                if (this.user.gender) {
-                    this.user.percen = this.user.percen + 30;
-                }
-                
-                if (this.user.birth) {
-                    this.user.percen = this.user.percen + 25;
-                }
+            if (this.$store.state.auth.user) {
+                this.axios.get('auth/user', this.$store.state.config)
+                .then((response) => {
+                    this.user = response.data;
+                    this.user.birth = moment(response.data.birth, 'YYYY-MM-DD').toDate();
+                    this.user.percen = 0
+                    
+                    if (this.user.phone) {
+                        this.user.percen = this.user.percen + 35;
+                    }
+                    if (this.user.gender) {
+                        this.user.percen = this.user.percen + 30;
+                    }
+                    
+                    if (this.user.birth) {
+                        this.user.percen = this.user.percen + 25;
+                    }
 
-                if (this.user.transaction_count > 10) {
-                    this.user.percen = this.user.percen + 10;
-                }
-            })
-            .catch(error => {
-                this.errorNotif(error)
-            })
+                    if (this.user.transaction_count > 10) {
+                        this.user.percen = this.user.percen + 10;
+                    }
+                })
+                .catch(error => {
+                    this.errorNotif(error)
+                })
+            }
+
         },
         profileUpdate: function () {
             this.axios.patch('auth/user/' + this.user.id, this.user, this.$store.state.config)

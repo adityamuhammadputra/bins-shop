@@ -172,8 +172,9 @@
 
             <div class="row" v-else>
                 <div class="col-lg-12">
+                    <h5 class="title mb-3 mt-3">Transaksi </h5>
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body p-0-mobile">
                             <ElseLogin></ElseLogin>
                         </div>
                     </div>
@@ -253,10 +254,11 @@ export default {
         }
     },
     mounted() {
-        if (this.$store.state.auth.user) 
+        if (this.$store.state.auth.user) {
             this.user = this.$store.state.auth.user.user;
+            this.orderIndex();
+        }
 
-        this.orderIndex();
     },
     methods: {
         orderIndex: function() {

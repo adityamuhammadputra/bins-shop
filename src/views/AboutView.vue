@@ -75,10 +75,10 @@
 
     <div class="section section-margin mt-0">
         <div class="container">
-            <h2 class="title text-center mb-5 pb-5 pt-5">Ulasan pelanggan kami</h2>
+            <h2 class="title text-center mb-5 pt-5" :class="(isMobile() ? '' : 'pb-4')">Ulasan pelanggan kami</h2>
             <p></p>
             <div class="row mb-n6 pt-2">
-                <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile()) ? 1 : 3">
+                <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile()) ? 1 : 3.3" class="p-0-mobile">
                     <Slide v-for="slide in 12" :key="slide">
                         <div class="carousel__item">
                             <div class="banner ">
