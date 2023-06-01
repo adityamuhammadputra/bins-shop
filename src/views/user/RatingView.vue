@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <div class="row" v-else>
+            <div class="row" v-if="!this.$store.state.auth.user">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">

@@ -11,7 +11,7 @@
                                     <router-link to="/user" class="active">
                                         <i class="pe-7s-user"></i> Pengaturan Akun
                                     </router-link>
-                                    <a @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
+                                    <a href="#" @click="this.logOut()"><i class="fa fa-sign-out"></i> Logout</a>
                                 </div>
                             </div>
                             <!-- My Account Tab Menu End -->
@@ -165,7 +165,7 @@
                 </div>
             </div>
 
-            <div class="row" v-else>
+            <div class="row" v-if="!this.$store.state.auth.user">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body p-0-mobile">

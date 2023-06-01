@@ -170,7 +170,7 @@
                 </div>
             </div>
 
-            <div class="row" v-else>
+            <div class="row" v-if="!this.$store.state.auth.user">
                 <div class="col-lg-12">
                     <h5 class="title mb-3 mt-3">Transaksi </h5>
                     <div class="card">

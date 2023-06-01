@@ -48,7 +48,7 @@
 
                         <!-- Header Action Start -->
                         <div class="col-xl-2 col-6">
-                            <div class="header-actions" v-if="!user">
+                            <div class="header-actions" v-if="!this.$store.state.auth.user">
                                 <GoogleLogin :callback="handleLogin" prompt auto-login/>
                             </div>
                             <div class="header-actions" v-else>

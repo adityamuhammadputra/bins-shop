@@ -90,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-3" v-else>
+                    <div class="card mb-3"  v-if="!this.$store.state.auth.user">
                         <div class="card-body p-0-mobile">
                             <ElseLogin></ElseLogin>
                         </div>
