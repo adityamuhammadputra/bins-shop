@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col">
-            <Carousel :items-to-show="(isMobile()) ? 2 : 5">
+            <Carousel :items-to-show="(isMobile()) ? 2 : 5" >
                 <Slide v-for="product in this.dataRekomends" :key="product.id">
                     <div class="product">
                         <div class="product-inner">

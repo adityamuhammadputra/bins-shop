@@ -38,7 +38,7 @@
                         <div class="single-product-thumb swiper-container gallery-thumbs">
                             <Carousel :items-to-show="3">
                                 <Slide v-for="fileData in detail.files" :key="fileData.name" 
-                                    style="height: 117px;width: 117px; padding: 0px; margin-right: 10px;">
+                                    style="height: 32%;width: 32%; padding: 0px; margin-right: 7px;">
                                     <img :src="fileData.path" @click="preview" :alt="fileData.name" style="width: 117px;"
                                         :name="fileData.name"
                                         :class="(fileData.name == activeImg) ? 'active' : ''">
@@ -590,6 +590,9 @@ export default {
         copyLink: function(url){
             navigator.clipboard.writeText(url)
             this.successNotif("Url berhasil disalin")
+        },
+        slideToBeginning: function(e){
+            console.log(e);
         }
 
     }

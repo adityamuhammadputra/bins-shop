@@ -22,7 +22,7 @@
     "vue-star-rating": "^2.1.0",
     "vue-sweetalert2": "^5.0.5",
     "vue-toastification": "^2.0.0-rc.5",
-    "vue3-carousel": "^0.2.13",
+    "vue3-carousel": "^0.1.38",
     "vue3-datepicker": "^0.3.4",
     "vue3-google-login": "^2.0.15",
     "vuex": "^4.0.0"
