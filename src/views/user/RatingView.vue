@@ -22,7 +22,7 @@
 
                             <div class="col-lg-9 col-md-8" v-else>
                                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
-                                    <div class="shop-top-bar-left ">
+                                    <div class="shop-top-bar-left" v-if="!isMobile()">
                                         <div class="shop-top-show">
                                             <span>Menampilakan <b>{{ dataRating.length }}</b> Ulasan</span>
                                         </div>
@@ -58,12 +58,12 @@
                                     <div class="card-body comment-area-wrapper pt-1" 
                                         v-for="detail in order.transaction_details">
                                         <div class="single-comment-wrap mb-2">
-                                            <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
+                                            <router-link :to="'/product/'+detail.product.slug+ '?back=rating'" class="image author-thumb">
                                                 <img :src="detail.product.file" alt="Author">
                                             </router-link>
                                             <div class="comments-info">
                                                 <p class="mb-0" style="font-size: 14px;">
-                                                    <router-link :to="'/product/'+detail.product.slug" class="image">
+                                                    <router-link :to="'/product/'+detail.product.slug+ '?back=rating'" class="image">
                                                         {{ detail.name }}
                                                     </router-link>
                                                 </p>
@@ -167,7 +167,7 @@ export default {
     },
     methods: {
         ratingIndex: function() {
-            this.axios.get('order?rating='+this.status, this.$store.state.config)
+            this.axios.get('order?rating='+this.status+'&status=4', this.$store.state.config)
             .then((response) => {
                 this.dataRating = response.data.data
             })

@@ -3,14 +3,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h5 class="title mb-3">Keranjang </h5>
+                    <h5 class="title mb-3">Keranjang Belanja </h5>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-8 col-12">
-                    <div class="card">
-                        <div class="card-body" v-if="user">
+                    <div class="card border-none-trl-mobile">
+                        <div class="card-body p-0-mobile" v-if="user">
                             <div class="comment-area-wrapper" v-if="this.loading === true">
                                 <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
                                     secondaryColor="#ecebeb" >
@@ -26,16 +26,16 @@
                                         <input type="checkbox" 
                                             v-model="data[indexCart].status"
                                             @change="cartCheck(data)"
-                                            style="width: 20px;margin-right: 15px;height: 20px;"
+                                            style="width: 23px;margin-right: 13px;height: 23px;"
                                         >
                                         <a class="author-thumb" href="#">
-                                            <router-link :to="'/product/'+data[indexCart].product.slug" class="image">
+                                            <router-link :to="'/product/'+data[indexCart].product.slug+ '?back=cart'" class="image">
                                                 <img :src="cart.product.file" alt="Author">
                                             </router-link>
                                         </a>
                                         <div class="comments-info">
                                             <p class="mb-0" style="font-size: 14px;">
-                                                <router-link :to="'/product/'+data[indexCart].product.slug" class="image">
+                                                <router-link :to="'/product/'+data[indexCart].product.slug + '?back=cart'" class="image">
                                                 {{ data[indexCart].product.name }}
                                                 </router-link>
                                             </p>

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="shop_toolbar_wrapper flex-column flex-md-row mb-10" v-if="!isMobile()">
-                    <div class="shop-top-bar-left mb-md-0 mb-2">
+                <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4" >
+                    <div class="shop-top-bar-left mb-md-0 mb-2" v-if="!isMobile()">
                         <div class="shop-top-show">
                             <span>Menampilakan <b>{{ this.meta.total }}</b> Produk</span>
                         </div>
@@ -23,7 +23,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row" v-else>
+                <!-- <div class="shop_toolbar_wrapper flex-column flex-md-row mb-10" v-else>
+                    <div class="shop-top-bar-left mb-md-0 mb-2">
+                        <div class="shop-top-show">
+                            <span>Menampilakan <b>{{ this.meta.total }}</b> Produk</span>
+                        </div>
+                    </div>
+
+                    <div class="shop-top-bar-right">
+                        <span class="mr-1">Urutkan: </span>
+                        <div class="shop-short-by mr-4">
+                            <select class="nice-select" @change="getIndex()"
+                                v-model="this.$store.state.meta.sort">
+                                <option value="">--Urutkan--</option>
+                                <option value="1">Penjualan Terbanyak</option>
+                                <option value="2">Terbaru</option>
+                                <option value="3">Harga Terendah</option>
+                                <option value="4">Harga Tertinggi</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row" v-else>
                     <label for="staticEmail" class="col-6 col-form-label"><b>{{ this.meta.total }}</b> Produk</label>
                     <div class="col-6 shop-short-by">
                         <select class="nice-select" @change="getIndex()" 
@@ -36,7 +57,7 @@
                             <option value="4">Harga Tertinggi</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <!-- Shop Wrapper Start -->
                 <div class="row shop_wrapper grid_4">
                     <div  v-if="loading">

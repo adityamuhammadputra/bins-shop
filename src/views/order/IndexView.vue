@@ -23,13 +23,16 @@
 
                             <div class="col-lg-9 col-md-8" v-else>
                                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
-                                    <div class="shop-top-bar-left ">
-                                        <div class="shop-top-show">
+                                    <div class="shop-top-bar-left alert-transaction">
+                                        <div class="shop-top-show" v-if="!isMobile()">
                                             <span>Menampilkan <b>{{ dataOrder.length }}</b> Transaksi, <b>{{ this.$store.state.default.notif }}</b> Transaksi Berlangsung</span>
+                                        </div>
+                                        <div class="shop-top-show" v-else>
+                                            <span><b>{{ this.$store.state.default.notif }}</b> Transaksi sedang Berlangsung</span>
                                         </div>
                                     </div>
                                     <div class="shop-top-bar-right">
-                                        <span class="mr-1">Tampilkan: </span>
+                                        <span class="mr-1">Tampilkan:</span>
                                         <div class="shop-short-by mr-4">
                                             <select class="nice-select" v-model="status" @change="orderIndex">
                                                 <option value="">--Semua Transaksi--</option>
@@ -87,12 +90,12 @@
                                         v-for="detail in order.transaction_details" v-bind:key="detail.id">
                                         
                                         <div class="single-comment-wrap mb-2">
-                                            <router-link :to="'/product/'+detail.product.slug" class="image author-thumb">
+                                            <router-link :to="'/product/'+detail.product.slug+ '?back=order'" class="image author-thumb">
                                                 <img :src="detail.product.file" alt="Author">
                                             </router-link>
                                             <div class="comments-info">
                                                 <p class="mb-0" style="font-size: 14px;">
-                                                    <router-link :to="'/product/'+detail.product.slug" class="image">
+                                                    <router-link :to="'/product/'+detail.product.slug+ '?back=order'" class="image">
                                                         {{ detail.name }}
                                                     </router-link>
                                                 </p>

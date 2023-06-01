@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4">
+                            <div class="col-lg-3 col-md-4" v-if="!isMobile()">
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <TabMenu v-bind:url="'order'"></TabMenu>
                                 </div>
@@ -23,8 +23,9 @@
                             </div>
 
                             <div class="col-lg-9 col-md-8" v-else>
-                                <div class="card mb-4 ">
-                                    <div class="card-header" style="background: white;border-bottom: 1px dashed #dfdfdf;">
+                                <div class="card mb-4 border-none-trl-mobile">
+                                    <div class="card-header mb-1 pb-1 p-0-mobile" 
+                                            style="background: white;border-bottom: 1px dashed #dfdfdf;">
                                         <h5 class="title mb-0">
                                             <router-link to="/order">
                                                 <i class="fa fa-arrow-left"></i> Kembali
@@ -39,7 +40,7 @@
                                         </h5>
                                     </div>
                                     
-                                    <div class="card-body comment-area-wrapper pt-1">
+                                    <div class="card-body comment-area-wrapper p-0-mobile">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ul class="list-group list-group-horizontal">

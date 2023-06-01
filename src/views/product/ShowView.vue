@@ -3,17 +3,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcrumb-content mt-3 mb-2">
+                    <div class="breadcrumb-content mt-3 mb-2" v-if="!isMobile()">
                         <ul>
                             <li> <a href="/">Home </a> </li>
                             <li class="active"> {{ this.detail.category }}</li>
                             <li class="active"> {{ this.detail.name   }}</li>
                         </ul>
                     </div>
+                    <h5 class="title mb-0" style="position: absolute;z-index: 11;margin-top: 10px;"  
+                        v-else>
+                        <router-link :to="($route.query.back) ? '/' + $route.query.back : '/product'">
+                            <i class="fa fa-arrow-left"></i> Kembali
+                        </router-link>
+                    </h5>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 offset-lg-0 col-md-8 offset-md-2 col-custom">
+                <div class="col-lg-4 offset-lg-0 col-md-8 offset-md-2 col-custom p-0-mobile">
                     <div v-if="loading">
                         <content-loader viewBox="0 0 100 200" :speed="1" style="position: relative; top: -140px;"  primaryColor="#f3f3f3"
                         secondaryColor="#ecebeb" >
@@ -33,11 +39,9 @@
                             <Carousel :items-to-show="3">
                                 <Slide v-for="fileData in detail.files" :key="fileData.name" 
                                     style="height: 117px;width: 117px; padding: 0px; margin-right: 10px;">
-                                    <div class="carousel__item">
-                                        <img :src="fileData.path" @click="preview" :alt="fileData.name" style="width: 117px;"
-                                            :name="fileData.name"
-                                            :class="(fileData.name == activeImg) ? 'active' : ''">
-                                    </div>
+                                    <img :src="fileData.path" @click="preview" :alt="fileData.name" style="width: 117px;"
+                                        :name="fileData.name"
+                                        :class="(fileData.name == activeImg) ? 'active' : ''">
                                 </Slide>
                             </Carousel>
                         </div>
@@ -198,7 +202,7 @@
                         <div class="tab-pane " :class="(activeTab == 'rating') ? 'active fade show' : ''">
                             <div class="desc-content p-3">
                                 <div class="row" v-if="detail.rating_count > 0">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mb-1-mobile p-0-mobile">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="rating-avg">
@@ -209,13 +213,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 p-0-mobile">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-5" style="border: none; padding: 0px;">
                                                     <div class="shop-top-bar-left mb-md-0 mb-2">
-                                                        <div class="shop-top-show">
-                                                            <span>Menampilakan <b>{{ detail.rating_count }}</b> Produk</span>
+                                                        <div class="shop-top-show" v-if="!isMobile()">
+                                                            <span>Menampilkan <b>{{ detail.rating_count }}</b> Ulasan</span>
                                                         </div>
                                                     </div>
                                                     <div class="shop-top-bar-right">
@@ -239,8 +243,10 @@
                                                         <div class="review_details ml-0">
                                                             <div class="review_info mb-2">
                                                                 <div class="review-title-date d-flex">
-                                                                    <h5 class="title" style="font-size: 16px;">{{ rating.user.name }} </h5>
-                                                                    <span class="ml-1"> {{ dateOuput2(rating.created_at) }}</span>
+                                                                    <h5 class="title" style="font-size: 14px;">{{ rating.user.name }} </h5>
+                                                                    <span class="ml-1"> 
+                                                                        {{ (isMobile() ? dateOuput(rating.created_at) : dateOuput2(rating.created_at)) }}
+                                                                    </span>
                                                                 </div>
 
                                                                 <span class="ratings justify-content-start mb-3">
@@ -273,9 +279,9 @@
                         </div>
 
                         <div class="tab-pane" :class="(activeTab == 'discus') ? 'active fade show' : ''">
-                            <div class="desc-content p-3 pt-0">
+                            <div class="desc-content p-3 pt-0 p-0-mobile">
                                 <div class="mb-4">
-                                    <i class="pe-7s-comment"></i> Ada pertanyaan? diskusikan dengan penjual
+                                    <i class="pe-7s-comment"></i> Ada pertanyaan? diskusikan disini
                                 </div>
                                 <div class="single-review d-flex mb-4">
                                     <div class="review_thumb" v-if="user">
@@ -283,7 +289,7 @@
                                             referrerpolicy="no-referrer" style="border-radius: 100%; width: 45px;">
                                     </div>
                                     <div class="review_details ml-0 p-0" style="width: 100%;">
-                                        <textarea class="form-control" style="border: none; padding-right: 125px;" placeholder="Tulis diskusi disini"
+                                        <textarea class="form-control" style="border: none; padding-right: 110px;" placeholder="Tulis diskusi disini"
                                             v-model="discus.desc"></textarea>
                                         <button class="btn btn-outline-primary btn-hover-primary" style="position: absolute;right: 10px;top: 11px;"
                                             @click="discusPost(detail)"> 
@@ -297,8 +303,8 @@
 
                                         <div class="shop_toolbar_wrapper flex-column flex-md-row mb-5" style="border: none; padding: 0px;">
                                             <div class="shop-top-bar-left mb-md-0 mb-2">
-                                                <div class="shop-top-show">
-                                                    <span>Menampilakan <b>{{ detail.discussions.length }}</b> Diskusi</span>
+                                                <div class="shop-top-show" v-if="!isMobile()">
+                                                    <span>Menampilkan <b>{{ detail.discussions.length }}</b> Diskusi</span>
                                                 </div>
                                             </div>
                                             <div class="shop-top-bar-right">
@@ -323,7 +329,7 @@
                                                     <div class="review_details ml-0" style="width: 100%;">
                                                         <div class="review_info mb-2">
                                                             <div class="review-title-date d-flex">
-                                                                <h5 class="title" style="font-size: 16px;">{{ discussion.user.name }} </h5>
+                                                                <h5 class="title" style="font-size: 14px;">{{ discussion.user.name }} </h5>
                                                                 <span class="ml-1"> {{ dateOuput2(discussion.created_at) }}</span>
                                                             </div>
                                                         </div>
@@ -340,7 +346,7 @@
                                                                 </span>
                                                                 <input type="text" class="form-control" placeholder="Isi komentar disini"
                                                                     v-model="discus.desc_parent[index]">
-                                                                <span class="input-group-text" style="background: #ff4545;cursor: pointer;"
+                                                                <span class="input-group-text p-0-mobile" style="background: #ff4545;cursor: pointer;"
                                                                     @click="discusPost(detail, discussion.id, index)">
                                                                     <button class="btn btn-primary btn-hover-primary btn-sm"> Kirim </button>
                                                                 </span>
@@ -386,6 +392,17 @@
         </div>
     </div>
 
+    <!-- <div data-v-67637842="" class="wn-btn-container-foreground" style="--border-color: #9B9B9B; --background-color: #FFFFFF; --badge-color: #828282; height: 47px;">
+        <div class="cart-wishlist-btn" style="width: 100%;">
+            <div class="add-to_cart" style="float: left;">
+                <button class="btn btn-outline-danger btn-hover-danger"> + Keranjang </button>
+            </div>
+            <div class="add-to-wishlist" style="float: left;">
+                <button class="btn btn-danger btn-hover-danger"> Beli Langsung </button>
+            </div>
+        </div>
+    </div> -->
+<!-- 
     <div class="modal" :class="(showModal) ? 'show' : ''" tabindex="-1" :style="(showModal) ? 'display: block; background: radial-gradient(black, transparent);' : 'display: none;'">
         <div class="modal-dialog modal-lg" style="margin-top: 150px;">
             <div class="modal-content">
@@ -394,7 +411,7 @@
                 <img src="http://bins.local/api/v1/storage/2016_1.png">
             </div>
         </div>
-    </div>
+    </div> -->
 
 </template>
 

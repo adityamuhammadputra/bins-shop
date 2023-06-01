@@ -1,11 +1,10 @@
 <template>
-    <div class="header section" id="myHeader" v-if="$route.meta.hideMobile !== 1">
+    <div class="header section" id="myHeader" v-if="!isMobile()">
     <!-- Header Bottom Start -->
         <div class="header-bottom">
             <div class="header-sticky">
                 <div class="container">
-
-                    <div class="row align-items-center" v-if="!isMobile()">
+                    <div class="row align-items-center">
 
                         <!-- Header Logo Start -->
                         <div class="col-xl-2 col-6">
@@ -105,8 +104,18 @@
                         </div>
                         <!-- Header Action End -->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="row align-items-center" v-else>
+    <div class="header section" id="myHeader" 
+        v-else
+        v-if="!$route.meta.hideMobile">
+        <div class="header-bottom">
+            <div class="header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
                         <!-- Header Logo Start -->
                         <div class="col-2" style="position: relative; top: 14px; left: -10px;">
                             <div class="header-logo" >
@@ -131,8 +140,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </template>
 
@@ -154,6 +161,7 @@ export default {
         }
     },
     mounted() {
+        // if (!this.isMobile()) {
         this.stickyScroll();
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
@@ -166,13 +174,16 @@ export default {
         stickyScroll: function() {
             window.onscroll = function() {
                 var header = document.getElementById("myHeader");
-                var sticky = header.offsetTop;
+                if (header) {
+                    var sticky = header.offsetTop;
 
-                if (window.pageYOffset > sticky) {
-                    header.classList.add("sticky");
-                } else {
-                    header.classList.remove("sticky");
+                    if (window.pageYOffset > sticky) {
+                        header.classList.add("sticky");
+                    } else {
+                        header.classList.remove("sticky");
+                    }
                 }
+
             }
         },
         handleLogin: function(response) {

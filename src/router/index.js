@@ -58,7 +58,10 @@ const routes = [
   {
     path: '/order/:order_id',
     name: 'order-detail',
-    component: OrderShowView
+    component: OrderShowView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/order/:order_id/print',

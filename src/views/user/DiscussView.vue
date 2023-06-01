@@ -22,7 +22,7 @@
 
                             <div class="col-lg-9 col-md-8" v-else>
                                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4">
-                                    <div class="shop-top-bar-left ">
+                                    <div class="shop-top-bar-left" v-if="!isMobile()">
                                         <div class="shop-top-show">
                                             <span>Menampilakan <b>{{ dataDiscuss.length }}</b> Diskusi</span>
                                         </div>
@@ -46,13 +46,13 @@
                                         <div class="comment-area-wrapper">
                                             <div class="single-comment-wrap mb-2" 
                                                 style="height: 60px;border-bottom: 1px solid #e9e9e9;">
-                                                <router-link :to="'/product/'+discuss.product.slug" class="image author-thumb"
+                                                <router-link :to="'/product/'+discuss.product.slug+ '?back=discuss'" class="image author-thumb"
                                                     style="width: 50px;">
                                                     <img :src="discuss.product.file" alt="Author">
                                                 </router-link>
                                                 <div class="comments-info">
                                                     <p class="mb-0" style="font-size: 14px;">
-                                                        <router-link :to="'/product/'+discuss.product.slug" class="image">
+                                                        <router-link :to="'/product/'+discuss.product.slug+ '?back=discuss'" class="image">
                                                             {{ discuss.product.name }}
                                                         </router-link>
                                                     </p>
