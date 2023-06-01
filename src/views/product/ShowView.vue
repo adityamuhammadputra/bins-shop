@@ -329,7 +329,7 @@
                                                     <div class="review_details ml-0" style="width: 100%;">
                                                         <div class="review_info mb-2">
                                                             <div class="review-title-date d-flex">
-                                                                <h5 class="title" style="font-size: 14px;">{{ discussion.user.name }} </h5>
+                                                                <h5 class="title" style="font-size: 14px;">{{ discussion.user.name.split(' ')[0] }} </h5>
                                                                 <span class="ml-1"> {{ dateOuput2(discussion.created_at) }}</span>
                                                             </div>
                                                         </div>
@@ -352,17 +352,17 @@
                                                                 </span>
                                                             </div>
 
-                                                            <div class="input-group mb-2 ml-2"
+                                                            <div class="input-group mb-2"
                                                                 v-for=" replay in discussion.replay">
                                                                 <span class="input-group-text" 
-                                                                    style="background: transparent;border: none;padding-top: 0px;"
+                                                                    style="background: transparent;border: none;padding-top: 0px; padding-left: 2px;"
                                                                     v-if="replay">
                                                                     <img :src="replay.user.avatar"  
                                                                         referrerpolicy="no-referrer" style="border-radius: 100%; width: 30px;">
                                                                 </span>
                                                                 <p> 
                                                                     <span class="mr-1" style="font-size: 16px;">
-                                                                        {{ replay.user.name }}
+                                                                        {{ replay.user.name.split(' ')[0] }}
                                                                     </span>
                                                                     <span style="color:#7e7e7e;">{{ dateOuput2(replay.created_at) }}</span><br/>
                                                                     {{ replay.desc }}

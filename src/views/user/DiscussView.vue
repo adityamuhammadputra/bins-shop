@@ -97,7 +97,9 @@
                                                                 <span class="mr-1" style="font-size: 16px;">
                                                                     {{ replay.user.name.split(' ')[0] }}
                                                                 </span>
-                                                                <span style="color:#7e7e7e;">{{ dateOuput2(replay.created_at) }}</span><br/>
+                                                                <span style="color:#7e7e7e;">
+                                                                    {{ dateOuput2(replay.created_at) }}
+                                                                </span><br/>
                                                                 {{ replay.desc }}
                                                             </p> 
                                                         </div>
