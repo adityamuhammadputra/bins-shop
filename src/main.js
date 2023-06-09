@@ -32,8 +32,6 @@ import "bottom-navigation-vue/dist/style.css";
 import VueSocialSharing from 'vue-social-sharing'
 import { decodeCredential } from 'vue3-google-login'
 
-const currentBaseUrl = 'http://localhost:8080'
-
 const optionToast = {
     timeout: 5500,
     position: "bottom-center",
@@ -58,11 +56,11 @@ vueApp.component("content-loader", ContentLoader)
 
 vueApp.mixin({
     methods: {
-        testAh: function (){
-            console.log('test');
-        },
+        // testAh: function (){
+        //     console.log('test');
+        // },
         currentBaseUrl: function () {
-            return currentBaseUrl;
+            return 'http://localhost:8080';
         },
         globalAlert: function (message) {
             this.$swal(message);

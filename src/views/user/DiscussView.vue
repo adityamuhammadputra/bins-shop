@@ -117,7 +117,7 @@
                                </div>
                                <div class="card mb-4 text-center" v-else>
                                     <div class="card-body">
-                                        <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 400px;"/>
+                                        <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 300px;"/>
                                             <h5>Waaah Diskusimu kosong!</h5>
                                             <p>Dari pada kosong, yuk lihat Produk Lainnya barang untuk kamu. kali aja cocok :D</p>
                                             <router-link to="/product" class="btn btn-primary">Lihat Produk Lainnya</router-link> 

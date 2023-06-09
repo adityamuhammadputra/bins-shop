@@ -13,7 +13,9 @@
 - halaman tentang x 
 - icon rel link meta  x
 - tampilan mobile x
-- login google 
+- login google x 
+- Keranjang dan beli langsung, arahkan ke login google
+- keranjang dan notif versi web login google jika belum
 
 
 halaman admin
@@ -21,3 +23,35 @@ halaman admin
 -list user
 -email transaksi
 -realtime order masuk
+
+
+Aktivitas Hari ini 
+-Pesanan Baru
+-Siap dikirim
+-dalam pengiriman
+-diskusi baru
+-ulasan baru
+
+Table order hari ini RECENT ORDERS
+
+
+Analisis Toko Tanggal range
+
+-Penjualan Rp
+-New User
+-New Visitor
+-Produk terjual
+(ada staistik cart waktu)
+
+
+
+
+exabytes hosting
+https://hpanel.hostinger.com/
+https://www.domainesia.com/
+
+
+ALTER TABLE bins.products CONVERT TO CHARACTER SET utf8
+
+
+

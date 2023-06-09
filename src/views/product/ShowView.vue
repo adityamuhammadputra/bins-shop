@@ -1,7 +1,7 @@
 <template>
  <div class="section">
         <div class="container">
-            <div class="row">
+            <div class="row" id="row-back-mobile">
                 <div class="col-12">
                     <div class="breadcrumb-content mt-3 mb-2" v-if="!isMobile()">
                         <ul>
@@ -91,19 +91,46 @@
                             <table>
                                 <tr>
                                     <td>Kategori</td>
-                                    <td>: <b><router-link :to="'/'+detail.category">{{ detail.category }}</router-link></b></td>
+                                    <td>:</td>
+                                    <td><b><router-link :to="'/'+detail.category">{{ detail.category }}</router-link></b></td>
                                 </tr>
                                 <tr>
                                     <td>Stok</td>
-                                    <td>: <b>{{ detail.stock }}</b></td>
+                                    <td>:</td>
+                                    <td><b>{{ detail.stock }}</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 110px;">Minimal Order</td>
+                                    <td style="width: 10px;">:</td>
+                                    <td><b>{{ detail.minorder }}</b></td>
+                                </tr>
+                                <tr v-if="detail.weight">
+                                    <td>Berat Produk</td>
+                                    <td>:</td>
+                                    <td><b>{{ detail.weight }} Gram</b></td>
+                                </tr>
+                                <tr v-if="detail.weight">
+                                    <td style="vertical-align: top;" colspan="3">
+                                        <div class="alert alert-info d-flex align-items-center mt-2 py-2" role="alert">
+                                            <div>
+                                                <span class="fa fa-check text-primary"></span>
+                                                <b> Produk ini tersedia fisik seperti difoto produk</b>
+                                                <p style="font-size: 12px;font-style: italic;color: grey;position: relative;top: -2px;">
+                                                    Kamu bisa pilih apakah perlu dikirim fisik atau tidak. Menggunakan jasa kirim pilihan kamu :)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
-                       
-                        <!-- SKU End -->
+                        
 
-                        <!-- Description Start -->
                         <p class="desc-content mb-5 mt-1" v-html="detail.desc"></p>
+                        <!-- <span  v-for="(line, index) of detail.desc.split('\r\n')" 
+                            :key="index" v-if="detail.desc">
+                            {{ line }}<br/>
+                        </span> -->
 
                         <!-- Quantity Start -->
                         <div class="quantity mb-5">
@@ -176,8 +203,6 @@
                                 <i class="fa fa-linkedin-square linkedin-color"></i>
                             </ShareNetwork>
                         </div>
-                       
-
                     </div>
 
                 </div>
@@ -253,7 +278,7 @@
                                                                     <star-rating 
                                                                         v-model:rating="rating.rating" 
                                                                         :star-size="15" 
-                                                                        read-only="true">
+                                                                        :read-only="true">
                                                                     </star-rating>
                                                                 </span>
                                                             </div>
@@ -463,6 +488,7 @@ export default {
         this.getData();
     },
     mounted() {
+        this.stickyScroll()
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
     },
@@ -481,6 +507,9 @@ export default {
             this.axios.get('product/'+this.$route.params.slug)
             .then((response) => {
                 this.detail = response.data.data;
+                // console.log(this.detail.desc);
+                // this.detail.desc = this.detail.desc.replace('\r\n', '<br\>')
+                // console.log(this.detail);
             })
             .catch(error => {
                 this.loading = true
@@ -567,7 +596,6 @@ export default {
                 }
             });
         },
-       
         discusPost: function(product, parent = null, key = null) {
             if (!this.$store.state.auth.user) {
                 this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
@@ -577,9 +605,6 @@ export default {
             this.discus.product_id = product.id
             this.discus.parent = parent
             this.discus.desc_key = key
-            // console.log(parent);
-            // console.log(this.discus);
-            // return false;
             this.axios.post('discuss', this.discus, this.$store.state.config)
             .then((response) => {
                 this.successNotif(response.data.message)
@@ -599,9 +624,20 @@ export default {
             navigator.clipboard.writeText(url)
             this.successNotif("Url berhasil disalin")
         },
-        slideToBeginning: function(e){
-            console.log(e);
-        }
+        stickyScroll: function() {
+            window.onscroll = function() {
+                var header = document.getElementById("row-back-mobile");
+                if (header) {
+                    var sticky = header.offsetTop;
+                    if (window.pageYOffset > sticky) {
+                        header.classList.add("sticky");
+                    } else {
+                        header.classList.remove("sticky");
+                    }
+                }
+
+            }
+        },
 
     }
 }

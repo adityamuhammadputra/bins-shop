@@ -246,6 +246,11 @@ p>a:hover {
 .myaccount-content fieldset legend {
     font-size: 17px;
 }
+
+.desc-content p{
+    margin-bottom: 0px;
+}
+
 @media (min-width: 900px) {
     .notification-ui_icon .unread-notification {
         left: 20px;
@@ -776,6 +781,29 @@ input[type="checkbox"] {
         margin-bottom: 0px !important;
     }
  
+    .cart-wishlist-btn {
+        position: fixed;
+        z-index: 11111;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        left: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 1px solid #efefef;
+        padding-left: 5px;
+        margin-bottom: 0px !important;
+    }
+
+    #row-back-mobile.sticky{
+        background: white;
+        height: 53px;
+        position: fixed;
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #e6e6e6;
+    }
     /* .shop_wrapper.grid_4 .product {
         padding-left: 5px;
         padding-right: 5px;

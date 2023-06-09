@@ -88,7 +88,7 @@
                                                                 <template v-if="this.dataOrder.transaction_rating">
                                                                     <star-rating v-model:rating="this.dataOrder.transaction_rating.rating" 
                                                                         :star-size="17" 
-                                                                        read-only="true">
+                                                                        :read-only="true">
                                                                     </star-rating>
                                                                     {{ this.dataOrder.transaction_rating.desc }}
                                                                 </template>
