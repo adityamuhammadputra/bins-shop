@@ -77,7 +77,7 @@
                         </div>
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Kontak Kami</h2>
-                            <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui :</p>
+                            <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui:</p>
                             <!-- Contact Address Start -->
                             <ul class="widget-address">
                                 <li><span>Email: </span> <a href="#"> admin@bins.shop</a></li>
