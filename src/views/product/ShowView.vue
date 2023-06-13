@@ -1,23 +1,28 @@
 <template>
  <div class="section">
         <div class="container">
-            <div class="row" id="row-back-mobile">
+            <div class="row" v-if="!isMobile()">
                 <div class="col-12">
-                    <div class="breadcrumb-content mt-3 mb-2" v-if="!isMobile()">
+                    <div class="breadcrumb-content mt-3 mb-2" >
                         <ul>
                             <li> <a href="/">Home </a> </li>
                             <li class="active"> {{ this.detail.category }}</li>
                             <li class="active"> {{ this.detail.name   }}</li>
                         </ul>
                     </div>
-                    <h5 class="title mb-0" style="position: absolute;z-index: 11;margin-top: 10px;"  
-                        v-else>
+                </div>
+            </div>
+
+            <div class="row" id="row-back-mobile" v-else>
+                <div class="col-12">
+                    <h5 class="title mb-0" style="position: absolute;z-index: 11;margin-top: 10px;">
                         <router-link :to="($route.query.back) ? '/' + $route.query.back : '/product'">
                             <i class="fa fa-arrow-left"></i> Kembali
                         </router-link>
                     </h5>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-4 offset-lg-0 col-md-8 offset-md-2 col-custom p-0-mobile">
                     <div v-if="loading">
@@ -148,15 +153,16 @@
 
                         <!-- Cart & Wishlist Button Start -->
                         <div class="cart-wishlist-btn mb-4">
+                           
                             <div class="add-to_cart">
-                                <button class="btn btn-outline-danger btn-hover-danger"
+                                <button class="btn btn-danger btn-hover-danger"
                                     @click="addChart(detail.id)"
                                     :disabled="loadingButton">
                                     + Keranjang
                                 </button>
                             </div>
                             <div class="add-to-wishlist">
-                                <button class="btn btn-danger btn-hover-danger" 
+                                <button class="btn btn-outline-danger btn-hover-danger" 
                                     @click="cartCheckout(detail)"
                                     :disabled="loadingButton">
                                     Beli Langsung
@@ -165,7 +171,16 @@
                         </div>
                         <!-- Social Shear Start -->
                         <div class="social-share">
-                            <span>Bagikan : {{  }}</span>
+                            <span>
+                                <a 
+                                    :href="'https://api.whatsapp.com/send/?phone=62816262439&text=Hai min, mau tanya produk ini %0a' + currentBaseUrl()+$route.fullPath + '&type=phone_number&app_absent=0'" 
+                                    target="_blank"
+                                    style="cursor: pointer;">
+                                    <i class="pe-7s-chat"></i> Chat 
+                                </a>
+                            </span>
+                            |
+                            <span> Bagikan : {{  }}</span>
                             <!--  -->
                             <a @click="copyLink(currentBaseUrl()+$route.fullPath)" style="cursor: pointer;">
                                 <i class="fa fa-copy text-primary"></i>
@@ -352,7 +367,7 @@
                                                             referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
                                                     </div>
                                                     <div class="review_details ml-0" style="width: 100%;">
-                                                        <div class="review_info mb-2">
+                                                        <div class="review_info">
                                                             <div class="review-title-date d-flex">
                                                                 <h5 class="title" style="font-size: 14px;">{{ discussion.user.name.split(' ')[0] }} </h5>
                                                                 <span class="ml-1"> {{ dateOuput2(discussion.created_at) }}</span>
@@ -361,7 +376,7 @@
                                                         <p>
                                                             {{ discussion.desc }}
                                                         </p>
-                                                        <div class="replay">
+                                                        <div class="replay mt-3">
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" 
                                                                     style="background: transparent;border: none; padding-left: 0px;"
@@ -417,27 +432,6 @@
         </div>
     </div>
 
-    <!-- <div data-v-67637842="" class="wn-btn-container-foreground" style="--border-color: #9B9B9B; --background-color: #FFFFFF; --badge-color: #828282; height: 47px;">
-        <div class="cart-wishlist-btn" style="width: 100%;">
-            <div class="add-to_cart" style="float: left;">
-                <button class="btn btn-outline-danger btn-hover-danger"> + Keranjang </button>
-            </div>
-            <div class="add-to-wishlist" style="float: left;">
-                <button class="btn btn-danger btn-hover-danger"> Beli Langsung </button>
-            </div>
-        </div>
-    </div> -->
-<!-- 
-    <div class="modal" :class="(showModal) ? 'show' : ''" tabindex="-1" :style="(showModal) ? 'display: block; background: radial-gradient(black, transparent);' : 'display: none;'">
-        <div class="modal-dialog modal-lg" style="margin-top: 150px;">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="showModal=false"
-                    style="position: absolute;right: 10px;top: 10px"></button>
-                <img src="http://bins.local/api/v1/storage/2016_1.png">
-            </div>
-        </div>
-    </div> -->
-
 </template>
 
 
@@ -488,7 +482,7 @@ export default {
         this.getData();
     },
     mounted() {
-        this.stickyScroll()
+        // this.stickyScrollDetail()
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
     },
@@ -504,7 +498,7 @@ export default {
         getData: function(loadingBypass = false) {
             if (loadingBypass == false) 
                 this.loading = true
-            this.axios.get('product/'+this.$route.params.slug)
+            this.axios.get('product/'+this.$route.params.slug, this.$store.state.config)
             .then((response) => {
                 this.detail = response.data.data;
                 // console.log(this.detail.desc);
@@ -624,15 +618,15 @@ export default {
             navigator.clipboard.writeText(url)
             this.successNotif("Url berhasil disalin")
         },
-        stickyScroll: function() {
+        stickyScrollDetail: function() {
             window.onscroll = function() {
                 var header = document.getElementById("row-back-mobile");
                 if (header) {
                     var sticky = header.offsetTop;
                     if (window.pageYOffset > sticky) {
-                        header.classList.add("sticky");
+                        header.classList.add("sticky-mobile");
                     } else {
-                        header.classList.remove("sticky");
+                        header.classList.remove("sticky-mobile");
                     }
                 }
 

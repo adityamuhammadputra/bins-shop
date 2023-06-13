@@ -31,7 +31,7 @@
                         </div>
                         <div class="content ps-0 w-100">
                             <h5 class="title mb-2">Gratis Ongkir</h5>
-                            <p>Produk digital, tanpa ongkos kirim pastinya. Jika ingin fisik seperti foto produk, bisa request juga kok</p>
+                            <p>Khusus Produk Digital gak perlu pake ongkos kirim pastinya. Ongkir hanya digunakan produk berfisik aja yaa </p>
                         </div>
                     </div>
                 </div>

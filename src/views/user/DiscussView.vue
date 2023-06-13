@@ -75,7 +75,7 @@
                                                         referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
                                                 </div>
                                                 <div class="review_details ml-0" style="width: 100%;">
-                                                    <div class="review_info mb-2">
+                                                    <div class="review_info">
                                                         <div class="review-title-date d-flex">
                                                             <h5 class="title" style="font-size: 16px;">{{ discuss.user.name.split(' ')[0] }} </h5>
                                                             <span class="ml-1"> {{ dateOuput2(discuss.created_at) }}</span>
@@ -84,7 +84,7 @@
                                                     <p>
                                                         {{ discuss.desc }}
                                                     </p>
-                                                    <div class="replay" v-if="discuss.replay.length > 0">
+                                                    <div class="replay mt-1" v-if="discuss.replay.length > 0">
                                                         <div class="input-group"
                                                             v-for="replay in discuss.replay">
                                                             <span class="input-group-text" 

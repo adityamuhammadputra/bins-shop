@@ -484,7 +484,9 @@ input[type="checkbox"] {
 
 .list-group-horizontal .list-group-right {
     width: -webkit-fill-available;
+    width: -moz-available;
     text-align: right;
+    width: fill-available;
 }
 
 .list-group-horizontal .list-group-right a {
@@ -727,6 +729,8 @@ input[type="checkbox"] {
 
     .section-margin .single-product-tab .nav-tabs .nav-item {
         width: -webkit-fill-available;
+        width: -moz-available;
+        width: fill-available;
     }
 
     .single-product-tab .review_details .review-title-date span {
@@ -795,7 +799,7 @@ input[type="checkbox"] {
         margin-bottom: 0px !important;
     }
 
-    #row-back-mobile.sticky{
+    #row-back-mobile.sticky-mobile{
         background: white;
         height: 53px;
         position: fixed;
