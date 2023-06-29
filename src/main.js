@@ -30,7 +30,6 @@ import { useToast } from "vue-toastification";
 import bottomNavigationVue from "bottom-navigation-vue";
 import "bottom-navigation-vue/dist/style.css";
 import VueSocialSharing from 'vue-social-sharing'
-import { decodeCredential } from 'vue3-google-login'
 
 const optionToast = {
     timeout: 5500,
@@ -51,8 +50,9 @@ const vueApp = createApp(App)
                     clientId: '178946568807-5tfh6j07huih5h53eiun11s6pf19iu2d.apps.googleusercontent.com'
                 })
 
-vueApp.component("content-loader", ContentLoader)
 
+vueApp.component("content-loader", ContentLoader)
+// vueApp.component("facebook-login", FacebookLogin)
 
 vueApp.mixin({
     methods: {
@@ -104,20 +104,6 @@ vueApp.mixin({
         errorNotifMsg: function(msg) {
             toast.error(msg);
         },
-        handleLogin: function(response) {
-            console.log(response);
-            const userData = decodeCredential(response.credential)
-            // console.log(userData);
-            // return false;
-            this.$store.dispatch("auth/login", userData).then(
-                () => {
-                    window.location.reload()
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-        },
         userLogin: function(){
             return (this.$store.state.auth) ? this.$store.state.auth.user.user : null;
         },
@@ -158,7 +144,7 @@ vueApp.mixin({
         },
         addChart: function(id, loadChart = false) {
             if (!this.$store.state.auth.user) {
-                this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
+                this.errorHasLogin('Opps... Silahkan login terlebih dahulu', '/user?back=' + this.$route.path)
                 return false;
             }
             this.loadingButton = true
@@ -229,6 +215,10 @@ vueApp.mixin({
                     this.$router.push('/cart');
                 }
             })
+        },
+        errorHasLogin: function(msg, urlBack) {
+            this.errorNotifMsg(msg)
+            this.$router.push(urlBack);
         },
         formatRibu: function(num){
             if (num) {

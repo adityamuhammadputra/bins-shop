@@ -8,13 +8,13 @@ class AuthService {
           email: user.email,
           name: user.name,
           picture: user.picture,
-          sub: user.sub,
+          provider_id: user.provider_id,
+          provider: user.provider,
         })
         .then(response => {
           if (response.data.accessToken) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }
-  
           return response.data;
         });
     }

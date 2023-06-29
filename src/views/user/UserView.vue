@@ -35,8 +35,8 @@
                                                             style="border-radius: 100%;" v-if="user">
                                                         <span class="badge badge-user-avatar bg-dark">Silver Member</span>
                                                     </div>
-                                                    <div class="col-md-10">
-                                                        <div class="form-floating mb-2">
+                                                    <div class="col-md-10 px-0">
+                                                        <div class="form-floating">
                                                             <input type="text" class="form-control" 
                                                                 id="email" 
                                                                 placeholder="Email"
@@ -44,6 +44,7 @@
                                                                 style="height: 45px;border-radius: 0px;padding-top: 1rem;border: none;cursor: not-allowed;">
                                                             <label for="email" style="padding-top: 7px;">Email </label>
                                                         </div>
+                                                        <p class="mb-3 ml-1" style="font-size: 11px; font-style: italic;position: relative;    top: -10px;left: -5px;"> Email untuk Informasi Tracking Pemesanan</p>
                                                         
                                                         <div class="form-floating mb-5">
                                                             <input type="text" class="form-control" 
@@ -59,7 +60,10 @@
                                                 <fieldset class="mt-2 mb-5">
                                                     <legend class="mt-0 mb-2">Akun yang terhubung</legend>
                                                     <div class="form-group">
-                                                        <span aria-hidden="true" class="NA_Img dkWypw"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="24" width="24"><path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z"></path><path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z"></path><path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z"></path><path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"></path></svg></span>
+                                                        <img v-if="this.user.provider == 'facebook'" srcset="https://img.icons8.com/?size=2x&amp;id=118497&amp;format=png 2x, https://img.icons8.com/?size=1x&amp;id=118497&amp;format=png 1x" src="https://img.icons8.com/?size=2x&amp;id=118497&amp;format=png 2x" alt="Facebook icon" width="27" height="27"/>
+                                                        <span  v-if="this.user.provider == 'google'" aria-hidden="true" class="NA_Img dkWypw">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="24" width="24"><path fill="#4285f4" d="M386 400c45-42 65-112 53-179H260v74h102c-4 24-18 44-38 57z"></path><path fill="#34a853" d="M90 341a192 192 0 0 0 296 59l-62-48c-53 35-141 22-171-60z"></path><path fill="#fbbc02" d="M153 292c-8-25-8-48 0-73l-63-49c-23 46-30 111 0 171z"></path><path fill="#ea4335" d="M153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55z"></path></svg>
+                                                        </span>
                                                         {{ this.user.email }}
                                                     </div>
                                                 </fieldset>
@@ -161,14 +165,13 @@
                         </div>
                     </div>
                     <!-- My Account Page End -->
-
                 </div>
             </div>
 
             <div class="row" v-if="!this.$store.state.auth.user">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-body p-0-mobile">
+                        <div class="card-body p-0-mobile text-center">
                             <ElseLogin></ElseLogin>
                         </div>
                     </div>
@@ -185,6 +188,7 @@
 
 <script>
 import ElseLogin from '/src/components/ElseLogin.vue'
+
 import Datepicker from 'vue3-datepicker'
 import moment from 'moment';
 
@@ -196,9 +200,6 @@ export default {
     data() {
         return {
             user : null,
-
-            // picked: new Date(),
-            // picked: null,
         }
     },
     mounted() {
@@ -209,6 +210,7 @@ export default {
     
     created() {
         this.profileGet()
+        
         // console.log(new Date());
     },
     methods: {

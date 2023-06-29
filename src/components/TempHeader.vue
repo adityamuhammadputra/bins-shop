@@ -11,7 +11,7 @@
                             <div class="header-logo">
                                 <router-link to="/">
                                     <img src="/assets/images/logo/logo.png" alt="Site Logo" style="width: 60px;"/>
-                                    <span style="font-size: 20px;position: relative;left: -8px;top: 10px;">Bins Shop</span>
+                                    <span style="font-size: 20px;position: relative;left: -8px;top: 7px;">Bins Shop</span>
                                 </router-link> 
                             </div>
                         </div>
@@ -49,7 +49,10 @@
                         <!-- Header Action Start -->
                         <div class="col-xl-2 col-6">
                             <div class="header-actions" v-if="!this.$store.state.auth.user">
-                                <GoogleLogin :callback="handleLogin" prompt auto-login/>
+                                <!-- <GoogleLogin :callback="handleLogin" prompt auto-login/> -->
+                                <router-link to="/user" class="btn btn-sm btn-outline-primary">
+                                    Login
+                                </router-link>
                             </div>
                             <div class="header-actions" v-else>
 
@@ -181,11 +184,6 @@ export default {
 
             }
         },
-        // handleLogin2: function() {
-        //     googleTokenLogin().then((response) => {
-        //         console.log("Handle the response", response)
-        //     })
-        // }
     }
 }
 

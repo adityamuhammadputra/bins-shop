@@ -18237,7 +18237,7 @@ input[type="checkbox"]:checked + label:after {
 }
 
 .price span.old {
-  font-size: 14px;
+  font-size: 13px;
   margin-left: 10px;
   text-decoration: line-through;
   color: #999999;

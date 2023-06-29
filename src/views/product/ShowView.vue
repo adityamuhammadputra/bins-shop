@@ -482,6 +482,9 @@ export default {
         this.getData();
     },
     mounted() {
+        if(this.$route.query.as) { 
+            this.successNotif('Anda login sebagai ' + this.$route.query.as)
+        }
         // this.stickyScrollDetail()
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
@@ -501,9 +504,6 @@ export default {
             this.axios.get('product/'+this.$route.params.slug, this.$store.state.config)
             .then((response) => {
                 this.detail = response.data.data;
-                // console.log(this.detail.desc);
-                // this.detail.desc = this.detail.desc.replace('\r\n', '<br\>')
-                // console.log(this.detail);
             })
             .catch(error => {
                 this.loading = true
@@ -516,7 +516,7 @@ export default {
         },
         cartCheckout: function(product) {
             if (!this.$store.state.auth.user) {
-                this.errorNotifMsg('Opps... anda belum login')
+                this.errorHasLogin('Opps... Login untuk lanjutkan checkout', '/user?back=' + this.$route.path)
                 return false;
             }
             this.loadingButton = true
@@ -592,8 +592,10 @@ export default {
         },
         discusPost: function(product, parent = null, key = null) {
             if (!this.$store.state.auth.user) {
-                this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
+                this.errorHasLogin('Opps... Login untuk lanjutkan diskusi', '/user?back=' + this.$route.path)
                 return false;
+                // this.errorNotifMsg('Opps... Silahkan login terlebih dahulu')
+                // return false;
             }
             this.loadingButton = true
             this.discus.product_id = product.id

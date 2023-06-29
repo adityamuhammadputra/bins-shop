@@ -356,6 +356,10 @@ p>a:hover {
     font-size: 30px;
 }
 
+.price span.old {
+    font-size: 12px;
+}
+
 .product-summery .price-box .old-price {
     font-size: 20px;
 }
@@ -527,6 +531,17 @@ input[type="checkbox"] {
 .whatsapp-color {
     color: #2fcd2d;
 }
+.btn-facebook {
+    border: 1px solid grey;
+    padding: 0px;
+    padding-right: 10px;
+}
+
+.btn-facebook i {
+    background: #3B5998;
+    color: #fff;
+    padding: 10px;
+}
 
 .facebook-color {
     color: #2b5dcf;
@@ -536,6 +551,34 @@ input[type="checkbox"] {
 }
 .linkedin-color {
     color: #0077b5;
+}
+
+button.v-facebook-login {
+    transition: background-color 0.25s ease-in-out 0s;
+    background: #415dae;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 5px 10px;
+    /* display: block; */
+    /* text-align: center; */
+}
+.v-facebook-login svg {
+    color: white;    
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+.v-facebook-login span {
+    color: white;
+    font-size: 0px;
+    visibility: hidden;
+}
+
+.v-facebook-login span::after {
+    content: 'Login dengan Facebook';
+    visibility: visible;
+    font-size: 13px;
+
 }
 
 .img-user-avatar {
