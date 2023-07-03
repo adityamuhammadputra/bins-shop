@@ -131,7 +131,7 @@
                         </div>
                         
 
-                        <p class="desc-content mb-5 mt-1" v-html="detail.desc"></p>
+                        <p class="desc-content mb-5 mt-3" v-html="detail.desc"></p>
                         <!-- <span  v-for="(line, index) of detail.desc.split('\r\n')" 
                             :key="index" v-if="detail.desc">
                             {{ line }}<br/>

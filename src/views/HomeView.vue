@@ -2,20 +2,23 @@
 
     <div class="section row-1 homepage">
         <div :class="(isMobile()) ? '' : 'container'">
-            <Carousel :autoplay="3000" :wrap-around="true" :items-to-show="(isMobile() ? 1.1 : 1)">
+            <Carousel :autoplay="6000" :wrap-around="true" :items-to-show="(isMobile() ? 1.1 : 1)">
                 <Slide v-for="slide in 4" :key="slide">
                     <div class="carousel__item">
                         <div class="banner">
                             <div class="banner-image">
-                                <a href="shop-grid.html"><img src="assets/images/slider/slide-2.jpg" alt="Banner Image"></a>
+                                <a :href="'assets/images/slider/' + slide + (isMobile() ? '-mobile' : '') + '.png'">
+                                    <img :src="'assets/images/slider/' + slide + (isMobile() ? '-mobile' : '') + '.png'" alt="Banner Image">
+                                </a>
+                                <!-- <a href="shop-grid.html"><img src="assets/images/slider/slide-1.jpg" alt="Banner Image"></a> -->
                             </div>
-                            <div class="info">
+                            <!-- <div class="info">
                                 <div class="small-banner-content">
                                     <h4 class="sub-title">Up to <span>{{ slide }}%</span> Off</h4>
                                     <h3 class="title">Office Dress</h3>
                                     <a href="shop-grid.html" class="btn btn-primary btn-hover-dark btn-sm">Shop Now</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </Slide>

@@ -20181,6 +20181,8 @@ input[type="checkbox"]:checked + label:after {
 .product-summery .desc-content {
   font-size: 14px;
   color: #535353;
+  margin-bottom: 1.625rem !important;
+  margin-top: 0.9375rem !important;
 }
 
 .product-summery .product-color-variation .btn {

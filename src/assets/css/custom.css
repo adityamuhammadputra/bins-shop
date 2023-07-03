@@ -181,7 +181,7 @@ p>a:hover {
 }
 
 .carousel__item {
-    min-height: 200px;
+    min-height: 185px;
     width: 100%;
     background-color: grey;
     color: var(--vc-clr-white);
@@ -191,7 +191,10 @@ p>a:hover {
     justify-content: center;
     align-items: center;
 }
-  
+
+.carousel__item img {
+    border-radius: 8px;
+}
 
 
 .carousel__pagination {
@@ -680,6 +683,15 @@ button.v-facebook-login {
     .carousel__slide {
         padding: 4px;
     }
+
+    .carousel__pagination {
+        margin-bottom: 0px !important;
+    }
+
+    .feature .content .title {
+        font-size: 14px !important;
+    }
+
     .shop_wrapper .product {
         margin-bottom: 10px !important;
     }

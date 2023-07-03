@@ -16,6 +16,7 @@
                                 v-model="this.$store.state.meta.sort">
                                 <option value="">--Urutkan--</option>
                                 <option value="1">Penjualan Terbanyak</option>
+                                <option value="5">Promo</option>
                                 <option value="2">Terbaru</option>
                                 <option value="3">Harga Terendah</option>
                                 <option value="4">Harga Tertinggi</option>
