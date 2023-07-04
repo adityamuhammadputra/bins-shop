@@ -81,7 +81,7 @@
 // 
 
 export default {
-    name: 'turoial',
+    name: 'tutorial',
     // components: {  
     //     Carousel, Slide, Pagination, Navigation, ProductList, 
     // }, 

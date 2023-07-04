@@ -425,8 +425,7 @@
                 </div>
             </div>
 
-            <ProductRecomend 
-                v-bind:excludeProps="this.$route.params.slug">
+            <ProductRecomend>
             </ProductRecomend>
 
         </div>

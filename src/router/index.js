@@ -1,3 +1,4 @@
+// import { createRouter, createWebHashHistory } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/product/IndexView.vue'
@@ -42,10 +43,7 @@ const routes = [
   {
     path: '/cart',
     name: 'cart',
-    component: CartView,
-    meta: {
-      hideMobile: 1,
-    }
+    component: CartView
   },
   {
     path: '/order',
@@ -116,6 +114,7 @@ const routes = [
 ]
 
 const router = createRouter({
+  // history: createWebHashHistory(),
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior() {

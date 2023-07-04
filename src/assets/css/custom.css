@@ -715,6 +715,15 @@ button.v-facebook-login {
         bottom: 9px !important;
         height: 3px !important;
     }
+
+    .header-bottom {
+        min-height: 55px !important;
+    }
+
+    .header-bottom .header-sticky {
+        height: 55px !important;
+    }
+
     /* 
     .col .carousel__slide:nth-of-type(odd) {
         padding-right: 6px;

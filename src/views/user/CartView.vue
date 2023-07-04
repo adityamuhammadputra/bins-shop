@@ -128,9 +128,7 @@
                 </div>
             </div>
 
-            <ProductRecomend 
-                v-bind:excludeProps="null"
-                v-bind:loadChart="true">
+            <ProductRecomend>
             </ProductRecomend>
 
         </div>
@@ -138,7 +136,6 @@
 </template>
     
 <script>
-// import { useAttrs } from 'vue';
 import ProductRecomend from '/src/components/ProductRecomend.vue'
 import ElseLogin from '/src/components/ElseLogin.vue'
 import { ContentLoader } from 'vue-content-loader'

@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col">
-            <Carousel :items-to-show="(isMobile()) ? 2 : 5" >
+            <Carousel :items-to-show="(isMobile()) ? 2 : 5" v-if="dataRekomends.length > 0">
                 <Slide v-for="product in this.dataRekomends" :key="product.id">
                     <div class="product">
                         <div class="product-inner">
@@ -67,19 +67,19 @@
 <script>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-import { ContentLoader } from 'vue-content-loader'
+// import { ContentLoader } from 'vue-content-loader'
 
 export default {
-    props : ['excludeProps', 'loadChart'],
     name: 'ProdcutRecoment',
+    // props : ['excludeProps', 'loadChart'],
     components: {  
-        Carousel, Slide, Pagination, Navigation, ContentLoader
+        Carousel, Slide, Pagination, Navigation
     }, 
     data() {
         return {
             dataRekomends: [],
-            loadTheChart : this.loadChart ?? false,
-            exclude: this.excludeProps ?? this.$store.state.default.exlude,
+            // loadTheChart : this.loadChart ?? false,
+            // exclude: this.excludeProps ?? this.$store.state.default.exlude,
         }
     },
     mounted() {

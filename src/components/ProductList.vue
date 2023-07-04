@@ -13,8 +13,8 @@
                         <span class="mr-1">Urutkan: </span>
                         <div class="shop-short-by mr-4">
                             <select class="nice-select" @change="getIndex()"
-                                v-model="this.$store.state.meta.sort">
-                                <option value="">--Urutkan--</option>
+                                v-model="this.sort">
+                                <option value="">--Pilih Urutan--</option>
                                 <option value="1">Penjualan Terbanyak</option>
                                 <option value="5">Promo</option>
                                 <option value="2">Terbaru</option>
@@ -146,6 +146,7 @@ export default {
     data() {
         return {
             meta: this.$store.state.meta,
+            sort: 5,
             data: this.$store.state.meta.data,
             loading: true,
             loadingButton: false,
@@ -163,7 +164,7 @@ export default {
     methods: {
         getIndex: function() {
             this.loading = true
-            this.axios.get('product?q=' + this.$store.state.meta.q + '&sort=' + this.$store.state.meta.sort)
+            this.axios.get('product?q=' + this.$store.state.meta.q + '&sort=' + this.sort)
             .then((response) => {
                 this.meta.data = response.data.data;
                 this.meta.total = response.data.meta.total

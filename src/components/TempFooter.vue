@@ -59,9 +59,9 @@
                             <h2 class="widget-title mb-3">Pembayaran</h2>
                             <p cla ss="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran :</p>
                             <div class="widget-social justify-content-start">
-                                <img src="/assets/images/pay-wallet.png" style="width: 250px;"/>
-                                <img src="/assets/images/pay-bank.png" style="width: 280px;"/>
-                                <img src="/assets/images/pay-mart.png" style="width: 300px;"/>
+                                <img src="assets/images/pay-wallet.PNG" style="width: 250px;"/>
+                                <img src="assets/images/pay-bank.PNG" style="width: 280px;"/>
+                                <img src="assets/images/pay-mart.PNG" style="width: 300px;"/>
                                 <!-- <img src="/assets/images/pay-debit.png" style="width: 350px;"/> -->
                             </div>
                         </div>
@@ -70,11 +70,7 @@
                 </div>
 
                 <div class="row mb-n10" v-else>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10" v-if="!$route.meta.hideMobile">
-                        <div class="single-footer-widget mb-2" v-if="isMobile() && !this.$store.state.auth.user">
-                            <h2 class="widget-title mb-3">Silahkan login</h2>
-                            <GoogleLogin :callback="handleLogin" prompt auto-login/>
-                        </div>
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10">
                         <div class="single-footer-widget">
                             <h2 class="widget-title mb-3">Kontak Kami</h2>
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui:</p>
@@ -129,9 +125,9 @@
                             <h2 class="widget-title mb-3">Pembayaran</h2>
                             <p cla ss="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran</p>
                             <div class="widget-social justify-content-start">
-                                <img src="/assets/images/pay-wallet.png" style="width: 250px;"/>
-                                <img src="/assets/images/pay-bank.png" style="width: 280px;"/>
-                                <img src="/assets/images/pay-mart.png" style="width: 300px;"/>
+                                <img src="assets/images/pay-wallet.PNG" style="width: 250px;"/>
+                                <img src="assets/images/pay-bank.PNG" style="width: 280px;"/>
+                                <img src="assets/images/pay-mart.PNG" style="width: 300px;"/>
                                 <!-- <img src="/assets/images/pay-debit.png" style="width: 350px;"/> -->
                             </div>
                         </div>

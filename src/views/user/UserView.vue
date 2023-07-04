@@ -173,11 +173,10 @@
                     <div class="card">
                         <div class="card-body p-0-mobile text-center">
                             <ElseLogin></ElseLogin>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -192,7 +191,7 @@ import ElseLogin from '/src/components/ElseLogin.vue'
 import Datepicker from 'vue3-datepicker'
 import moment from 'moment';
 
-export default {
+export default {    
     name: 'Header',
     components: {
         ElseLogin, Datepicker

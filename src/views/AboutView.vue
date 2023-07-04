@@ -115,7 +115,7 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import ProductList from '/src/components/ProductList.vue'
 
 export default {
-    name: 'HomeView',
+    name: 'about',
     components: {  
         Carousel, Slide, Pagination, Navigation, ProductList, 
     }, 
