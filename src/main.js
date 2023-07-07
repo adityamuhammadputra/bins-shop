@@ -12,7 +12,7 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-axios.defaults.baseURL = 'http://be.binsshop.tech/api/v1/'
+axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
 // axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
@@ -245,7 +245,6 @@ vueApp.mixin({
             }
         },
         countDown : function (time) {
-
             setInterval(function () {
                 if (time > 0)
                     time = time - 1;
@@ -258,6 +257,11 @@ vueApp.mixin({
               return true
             } else {
               return false
+            }
+        },
+        toHttps: function() {
+            if (location.protocol !== 'https:') {
+                // location.replace(`https:${location.href.substring(location.protocol.length)}`);
             }
         }
     },

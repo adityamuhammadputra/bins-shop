@@ -1,4 +1,4 @@
-# frontendmini
+# bins-shop
 
 ## Project setup
 ```

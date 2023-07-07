@@ -39,7 +39,7 @@
                                         <router-link to="/about">Tentang</router-link> 
                                     </li>
                                     <li>
-                                        <router-link to="/faq">Faq ?</router-link> 
+                                        <router-link to="/faq" id="faq">Faq ?</router-link> 
                                     </li>
                                 </ul>
                             </div>
@@ -160,6 +160,7 @@ export default {
     },
     mounted() {
         // if (!this.isMobile()) {
+        this.toHttps();
         this.stickyScroll();
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
