@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-// axios.defaults.baseURL = 'http://bins.local/api/v1/'
+// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
@@ -257,6 +257,21 @@ vueApp.mixin({
               return true
             } else {
               return false
+            }
+        },
+        stickyTitleToHeader: function() {
+            if (this.isMobile()) {
+                window.onscroll = function() {
+                    var header = document.getElementById("title-mobile");
+                    if (header) {
+                        var sticky = header.offsetTop;
+                        if (window.pageYOffset > sticky) {
+                            header.classList.add("title-mobile-to-header");
+                        } else {
+                            header.classList.remove("title-mobile-to-header");
+                        }
+                    }
+                }
             }
         },
         toHttps: function() {

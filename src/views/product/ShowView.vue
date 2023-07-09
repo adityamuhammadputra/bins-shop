@@ -13,14 +13,23 @@
                 </div>
             </div>
 
-            <div class="row" id="row-back-mobile" v-else>
-                <div class="col-12">
+            <div class="row" v-else>
+                <div class="col-12" id="title-mobile" style="position: absolute;z-index: 11;margin-top: 10px;">
+                    <h5 class="title mb-2"> 
+                        <router-link :to="($route.query.back) ? '/' + $route.query.back : '/product'" class="image">
+                            <span class="fa fa-angle-left text-bold"></span> 
+                            Kembali 
+                        </router-link>
+                    </h5>
+                </div>
+
+                <!-- <div class="col-12" id="title-mobile">
                     <h5 class="title mb-0" style="position: absolute;z-index: 11;margin-top: 10px;">
                         <router-link :to="($route.query.back) ? '/' + $route.query.back : '/product'">
                             <i class="fa fa-arrow-left"></i> Kembali
                         </router-link>
                     </h5>
-                </div>
+                </div> -->
             </div>
 
             <div class="row">
@@ -484,7 +493,7 @@ export default {
         if(this.$route.query.as) { 
             this.successNotif('Anda login sebagai ' + this.$route.query.as)
         }
-        // this.stickyScrollDetail()
+        this.stickyTitleToHeader()
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
     },
@@ -618,20 +627,6 @@ export default {
         copyLink: function(url){
             navigator.clipboard.writeText(url)
             this.successNotif("Url berhasil disalin")
-        },
-        stickyScrollDetail: function() {
-            window.onscroll = function() {
-                var header = document.getElementById("row-back-mobile");
-                if (header) {
-                    var sticky = header.offsetTop;
-                    if (window.pageYOffset > sticky) {
-                        header.classList.add("sticky-mobile");
-                    } else {
-                        header.classList.remove("sticky-mobile");
-                    }
-                }
-
-            }
         },
 
     }

@@ -1,7 +1,12 @@
 <template>
     <div class="section mt-5 mb-5">
         <div class="container mb-5">
-            <div class="row"><div class="col-12"><h5 class="title mb-3">Informasi Akun </h5></div></div>
+            <div class="row">
+                <div class="col-12" :id="(isMobile() ? 'title-mobile' : '')">
+                    <h5 class="title mb-3">Informasi Akun </h5>
+                </div>
+            </div>
+            
             <div class="row" v-if="user">
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
@@ -24,8 +29,10 @@
                                         <div class="progress  mb-0">
                                             <div class="progress-bar" role="progressbar" 
                                                 :style="'width: '+user.percen +'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                Kelengkapan profile kamu, {{ user.percen }}%
                                             </div>
+                                            <p style="position: absolute;margin-top: -4px;margin-left: 10px;color: white;">
+                                                Kelengkapan profile kamu, {{ user.percen }}%
+                                            </p>
                                         </div>
                                         <div class="myaccount-content">
                                             <div class="account-details-form ">

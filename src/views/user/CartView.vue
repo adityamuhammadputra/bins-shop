@@ -1,9 +1,17 @@
 <template>
-     <div class="section mt-5 mb-5">
+     <div class="section mt-4 mb-5">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" v-if="!isMobile()">
                     <h5 class="title mb-3">Keranjang Belanja </h5>
+                </div>
+                <div class="col-12" v-else id="title-mobile">
+                    <h5 class="title mb-2"> 
+                        <router-link to="/" class="image">
+                            <span class="fa fa-angle-left text-bold"></span> 
+                            Keranjang 
+                        </router-link>
+                    </h5>
                 </div>
             </div>
 
@@ -96,7 +104,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" v-if="!isMobile()">
                     <div class="card">
                         <div class="card-body">
                             <div class="cart-calculate-items">
@@ -120,11 +128,30 @@
                                     </table>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-block w-100" :disabled="loadingButton"
+                            <button class="btn btn-primary btn-block w-100" 
+                                :disabled="loadingButton"
                                 @click="cartCheckout()"
-                                >Beli ({{ this.totalBarang }} barang)</button>
+                                >Beli ({{ this.totalBarang }} barang)
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row" v-if="isMobile()">
+                <div class="col-12">
+                    <div class="cart-wishlist-btn mb-4">
+                           <div class="add-to_cart" style="float: left;margin-top: 7px;padding-left: 5px;">
+                                <b>Rp. {{ formatRibu(this.totalHarga) }}</b>
+                           </div>
+                           <div class="add-to-wishlist" style="float: right;margin-right: 10px;">
+                               <button class="btn btn-danger btn-hover-danger" 
+                                :disabled="loadingButton"
+                                @click="cartCheckout()"
+                                >Beli ({{ this.totalBarang }} barang)
+                               </button>
+                           </div>
+                       </div>
                 </div>
             </div>
 
@@ -177,6 +204,8 @@ export default {
         
     },
     mounted() {
+            this.stickyTitleToHeader();
+
         if (this.$store.state.auth.user) 
             this.user = this.$store.state.auth.user.user;
         // console.log(this.data);

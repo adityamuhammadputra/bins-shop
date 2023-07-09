@@ -180,6 +180,20 @@ p>a:hover {
     justify-content: left;
 }
 
+.progress {
+    background-color: #d7d7d7;
+}
+
+.title-mobile-to-header {
+    position: fixed !important;
+    z-index: 11;
+    width: 100%;
+    background: white;
+    top: 0px;
+    padding-top: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.075);
+    margin-top: 0px !important;
+}
 .carousel__item {
     min-height: 185px;
     width: 100%;

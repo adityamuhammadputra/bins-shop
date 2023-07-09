@@ -43,7 +43,10 @@ const routes = [
   {
     path: '/cart',
     name: 'cart',
-    component: CartView
+    component: CartView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/order',
