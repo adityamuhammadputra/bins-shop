@@ -17,7 +17,7 @@
                 <div class="col-12" id="title-mobile" style="position: absolute;z-index: 11;margin-top: 10px;">
                     <h5 class="title mb-2"> 
                         <router-link :to="($route.query.back) ? '/' + $route.query.back : '/product'" class="image">
-                            <span class="fa fa-angle-left text-bold"></span> 
+                            <span class="fa fa-angle-left"></span> 
                             Kembali 
                         </router-link>
                     </h5>

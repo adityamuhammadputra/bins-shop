@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '/product',
-    name: 'produt',
+    name: 'product',
     component: ProductView
   },
   {

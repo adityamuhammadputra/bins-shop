@@ -184,6 +184,38 @@ p>a:hover {
     background-color: #d7d7d7;
 }
 
+#title-mobile .fa-angle-left {
+    margin-right: 1rem;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.wn-btn-container .wn-btn-icon {
+    text-align: center;
+    position: relative;
+    top: -2px;
+}
+
+.wn-btn-container .wn-btn-icon span{
+    font-size: 10px;
+    display: block;
+    line-height: 0px;
+    position: relative;
+    top: -2px;
+}
+
+.wn-btn-container .router-link-active .wn-btn-icon {
+    color: #af260b !important;
+}
+
+/* .wn-btn-container .router-link-active .wn-btn-border {
+    border-bottom: 3px solid var(--border-color);
+    border-radius: 5px;
+    position: relative;
+    top: -5px;
+    width: 65%;
+} */
+
 .title-mobile-to-header {
     position: fixed !important;
     z-index: 11;
@@ -789,7 +821,7 @@ button.v-facebook-login {
     } 
 
     .comment-area-wrapper .single-comment-wrap .author-thumb {
-        width: 78px;
+        width: 100px;
         height: 78px;
     }
 

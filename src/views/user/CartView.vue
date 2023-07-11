@@ -8,7 +8,7 @@
                 <div class="col-12" v-else id="title-mobile">
                     <h5 class="title mb-2"> 
                         <router-link to="/" class="image">
-                            <span class="fa fa-angle-left text-bold"></span> 
+                            <span class="fa fa-angle-left"></span> 
                             Keranjang 
                         </router-link>
                     </h5>
@@ -19,14 +19,14 @@
                 <div class="col-md-8 col-12">
                     <div class="card border-none-trl-mobile" v-if="user">
                         <div class="card-body p-0-mobile" >
-                            <div class="comment-area-wrapper" v-if="this.loading === true">
+                            <div class="comment-area-wrapper mt-2" v-if="this.loading === true">
                                 <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
                                     secondaryColor="#ecebeb" >
                                     <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
                                     <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
                                 </content-loader>
                             </div>
-                            <div class="comment-area-wrapper" v-else>
+                            <div class="comment-area-wrapper mt-2" v-else>
                                 <div class="mb-4 pb-4" style="border-bottom: 1px solid #f3f3f3;" 
                                     v-if="data.length > 0"
                                     v-for="(cart, indexCart) in data" v-bind:key="cart.id">

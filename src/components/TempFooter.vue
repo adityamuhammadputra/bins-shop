@@ -10,7 +10,7 @@
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui :</p>
                             <!-- Contact Address Start -->
                             <ul class="widget-address">
-                                <li><span>Email: </span> <a href="#"> admin@bins.shop</a></li>
+                                <li><span>Email: </span> <a href="#"> admin@binsshop.tech</a></li>
                             </ul>
                             <!-- Contact Address End -->
 
@@ -76,7 +76,7 @@
                             <p class="desc-content">Beritahu kami jika kamu ada pertanyaan atau kendala lainnya, melalui:</p>
                             <!-- Contact Address Start -->
                             <ul class="widget-address">
-                                <li><span>Email: </span> <a href="#"> admin@bins.shop</a></li>
+                                <li><span>Email: </span> <a href="#"> admin@binsshop.tech</a></li>
                             </ul>
                             <!-- Contact Address End -->
 
@@ -121,8 +121,8 @@
                     </div>
 
                     <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-10">
-                        <div class="single-footer-widget">
-                            <h2 class="widget-title mb-3">Pembayaran</h2>
+                        <div class="single-footer-widget"> 
+                            <h2 class="widget-title mb-3">Pembayaran </h2>
                             <p cla ss="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran</p>
                             <div class="widget-social justify-content-start">
                                 <img src="assets/images/pay-wallet.PNG" style="width: 250px;"/>
@@ -152,34 +152,101 @@
         </div>
         <!-- Footer Bottom End -->
     </footer>
+    
+    <div data-v-67637842="" class="wn-btn-container-foreground" 
+        style="--border-color: #9B9B9B; --background-color: #FFFFFF; --badge-color: #828282; height: 47px;">
+        <div data-v-67637842="" class="wn-btn-container">
+            <router-link to="/"> 
+                <div data-v-67637842="" class="wn-btn-item">
+                    <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
+                        <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-home"></i><!--v-if-->
+                        <span>Home</span>
+                    </div>
+                    <div data-v-67637842="" class="wn-btn-border"></div>
+                </div>
+            </router-link>
+        </div>
+        <div data-v-67637842="" class="wn-btn-container">
+            <router-link to="/about"> 
+                <div data-v-67637842="" class="wn-btn-item">
+                    <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
+                        <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-bookmarks"></i><!--v-if-->
+                        <span>Tentang</span>
+                    </div>
+                    <div data-v-67637842="" class="wn-btn-border"></div>
+                </div>
+            </router-link>
+        </div>
+        <div data-v-67637842="" class="wn-btn-container">
+            <router-link to="/cart"> 
+                <div data-v-67637842="" class="wn-btn-item">
+                    <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
+                        <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-cart"></i>
+                        <div data-v-67637842="" class="wn-btn-badge" v-if="this.$store.state.default.cart > 0">{{ this.$store.state.default.cart }}</div>
+                        <span>Keranjang</span>
+                    </div>
+                    <div data-v-67637842="" class="wn-btn-border"></div>
+                </div>
+            </router-link>
+        </div>
+        <div data-v-67637842="" class="wn-btn-container">
+            <router-link to="/order"> 
+                <div data-v-67637842="" class="wn-btn-item">
+                    <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
+                        <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-news-paper"></i><!--v-if-->
+                        <span>Transaksi</span>
+                    </div>
+                    <div data-v-67637842="" class="wn-btn-border"></div>
+                </div>
+            </router-link>
+        </div>
+        <div data-v-67637842="" class="wn-btn-container">
+            <router-link to="/user"> 
+                <div data-v-67637842="" class="wn-btn-item">
+                    <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
+                        <img :src="user.avatar"  referrerpolicy="no-referrer" style="border-radius: 100%;width: 22px;position: relative;top: -5px;" v-if="user">
+                        <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-user" v-else></i><!--v-if-->
+                        <span>Akun</span>
+                    </div>
+                    <div data-v-67637842="" class="wn-btn-border"></div>
+                </div>
+            </router-link>
+        </div>
+    </div>
 
-    <WindowsBottomNavigation :options="options" :replaceRoute="true" v-model="selected" v-if="isMobile()" style="height: 47px;"/>
+    <!-- <WindowsBottomNavigation :options="options" :replaceRoute="true" v-model="selected" v-if="isMobile()" style="height: 47px;"/> -->
 </template>
 
 
 
 <script>
 
-import { WindowsBottomNavigation } from "bottom-navigation-vue";
+// import { WindowsBottomNavigation } from "bottom-navigation-vue";
 import "bottom-navigation-vue/dist/style.css";
 
 
 export default {
     name: 'footerView',
-    components: { WindowsBottomNavigation },
+    // components: { WindowsBottomNavigation },
     data() {
         return {
+            user : null,
             selected: 1,
-            // replaceRoute: true,
-            options: [
-                // { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home", query: { bookmark: "important" } }},
-                { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home" }, replaceRoute: true},
-                { id: 2, icon: 'pe-7s-bookmarks', title: 'Blog', color: '#2e2e2e', path: { name: "about"} },
-                { id: 3, icon: 'pe-7s-cart', title: 'Keranjang', color: '#2e2e2e', badge: this.$store.state.default.cart, path: { name: "cart" }},
-                { id: 4, icon: 'pe-7s-news-paper', title: 'Transaksi', color: '#2e2e2e', badge: this.$store.state.default.notif, path: { name: "order" } },
-                { id: 5, icon: 'pe-7s-user', title: 'Akun', color: '#2e2e2e', path: { name: "user" }}
-            ]
+            replaceRoute: true,
+            // options: [
+            //     // { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home", query: { bookmark: "important" } }},
+            //     { id: 1, icon: 'pe-7s-home', title: 'Home', color: '#2e2e2e', path: { name: "home" }, replaceRoute: true},
+            //     { id: 2, icon: 'pe-7s-bookmarks', title: 'Blog', color: '#2e2e2e', path: { name: "about"} },
+            //     { id: 3, icon: 'pe-7s-cart', title: 'Keranjang', color: '#2e2e2e', badge: this.$store.state.default.cart, path: { name: "cart" }},
+            //     { id: 4, icon: 'pe-7s-news-paper', title: 'Transaksi', color: '#2e2e2e', badge: this.$store.state.default.notif, path: { name: "order" } },
+            //     { id: 5, icon: 'pe-7s-user', title: 'Akun', color: '#2e2e2e', path: { name: "user" }}
+            // ]
         }
+    },
+    mounted() {
+        // if (!this.isMobile()) {
+        if (this.$store.state.auth.user) 
+            this.user = this.$store.state.auth.user.user;
     },
     
 }
