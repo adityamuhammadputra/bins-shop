@@ -153,7 +153,8 @@
         <!-- Footer Bottom End -->
     </footer>
     
-    <div data-v-67637842="" class="wn-btn-container-foreground" 
+    <div v-if="isMobile()" 
+        data-v-67637842="" class="wn-btn-container-foreground" 
         style="--border-color: #9B9B9B; --background-color: #FFFFFF; --badge-color: #828282; height: 47px;">
         <div data-v-67637842="" class="wn-btn-container">
             <router-link to="/"> 

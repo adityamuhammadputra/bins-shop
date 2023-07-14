@@ -97,9 +97,12 @@ vueApp.mixin({
         },
         errorNotif: function(error) {
             let message = (error.response) ? error.response.data.error : error.message
-            toast.error(message);
             if(error.response.status == 401) {
+                // this.$store.dispatch('auth/refresh');
                 this.logOut();
+                // disini request baru berarti
+            } else {
+                toast.error(message);
             }
         },
         errorNotifMsg: function(msg) {
@@ -109,9 +112,8 @@ vueApp.mixin({
             return (this.$store.state.auth) ? this.$store.state.auth.user.user : null;
         },
         logOut: function(){
-            console.log('logut');
             this.$store.dispatch('auth/logout');
-            this.$router.push('/');
+            // this.$router.push('/login');
             window.location.href = '/'
         },
         search: function() {

@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 class AuthService {
     login(user) {
       // console.log('user: ' + user);
@@ -15,6 +14,24 @@ class AuthService {
           if (response.data.accessToken) {
             localStorage.setItem('user', JSON.stringify(response.data));
           }
+          return response.data;
+        });
+    }
+
+    refresh(token) {
+      return axios
+        .post('auth/refresh', null, {
+          headers:{
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + token,
+          }
+        })
+        .then(response => {
+          // console.log(response);
+          if (response.data.accessToken) {
+            localStorage.setItem('user', JSON.stringify(response.data));
+          }
+          window.location.reload()
           return response.data;
         });
     }

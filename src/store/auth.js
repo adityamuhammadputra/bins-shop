@@ -22,6 +22,18 @@ export const auth = {
         }
       );
     },
+    refresh({ commit }) {
+      return AuthService.refresh(this.state.auth.user.accessToken).then(
+        user => {
+          commit('loginSuccess', user);
+          return Promise.resolve(user);
+        },
+        error => {
+          commit('loginFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
     logout({ commit }) {
       AuthService.logout();
       commit('logout');
