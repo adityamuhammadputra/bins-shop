@@ -126,7 +126,7 @@
                             <div class="error_form" style="margin-top: 23px;">
                                 <form class="search-form-error" @submit.prevent="search">
                                     <router-link to="/product"> 
-                                        <input class="input-text" placeholder="Cari di Bins" type="text" v-model="this.$store.state.meta.q">
+                                        <input class="input-text" placeholder="Cari di Bins" type="text">
                                         <button class="submit-btn" type="button"  @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>

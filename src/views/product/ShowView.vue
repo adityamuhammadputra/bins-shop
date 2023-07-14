@@ -285,31 +285,33 @@
                                                 <div class="section-body mb-5">
                                                     <div class="single-review d-flex mb-4"
                                                         v-for="rating in detail.ratings" :key="rating.id">
-                                                        <div class="review_thumb">
-                                                            <img :src="rating.user.avatar"  
-                                                                referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
-                                                        </div>
-                                                        <div class="review_details ml-0">
-                                                            <div class="review_info mb-2">
-                                                                <div class="review-title-date d-flex">
-                                                                    <h5 class="title" style="font-size: 14px;">{{ rating.user.name }} </h5>
-                                                                    <span class="ml-1"> 
-                                                                        {{ (isMobile() ? dateOuput(rating.created_at) : dateOuput2(rating.created_at)) }}
+                                                        <template v-if="rating.user">
+                                                            <div class="review_thumb">
+                                                                <img :src="rating.user.avatar"  
+                                                                    referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
+                                                            </div>
+                                                            <div class="review_details ml-0">
+                                                                <div class="review_info mb-2">
+                                                                    <div class="review-title-date d-flex">
+                                                                        <h5 class="title" style="font-size: 14px;">{{ rating.user.name }} </h5>
+                                                                        <span class="ml-1"> 
+                                                                            {{ (isMobile() ? dateOuput(rating.created_at) : dateOuput2(rating.created_at)) }}
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <span class="ratings justify-content-start mb-3">
+                                                                        <star-rating 
+                                                                            v-model:rating="rating.rating" 
+                                                                            :star-size="15" 
+                                                                            :read-only="true">
+                                                                        </star-rating>
                                                                     </span>
                                                                 </div>
-
-                                                                <span class="ratings justify-content-start mb-3">
-                                                                    <star-rating 
-                                                                        v-model:rating="rating.rating" 
-                                                                        :star-size="15" 
-                                                                        :read-only="true">
-                                                                    </star-rating>
-                                                                </span>
+                                                                <p>
+                                                                    {{ rating.desc }}
+                                                                </p>
                                                             </div>
-                                                            <p>
-                                                                {{ rating.desc }}
-                                                            </p>
-                                                        </div>
+                                                        </template>
                                                     </div>
                                                 
                                                 </div>
@@ -370,7 +372,7 @@
                                         <div class="section-body mb-2">
                                             <div class="single-review d-flex mb-2 pb-3" style="border-bottom: 1px solid #e7e7e7;"
                                                 v-for="(discussion, index) in detail.discussions" v-bind:key="discussion.id">
-                                                <template v-if="detail.parent != 'null'">
+                                                <template v-if="detail.parent != 'null' && discussion.user">
                                                     <div class="review_thumb">
                                                         <img :src="discussion.user.avatar"  
                                                             referrerpolicy="no-referrer" style="border-radius: 100%;width: 45px;">
