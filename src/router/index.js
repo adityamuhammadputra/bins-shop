@@ -30,7 +30,10 @@ const routes = [
   {
     path: '/product',
     name: 'product',
-    component: ProductView
+    component: ProductView,
+    meta: {
+      hideMobile: 1,
+    }
   },
   {
     path: '/product/:slug',

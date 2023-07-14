@@ -186,7 +186,7 @@ p>a:hover {
 
 #title-mobile .fa-angle-left {
     margin-right: 1rem;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -229,7 +229,7 @@ p>a:hover {
 .carousel__item {
     min-height: 185px;
     width: 100%;
-    background-color: grey;
+    background-color: transparent;
     color: var(--vc-clr-white);
     font-size: 20px;
     border-radius: 8px;

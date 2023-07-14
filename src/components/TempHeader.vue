@@ -115,18 +115,18 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <!-- Header Logo Start -->
-                        <div class="col-2" style="position:relative; left: -10px; top: 12px;">
+                        <div class="col-2" style="position:relative; left: -10px; top: 11px;">
                             <div class="header-logo">
                                 <router-link to="/">
-                                    <img src="/assets/images/logo/logo.png" alt="Site Logo" style="width: 60px;"/>
+                                    <img src="/assets/images/logo/logo.png" alt="Logo" style="width: 60px;"/>
                                 </router-link> 
                             </div>
                         </div>
-                        <div class="col-10" style="padding-right: 20px;">
+                        <div class="col-10" style="padding-right: 20px; padding-left: 0px;">
                             <div class="error_form" style="margin-top: 23px;">
                                 <form class="search-form-error" @submit.prevent="search">
                                     <router-link to="/product"> 
-                                        <input class="input-text" placeholder="Cari..." type="text" v-model="this.$store.state.meta.q">
+                                        <input class="input-text" placeholder="Cari di Bins" type="text" v-model="this.$store.state.meta.q">
                                         <button class="submit-btn" type="button"  @click="search">
                                             <i class="fa fa-search"></i>
                                         </button>
