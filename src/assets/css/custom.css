@@ -190,6 +190,22 @@ p>a:hover {
     font-weight: bold;
 }
 
+.wrap-loading {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    z-index: 111111;
+    text-align: center;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.wrap-loading img {
+    width: 150px;
+    height: 150px;
+    margin-top: 25%;
+}
 .wn-btn-container .wn-btn-icon {
     text-align: center;
     position: relative;
@@ -720,6 +736,10 @@ button.v-facebook-login {
         border-left: none;
         border-right: none;
         border-top: none;
+    }
+
+    .wrap-loading img {
+        margin-top: 60%;
     }
 
     .wn-btn-icon-active {

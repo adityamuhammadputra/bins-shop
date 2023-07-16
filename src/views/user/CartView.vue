@@ -16,6 +16,9 @@
             </div>
 
             <div class="row">
+                <div class="wrap-loading" v-if="loadingButton">
+                    <img src="/assets/images/loading3.gif"/>
+                </div>
                 <div class="col-md-8 col-12">
                     <div class="card border-none-trl-mobile" v-if="user">
                         <div class="card-body p-0-mobile" >
@@ -284,6 +287,11 @@ export default {
                 .then((response) => {
                     // console.log(response.data.token);
                     var that = this;
+                    window.addEventListener('popstate', function() {
+                        window.location.reload()
+                    });
+                    window.history.pushState({id:1}, null, "?co=1");
+
                     window.snap.pay(response.data.token, {
                         onSuccess: function(result){
                             that.successNotif('Pembayaran berhasil... Pesanan dalam proses')

@@ -59,9 +59,9 @@
                             <h2 class="widget-title mb-3">Pembayaran</h2>
                             <p cla ss="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran :</p>
                             <div class="widget-social justify-content-start">
-                                <img src="assets/images/pay-wallet.PNG" style="width: 250px;"/>
-                                <img src="assets/images/pay-bank.PNG" style="width: 280px;"/>
-                                <img src="assets/images/pay-mart.PNG" style="width: 300px;"/>
+                                <img src="/assets/images/pay-wallet.PNG" style="width: 250px;"/>
+                                <img src="/assets/images/pay-bank.PNG" style="width: 280px;"/>
+                                <img src="/assets/images/pay-mart.PNG" style="width: 300px;"/>
                                 <!-- <img src="/assets/images/pay-debit.png" style="width: 350px;"/> -->
                             </div>
                         </div>
@@ -125,9 +125,9 @@
                             <h2 class="widget-title mb-3">Pembayaran </h2>
                             <p cla ss="desc-content mb-0">Untuk mempermudah transkasi, kami mendukung berbagai macam pembayaran</p>
                             <div class="widget-social justify-content-start">
-                                <img src="assets/images/pay-wallet.PNG" style="width: 250px;"/>
-                                <img src="assets/images/pay-bank.PNG" style="width: 280px;"/>
-                                <img src="assets/images/pay-mart.PNG" style="width: 300px;"/>
+                                <img src="/assets/images/pay-wallet.PNG" style="width: 250px;"/>
+                                <img src="/assets/images/pay-bank.PNG" style="width: 280px;"/>
+                                <img src="/assets/images/pay-mart.PNG" style="width: 300px;"/>
                                 <!-- <img src="/assets/images/pay-debit.png" style="width: 350px;"/> -->
                             </div>
                         </div>

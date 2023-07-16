@@ -6,7 +6,7 @@
                     <div class="error_form">
                         <h1 class="title">404</h1>
                         <h2 class="sub-title">Halaman tidak ditemukan</h2>
-                        <p>Aduuuuh.... :(<br> halaman yang anda tuju tidak tersedia, Silahkan kembali ke Halaman Utama dengan klik tombol dibawah</p>
+                        <p>Aduuuuh.... :(<br> halaman yang kamu tuju tidak tersedia, Silahkan kembali ke Halaman Utama dengan klik tombol dibawah</p>
                         <a href="/" class="btn btn-primary btn-hover-dark rounded-0">Kembali ke Halaman Utama</a>
                     </div>
                 </div>

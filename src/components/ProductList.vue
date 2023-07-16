@@ -61,32 +61,30 @@
                 </div> -->
                 <!-- Shop Wrapper Start -->
                 <div class="row shop_wrapper grid_4">
-                    <div  v-if="loading">
-                        <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="2" primaryColor="#f3f3f3"
-                            secondaryColor="#ecebeb" >
-                            <rect x="5" y="42" rx="3" ry="3" width="88" height="78" /> 
-                            <rect x="8" y="139" rx="3" ry="3" width="82" height="12" /> 
-                            <rect x="11" y="128" rx="3" ry="3" width="78" height="1" /> 
-                            <rect x="106" y="42" rx="3" ry="3" width="88" height="78" /> 
-                            <rect x="109" y="139" rx="3" ry="3" width="82" height="12" /> 
-                            <rect x="110" y="129" rx="3" ry="3" width="78" height="1" /> 
-                            <rect x="204" y="42" rx="3" ry="3" width="88" height="78" /> 
-                            <rect x="207" y="139" rx="3" ry="3" width="82" height="12" /> 
-                            <rect x="208" y="129" rx="3" ry="3" width="78" height="1" /> 
-                            <rect x="304" y="41" rx="3" ry="3" width="88" height="78" /> 
-                            <rect x="307" y="137" rx="3" ry="3" width="82" height="12" /> 
-                            <rect x="308" y="128" rx="3" ry="3" width="78" height="1" />
-                        </content-loader>
-                    </div>
+                    <template  v-if="loading">
+                        <template v-for="row in 8" :key="row">
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-6 product">
+                                <content-loader  viewBox="0 0 700 1100" :speed="2" primaryColor="#f3f3f3"
+                                    secondaryColor="#ecebeb" >
+                                    <rect x="5" y="42" rx="3" ry="3" width="700" height="800" /> 
+                                    <rect x="8" y="870" rx="3" ry="3" width="700" height="50"/> 
+                                    <rect x="8" y="930" rx="3" ry="3" width="350" height="50"/> 
+                                    <rect x="8" y="1000" rx="3" ry="3" width="700" height="170" /> 
+                                    <!-- <rect x="11" y="128" rx="3" ry="3" width="78" height="900" />  -->
+                                </content-loader>
+                            </div>
+                        </template>
+                    </template>
                     <!-- Single Product Start -->
                     <div class="col-xl-3 col-lg-4 col-md-4 col-6 product" 
                         v-else 
                         v-for="product in this.meta.data" :key="product.id">
                         <div class="product-inner">
                             <div class="thumb">
-                                <router-link :to="'/product/'+product.slug" class="image">
-                                    <img class="first-image" :src="product.file" alt="Product">
-                                    <img class="second-image" :src="product.file" alt="Product">
+                                <router-link :to="'/product/'+product.slug" class="image"
+                                    v-lazy-container="{ selector: 'img', error: 'assets/images/loading-error.jpg', loading: 'assets/images/loading-img.gif' }">
+                                    <img class="first-image" :src="product.file" :data-src="product.file" alt="Product">
+                                    <img class="second-image" :src="product.file" :data-src="product.file" alt="Product">
                                 </router-link>
 
                                 <div class="actions">
@@ -169,7 +167,7 @@ export default {
                 this.meta.data = response.data.data;
                 this.meta.total = response.data.meta.total
             })
-            .catch(error => {
+            .catch(error => {   
                 this.loading = true
                 this.errorNotif(error)
             })

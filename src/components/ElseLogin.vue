@@ -1,7 +1,7 @@
 <template>
     <p class="saved-message">
-        Oppps... Anda belum login. <br> 
-        Gunakan akun Google atau Facebook anda untuk login ke Bins Shop <br> 
+        Oppps... Kamu belum login. <br> 
+        Gunakan akun Google atau Facebook kamu untuk login ke Bins Shop <br> 
         <span style="font-size: 14px;font-weight: 400;">Tidak perlu lagi mengingat sandi. Login cepat, mudah dan aman</span>
     </p>
     <div class="text-center mb-3">

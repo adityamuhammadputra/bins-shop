@@ -2,8 +2,13 @@
  <div class="section">
         <div class="container">
             <div class="row" v-if="!isMobile()">
-                <div class="col-12">
-                    <div class="breadcrumb-content mt-3 mb-2" >
+                <div class="col-12" >
+                    <div class="mt-1" v-if="loading" style="position: relative;top: 5px;">
+                        <content-loader viewBox="0 0 200 4" :speed="1" primaryColor="#f3f3f3" secondaryColor="#ecebeb">
+                            <rect x="0" y="0" rx="0" ry="0" width="63" height="2" /> 
+                        </content-loader>
+                    </div>
+                    <div class="breadcrumb-content mt-3 mb-2" v-else>
                         <ul>
                             <li> <a href="/">Home </a> </li>
                             <li class="active"> {{ this.detail.category }}</li>
@@ -33,38 +38,57 @@
             </div>
 
             <div class="row">
+                <div class="wrap-loading" v-if="loadingButton">
+                    <img src="/assets/images/loading3.gif"/>
+                </div>
                 <div class="col-lg-4 offset-lg-0 col-md-8 offset-md-2 col-custom p-0-mobile">
                     <div v-if="loading">
-                        <content-loader viewBox="0 0 100 200" :speed="1" style="position: relative; top: -140px;"  primaryColor="#f3f3f3"
+                        <content-loader viewBox="0 0 100 200" :speed="1" primaryColor="#f3f3f3"
                         secondaryColor="#ecebeb" >
-                            <rect x="5" y="42" rx="3" ry="3" width="88" height="78" /> 
-                            <rect x="8" y="139" rx="3" ry="3" width="82" height="12" /> 
-                            <rect x="11" y="128" rx="3" ry="3" width="78" height="1" /> 
+                            <rect x="0" y="4" rx="1" ry="1" width="100" height="92" /> 
+                            <rect x="0" y="100" rx="1" ry="1" width="100" height="35" /> 
                         </content-loader>
                     </div>
                     <div class="product-details-img" v-else>
-                        <div class="single-product-img swiper-container gallery-top">
-                            <a class="swiper-slide w-100" @click="showModal = true">
-                                <img class="w-100" :src="detail.file" alt="Product">
+                        <div class="single-product-img swiper-container gallery-top" >
+                            <a class="swiper-slide w-100" 
+                                v-lazy-container="{ selector: 'img', error: '/assets/images/loading-error.jpg', loading: '/assets/images/loading-img.gif' }">
+                                <img class="w-100" :src="detail.file" :data-src="detail.file" alt="Product">
                             </a>
                         </div>
                         <!-- Single Product Thumb Start -->
                         <div class="single-product-thumb swiper-container gallery-thumbs">
-                            <Carousel :items-to-show="3">
+                            <Carousel :items-to-show="3" :mouseDrag="false" :touchDrag="false">
                                 <Slide v-for="fileData in detail.files" :key="fileData.name" 
                                     style="height: 32%;width: 32%; padding: 0px; margin-right: 7px;">
-                                    <img :src="fileData.path" @click="preview" :alt="fileData.name" style="width: 117px;"
+                                    <div v-lazy-container="{ selector: 'img', error: '/assets/images/loading-error.jpg', 
+                                     loading: '/assets/images/loading-img.gif' }">
+                                    <img :src="fileData.path" 
+                                        :data-src="fileData.path"
+                                        @click="preview" :alt="fileData.name" style="width: 117px;"
                                         :name="fileData.name"
                                         :class="(fileData.name == activeImg) ? 'active' : ''">
+                                    </div>
+
                                 </Slide>
                             </Carousel>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-custom">
-
+                    <div v-if="loading" :style="(isMobile() ? 'position: fixed;z-index: 11111;top: 596px;width: 100%;left: 0;' : '')">
+                        <content-loader viewBox="0 0 100 200" :speed="1"  primaryColor="#f3f3f3"
+                                secondaryColor="#ecebeb" >
+                            <rect x="0" y="2" rx="1" ry="1" width="100" height="8" /> 
+                            <rect x="0" y="10" rx="1" ry="1" width="80" height="3" /> 
+                            <rect x="0" y="16" rx="1" ry="1" width="50" height="7" /> 
+                            <rect x="0" y="25" rx="1" ry="1" width="30" height="5" /> 
+                            <rect x="0" y="32" rx="1" ry="1" width="50" height="20" /> 
+                            <rect x="0" y="55" rx="1" ry="1" width="100" height="60" /> 
+                        </content-loader>
+                    </div>
                     <!-- Product Summery Start -->
-                    <div class="product-summery position-relative">
+                    <div class="product-summery position-relative" v-else>
 
                         <!-- Product Head Start -->
                         <div class="product-head mb-1">
@@ -162,7 +186,6 @@
 
                         <!-- Cart & Wishlist Button Start -->
                         <div class="cart-wishlist-btn mb-4">
-                           
                             <div class="add-to_cart">
                                 <button class="btn btn-danger btn-hover-danger"
                                     @click="addChart(detail.id)"
@@ -479,7 +502,6 @@ export default {
             loading: true,
             errored: false,
             showMobileMenu: false,
-            showModal: false,
             loadingButton: false
         }
     },
@@ -493,7 +515,7 @@ export default {
     },
     mounted() {
         if(this.$route.query.as) { 
-            this.successNotif('Anda login sebagai ' + this.$route.query.as)
+            this.successNotif('Kamu login sebagai ' + this.$route.query.as)
         }
         this.stickyTitleToHeader()
         if (this.$store.state.auth.user) 
@@ -540,6 +562,11 @@ export default {
             this.axios.post('checkout', dataSumm, this.$store.state.config)
             .then((response) => {
                 var that = this;
+                window.addEventListener('popstate', function() {
+                    window.location.reload()
+                });
+                window.history.pushState({id:1}, null, "?co=1");
+
                 window.snap.pay(response.data.token, {
                     onSuccess: function(result){
                         that.successNotif('Pembayaran berhasil... Pesanan dalam proses')

@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-axios.defaults.baseURL = 'http://bins.local/api/v1/'
+axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+// axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
@@ -31,6 +31,7 @@ import { useToast } from "vue-toastification";
 import bottomNavigationVue from "bottom-navigation-vue";
 import "bottom-navigation-vue/dist/style.css";
 import VueSocialSharing from 'vue-social-sharing'
+import VueLazyload from 'vue-lazyload'
 
 const optionToast = {
     timeout: 5500,
@@ -47,6 +48,7 @@ const vueApp = createApp(App)
                 .use(ContentLoader)
                 .use(VueAxios, axios)
                 .use(VueSocialSharing)
+                .use(VueLazyload)
                 .use(vue3GoogleLogin, {
                     clientId: '178946568807-5tfh6j07huih5h53eiun11s6pf19iu2d.apps.googleusercontent.com'
                 })
@@ -114,7 +116,7 @@ vueApp.mixin({
         logOut: function(){
             this.$store.dispatch('auth/logout');
             // this.$router.push('/login');
-            window.location.href = '/'
+            window.location.href = '/user'
         },
         search: function() {
             this.$router.push('/product?q=' + this.$store.state.meta.q);
@@ -202,7 +204,7 @@ vueApp.mixin({
             // let timerInterval
             this.$swal({
               title: msg,
-              html: 'Anda akan dialihkan kehalaman Keranjang',
+              html: 'Kamu akan dialihkan kehalaman Keranjang',
               timer: 3000,
               icon: 'success',
               timerProgressBar: true,
