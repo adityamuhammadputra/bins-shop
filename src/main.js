@@ -194,6 +194,7 @@ vueApp.mixin({
                 this.$store.state.default.cartLoading = false
             })
             .catch(error => {
+                window.location.href = '/user'
                 this.errorNotif(error)
             })
             .finally(
