@@ -4,7 +4,7 @@
             <div class="faq_content_area">
                 <div class="container">
                     <div class="row mb-n6">
-                        <div class="col-lg-6 align-self-center mb-6 p-0-mobile">
+                        <div class="col-lg-6 mb-6 p-0-mobile">
                             <div class="about_content">
                                 <h3 class="title">Hal yang sering ditanyakan</h3>
                                 <p>Beberapa hal sering ditanyakan oleh pelanggan kami, kami coba rangkum dibawah ini untuk menjadi refensi jika tidak bertanya kepada admin kami.
@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-lg-6 mb-6 p-0-mobile">
                             <div class="about_thumb">
-                                <img class="fit-image" src="assets/images/about/1.jpg" alt="About Image">
+                                <img class="fit-image" src="/assets/images/faq.PNG" alt="About Image">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,8 @@
                                     <div class="card-header card_accor" id="headingOne" @click="collapsed = '', show='show'">
                                         <button class="btn btn-link" :class="collapsed">
                                             Apa bedanya dengan produk yang di bins.shop dengan produk lain di shopee atau tokopedia ?
-                                            <i class="fa fa-plus"></i><i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
+                                            <i class="fa fa-plus"></i>
+                                            <i class="fa fa-minus"  @click="collapsed = 'collapsed', show=''"></i>
                                         </button>
                                     </div>
                                     <div id="collapseOne" class="collapse accordion-collapse border-0" :class="show" 
@@ -93,6 +94,7 @@
                                     <div id="collapseFive" class="collapse accordion-collapse border-0" :class="show">
                                         <div class="card-body">
                                             <p>Bisa kami kirim langsung menggunakan Kurir atau Jasa kirim yang telah dispakati oleh pembeli. ongkos kirim tergantung daerah masing masing yaa :) </p>
+                                            <p>Untuk detailnya bisa tanyakan langsung ke Admin kita yaa :) </p>
                                         </div>
                                     </div>
                                 </div>
@@ -125,5 +127,8 @@ export default {
            
         }
     },
+    methods: {
+        
+    }
 }
 </script>
