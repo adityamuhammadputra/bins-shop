@@ -41,7 +41,7 @@
                         </div>
                         <div class="content ps-0 w-100">
                             <h5 class="title mb-2">Gratis Ongkir</h5>
-                            <p v-if="!isMobile()">Khusus Produk Digital gak perlu pake ongkos kirim pastinya. Ongkir hanya digunakan produk berfisik aja yaa </p>
+                            <p v-if="!isMobile()">Khusus Produk Digital gak perlu Ongkos Kirim dan gratis biaya Jasa Aplikasi. Ongkir hanya produk berfisik </p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
     </div>
 
     <div class="section mb-5">
-        <ProductList>
+        <ProductList :keyword="''">
         </ProductList>
     </div>
 </template>

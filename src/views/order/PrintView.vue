@@ -133,8 +133,12 @@
                             Invoice ini sah dan diproses oleh komputer <br/>
                         Silakan hubungi Admin apabila kamu membutuhkan bantuan.
                         </span>
-                        <span class="pull-right">
+                        <span class="pull-right" v-if="!isMobile()">
                             Dicetak pada: {{ dateNow() }}
+                        </span>
+
+                        <span v-else>
+                            <p class="pt-3">Dicetak pada: {{ dateNow() }}</p>
                         </span>
                     </p>
                 </div>

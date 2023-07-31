@@ -5,7 +5,7 @@
                 <div class="shop_toolbar_wrapper flex-column flex-md-row mb-4" >
                     <div class="shop-top-bar-left mb-md-0 mb-2" v-if="!isMobile()">
                         <div class="shop-top-show">
-                            <span>Menampilakan <b>{{ this.meta.total }}</b> Produk</span>
+                            <span>Menampilkan <b>{{ this.meta.total }}</b> Produk</span>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                     </template>
                     <!-- Single Product Start -->
                     <div class="col-xl-3 col-lg-4 col-md-4 col-6 product" 
-                        v-else 
+                        v-else-if="this.meta.data.length > 0"
                         v-for="product in this.meta.data" :key="product.id">
                         <div class="product-inner">
                             <div class="thumb">
@@ -126,6 +126,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 product"
+                        v-else>
+                        <div class="shop-top-bar-left alert-transaction">
+                            <div class="shop-top-show text-center pb-2">
+                                <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 300px;"/>
+                                    <h5>Opppps....!</h5>
+                                    <p>Kata kunci <b>{{ keyword }}</b> tidak ditemukan</p>
+                                    <router-link to="/" class="btn btn-primary">Kembali</router-link> 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,20 +152,26 @@ export default {
     components: {  
         ContentLoader, 
     }, 
+    props: ['keyword'],
     data() {
         return {
             meta: this.$store.state.meta,
-            sort: 5,
+            sort: 1,
             data: this.$store.state.meta.data,
             loading: true,
             loadingButton: false,
             errored: false,
+            q: '',
         }
     },
     watch:{
-        $route (to, from){
+        keyword: function(newVal, oldVal) { // watch it
             this.getIndex();
-        }
+        },
+       
+        // $route (to, from){
+        //     this.getIndex();
+        // }
     },
     mounted() {
         this.getIndex();
@@ -162,7 +179,7 @@ export default {
     methods: {
         getIndex: function() {
             this.loading = true
-            this.axios.get('product?q=' + this.$store.state.meta.q + '&sort=' + this.sort)
+            this.axios.get('product?q=' + this.$props.keyword + '&sort=' + this.sort)
             .then((response) => {
                 this.meta.data = response.data.data;
                 this.meta.total = response.data.meta.total

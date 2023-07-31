@@ -18,18 +18,32 @@
             <div class="row">
                 <div class="wrap-loading" v-if="loadingButton">
                     <img src="/assets/images/loading3.gif"/>
+                    <p>Loading...</p>
                 </div>
                 <div class="col-md-8 col-12">
                     <div class="card border-none-trl-mobile" v-if="user">
                         <div class="card-body p-0-mobile" >
-                            <div class="comment-area-wrapper mt-2" v-if="this.loading === true">
-                                <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
-                                    secondaryColor="#ecebeb" >
-                                    <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
-                                    <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
-                                </content-loader>
+                            <div class="comment-area-wrapper" v-if="this.loading === true" style="position: relative;top: -30px;">
+                                <template v-for="row in 5" :key="row">
+                                    <div class="col-12 product">
+                                        <content-loader  viewBox="0 0 700 320" :speed="2" primaryColor="#f3f3f3"
+                                            secondaryColor="#ecebeb">
+                                            <rect x="8" y="70" rx="3" ry="3" width="150" height="150"/> 
+                                            <rect x="190" y="70" rx="3" ry="3" width="500" height="90"/> 
+                                            <rect x="8" y="240" rx="3" ry="3" width="250" height="100"/> 
+                                            <rect x="450" y="240" rx="3" ry="3" width="250" height="100" /> 
+                                            <!-- <rect x="11" y="128" rx="3" ry="3" width="78" height="900" />  -->
+                                        </content-loader>
+                                    </div>
+                                </template>
                             </div>
                             <div class="comment-area-wrapper mt-2" v-else>
+                                <div class="shop-top-bar-left alert-transaction mb-3">
+                                    <div class="shop-top-show">
+                                        <span><b>Info!</b> Pilih tandai (<input type="checkbox" style="width: 18px;margin-right: 0;height: 14px;" checked>) untuk beli barang</span>
+                                    </div>
+                                </div>
+
                                 <div class="mb-4 pb-4" style="border-bottom: 1px solid #f3f3f3;" 
                                     v-if="data.length > 0"
                                     v-for="(cart, indexCart) in data" v-bind:key="cart.id">

@@ -1,7 +1,7 @@
 <template>
-    <div class="header section" id="myHeader" v-if="!isMobile()">
+    <div class="header section" id="myHeader" v-if="!isMobile()" >
     <!-- Header Bottom Start -->
-        <div class="header-bottom">
+        <div class="header-bottom" v-if="!$route.meta.headerHide">
             <div class="header-sticky">
                 <div class="container">
                     <div class="row align-items-center">

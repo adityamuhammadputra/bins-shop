@@ -1,5 +1,5 @@
 <template>
-    <footer class="section footer-section">
+    <footer class="section footer-section" v-if="!$route.meta.headerHide">
         <!-- Footer Top Start -->
         <div class="footer-top pt-7 pb-7" :class="(isMobile() ? 'mb-7' : '')">
             <div class="container">

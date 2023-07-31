@@ -13,12 +13,20 @@
                             <!-- My Account Tab Menu End -->
 
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8" v-if="this.loading === true">
-                                <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
-                                    secondaryColor="#ecebeb" >
-                                    <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
-                                    <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
-                                </content-loader>
+                            <div class="col-lg-9 col-md-8" v-if="this.loading === true" style="position: relative;top: -5px;">
+                                <template v-for="row in 5" :key="row">
+                                    <div class="col-12 product">
+                                        <content-loader  viewBox="0 0 700 320" :speed="2" primaryColor="#f3f3f3"
+                                            secondaryColor="#ecebeb">
+                                            <rect x="0" y="20" rx="3" ry="3" width="700" height="30"/> 
+                                            <rect x="8" y="70" rx="3" ry="3" width="150" height="150"/> 
+                                            <rect x="190" y="70" rx="3" ry="3" width="500" height="90"/> 
+                                            <rect x="190" y="180" rx="3" ry="3" width="500" height="30"/> 
+                                            <rect x="450" y="240" rx="3" ry="3" width="250" height="70" /> 
+                                            <!-- <rect x="11" y="128" rx="3" ry="3" width="78" height="900" />  -->
+                                        </content-loader>
+                                    </div>
+                                </template>
                             </div>
 
                             <div class="col-lg-9 col-md-8" v-else>

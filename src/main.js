@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-// axios.defaults.baseURL = 'http://bins.local/api/v1/'
+// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
@@ -98,7 +98,7 @@ vueApp.mixin({
             toast(msg);
         },
         errorNotif: function(error) {
-            let message = (error.response) ? error.response.data.error : error.message
+            let message = (error.response.data) ? error.response.data.error : error.message
             if(error.response.status == 401) {
                 // this.$store.dispatch('auth/refresh');
                 this.logOut();

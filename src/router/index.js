@@ -72,7 +72,7 @@ const routes = [
     name: 'order-print',
     component: OrderPrintView,
     meta: {
-      header: 0,
+      headerHide: 1,
       hideMobile: 1,
     }
   },
@@ -106,6 +106,11 @@ const routes = [
     path: '/tutorial',
     name: 'tutorial',
     component: () => import(/* webpackChunkName: "tutorial" */ '../views/TutorialView.vue')
+  },
+  {
+    path: '/proxy',
+    name: 'proxy',
+    component: () => import(/* webpackChunkName: "tutorial" */ '../views/ProxyView.vue')
   },
   { 
     path: '/:pathMatch(.*)*', 

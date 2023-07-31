@@ -40,6 +40,7 @@
             <div class="row">
                 <div class="wrap-loading" v-if="loadingButton">
                     <img src="/assets/images/loading3.gif"/>
+                    <p>Loading....</p>
                 </div>
                 <div class="col-lg-4 offset-lg-0 col-md-8 offset-md-2 col-custom p-0-mobile">
                     <div v-if="loading">

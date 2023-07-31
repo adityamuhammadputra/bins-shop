@@ -1,6 +1,6 @@
 <!-- mnodal detail -->
 <template>
-    <div class="section mt-5 mb-5">
+    <div class="section mb-5" :class="(isMobile()) ? 'mt-3' : 'mt-5'">
         <div class="container">
             <div class="row" v-if="user">
                 <div class="col-lg-12">
@@ -15,11 +15,10 @@
 
                             <!-- My Account Tab Content Start -->
                             <div class="col-lg-9 col-md-8" v-if="this.loading === true">
-                                <content-loader style="position: relative; top: -70px;" viewBox="0 0 400 200" :speed="1" primaryColor="#f3f3f3"
-                                    secondaryColor="#ecebeb" >
-                                    <rect x="10" y="42" rx="3" ry="3" width="40" height="40" /> 
-                                    <rect x="10" y="95" rx="3" ry="3" width="120" height="22" /> 
-                                </content-loader>
+                                <div  class="text-center">
+                                    <img src="/assets/images/loading3.gif" style="width: 200px;"/>
+                                    <p>Loading...</p>
+                                </div>
                             </div>
 
                             <div class="col-lg-9 col-md-8" v-else>
@@ -230,12 +229,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <ProductRecomend 
-                v-bind:excludeProps="this.exlude"
-                v-bind:loadChart="true">
-            </ProductRecomend>
 
         </div>
     </div>
