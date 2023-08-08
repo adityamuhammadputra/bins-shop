@@ -172,7 +172,7 @@
                 </div>
             </div>
 
-            <ProductRecomend>
+            <ProductRecomend :loadChart="true">
             </ProductRecomend>
 
         </div>

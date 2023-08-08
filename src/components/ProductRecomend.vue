@@ -71,14 +71,14 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
 export default {
     name: 'ProdcutRecoment',
-    // props : ['excludeProps', 'loadChart'],
+    props : ['loadChart'],
     components: {  
         Carousel, Slide, Pagination, Navigation
     }, 
     data() {
         return {
             dataRekomends: [],
-            // loadTheChart : this.loadChart ?? false,
+            loadTheChart : this.loadChart ?? false,
             // exclude: this.excludeProps ?? this.$store.state.default.exlude,
         }
     },

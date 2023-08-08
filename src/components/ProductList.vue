@@ -61,7 +61,7 @@
                 </div> -->
                 <!-- Shop Wrapper Start -->
                 <div class="row shop_wrapper grid_4">
-                    <template  v-if="loading">
+                    <template v-if="loading">
                         <template v-for="row in 8" :key="row">
                             <div class="col-xl-3 col-lg-4 col-md-4 col-6 product">
                                 <content-loader  viewBox="0 0 700 1100" :speed="2" primaryColor="#f3f3f3"

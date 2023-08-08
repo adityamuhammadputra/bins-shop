@@ -143,7 +143,6 @@
 
 
             <ProductRecomend 
-                v-bind:excludeProps="this.exlude"
                 v-bind:loadChart="true">
             </ProductRecomend>
 
