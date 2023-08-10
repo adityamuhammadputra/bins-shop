@@ -3,7 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/product/IndexView.vue'
 import ProductShow from '../views/product/ShowView.vue'
-import CartView from '../views/user/CartView.vue'
+import ProductPayment from '../views/product/PaymentView.vue'
+import CartView from '../views/cart/IndexView.vue'
+import PaymentView from '../views/cart/PaymentView.vue'
 import UserView from '../views/user/UserView.vue'
 import OrderView from '../views/order/IndexView.vue'
 import OrderShowView from '../views/order/ShowView.vue'
@@ -44,9 +46,25 @@ const routes = [
     }
   },
   {
+    path: '/product/payment',
+    name: 'product-payment',
+    component: ProductPayment,
+    meta: {
+      hideMobile: 1,
+    }
+  },
+  {
     path: '/cart',
     name: 'cart',
     component: CartView,
+    meta: {
+      hideMobile: 1,
+    }
+  },
+  {
+    path: '/cart/payment',
+    name: 'payment',
+    component: PaymentView,
     meta: {
       hideMobile: 1,
     }

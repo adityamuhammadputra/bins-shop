@@ -20,6 +20,7 @@ export default createStore({
     },
     default : {
       cart : (localStorage.getItem('cartLocal')) ? parseInt(localStorage.getItem('cartLocal')) : 0,
+      carts: [],
       notif : (localStorage.getItem('notifLocal')) ? parseInt(localStorage.getItem('notifLocal')) : 0,
       cartLoading : false,
       exclude : '',

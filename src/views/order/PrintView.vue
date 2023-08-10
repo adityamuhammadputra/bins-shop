@@ -46,7 +46,7 @@
                                         <ul class="list-group list-group-horizontal">
                                             <li class="list-group-left">Pembayaran</li>
                                             <li class="list-group-right">
-                                                {{ (this.dataOrder) ? this.dataOrder.transaction_midtrans.payment_type : '' }}
+                                                {{ (this.dataOrder) ? this.dataOrder.transaction_provider.payment_type : '' }}
                                             </li>
                                         </ul>
                                     </div>
@@ -92,7 +92,7 @@
                                     <div class="detail-pay">
                                         <ul class="list-group list-group-horizontal my-1">
                                             <li class="list-group-left">Metode Pembayaran</li>
-                                            <li class="list-group-right">{{ this.dataOrder.transaction_midtrans.payment_type }}</li>
+                                            <li class="list-group-right">{{ this.dataOrder.transaction_provider.payment_type }}</li>
                                         </ul>
                                         <ul class="list-group list-group-horizontal">
                                             <li class="list-group-left">Total Harga ({{ this.dataOrder.qty }} barang)</li>

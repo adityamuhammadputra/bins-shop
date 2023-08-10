@@ -177,19 +177,6 @@ export default {
                 () => this.loading = false
             )
         },
-        orderPay: function(token) {
-            window.snap.pay(token, {
-                onSuccess: function(result){
-                },
-                onPending: function(result){
-                },
-                onError: function(result){
-                },
-                onClose: function(){
-                    return false;
-                },
-            })
-        },
         // orderRating: function() {
         //     this.modal = 'display: none;';
         //     this.axios.post('order-rating', this.rating, this.$store.state.config)

@@ -560,73 +560,10 @@ export default {
                 product: this.form.product,
                 direct: true,
             }
-            this.axios.post('checkout', dataSumm, this.$store.state.config)
-            .then((response) => {
-                var that = this;
-                window.addEventListener('popstate', function() {
-                    window.location.reload()
-                });
-                window.history.pushState({id:1}, null, "?co=1");
-
-                window.snap.pay(response.data.token, {
-                    onSuccess: function(result){
-                        that.successNotif('Pembayaran berhasil... Pesanan dalam proses')
-                        that.cartCreated(that, result, response.data.token);
-                    },
-                    onPending: function(result){
-                        that.successNotif('Pesanan berhasil dibuat... Silahkan lanjutkan pembayaran')
-                        that.cartCreated(that, result, response.data.token);
-                    },
-                    onError: function(result){
-                        that.successNotif('Pesanan gagal, Silahkan muat ulang halaman')
-                    },
-                    onClose: function(){
-                        return false;
-                    },
-                })
-                // window.snap.pay(response.data.token);
-            })
-            .catch(error => {
-                this.errorNotif(error)
-            })
-            .finally(
-                () => this.loadingButton = false
-            )
-        },
-        cartCreated: function (that, result, snap) {
-            const dataSumm = {
-                amount : that.form.product.price_final * that.form.qty,
-                qty : that.form.qty,
-                product: that.form.product,
-                snapData: snap,
-                midtrans: result,
-                direct: true,
-            }
-            that.axios.post('order', dataSumm, that.$store.state.config)
-            .then((response) => {
-                // console.log(response);
-                that.countNotif();
-                that.$router.push('/order');
-            })
-            .catch(error => {
-                that.errorNotif(error)
-            })
-            
-            that.totalHarga = 0;
-            that.totalBarang = 0;
-            that.data.map(function(cart, key){                
-                // delete cart & insert order 
-                if (cart.status === true || cart.status === false) {
-                    if (cart.status === true) {
-                        that.axios.delete('chart/' + cart.id, that.$store.state.config)
-                        .then((response) => {
-                            that.cartData(false)
-                            that.countChart();
-                        })
-                        .catch(error => { })
-                    } 
-                }
-            });
+            console.log(dataSumm);
+            // return false;
+            this.$store.state.default.carts = dataSumm;
+            this.$router.push('/product/payment');
         },
         discusPost: function(product, parent = null, key = null) {
             if (!this.$store.state.auth.user) {

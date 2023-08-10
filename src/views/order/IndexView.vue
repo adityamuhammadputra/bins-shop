@@ -73,10 +73,10 @@
                                      v-if="order.status.id == 1">
                                         <div>
                                             Lakukan pembayaran dalam waktu
-                                            <vue-countdown :time="order.transaction_midtrans.payment_diff" v-slot="{ hours, minutes, seconds }">
+                                            <vue-countdown :time="order.transaction_provider.payment_diff" v-slot="{ hours, minutes, seconds }">
                                                 <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
                                             </vue-countdown> 
-                                                <!-- <b>{{ dateTimeOuput2(order.transaction_midtrans.payment_timeout) }}</b> -->
+                                                <!-- <b>{{ dateTimeOuput2(order.transaction_provider.payment_timeout) }}</b> -->
                                         </div>
                                     </div>
 
@@ -90,7 +90,7 @@
                                     <div class="alert alert-danger d-flex align-items-center mx-3 py-2" role="alert"
                                      v-if="order.status.id == 11">
                                         <div>
-                                            Tidak melakukan pembayaran <b>{{ order.transaction_midtrans.payment_type }}</b>, batas waktu <b> {{ dateTimeOuput2(order.transaction_midtrans.payment_timeout) }}</b>
+                                            Tidak melakukan pembayaran <b>{{ order.transaction_provider.payment_type }}</b>, batas waktu <b> {{ dateTimeOuput2(order.transaction_provider.payment_timeout) }}</b>
                                         </div>
                                     </div>
 
@@ -134,11 +134,11 @@
                                     </div>
                                     <div class="card-footer text-muted">
                                         <span class="pull-left" v-if="order.status.id == 1 && !isMobile()">
-                                            <small>Pembayaran : {{ order.transaction_midtrans.payment_type }} </small>
+                                            <small>Pembayaran : {{ order.transaction_provider.payment_type }} </small>
                                         </span>
                                         <a href="#" class="btn btn-primary pull-right btn-sm" 
                                             v-if="order.status.id == 1"
-                                            @click="orderPay(order.transaction_midtrans.payment_token)">
+                                            @click="orderPay(order.transaction_provider.transaction_id)">
                                             Cara Bayar
                                         </a>
 
@@ -277,19 +277,6 @@ export default {
             .finally(
                 () => this.loading = false
             )
-        },
-        orderPay: function(token) {
-            window.snap.pay(token, {
-                onSuccess: function(result){
-                },
-                onPending: function(result){
-                },
-                onError: function(result){
-                },
-                onClose: function(){
-                    return false;
-                },
-            })
         },
         // orderRating: function() {
         //     this.modal = 'display: none;';

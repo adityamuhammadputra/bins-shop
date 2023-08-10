@@ -102,7 +102,7 @@
                                                         v-if="this.dataOrder && dataOrder.status.id == 1">
                                                         <div>
                                                             Lakukan pembayaran dalam waktu
-                                                            <vue-countdown :time="dataOrder.transaction_midtrans.payment_diff" v-slot="{ hours, minutes, seconds }">
+                                                            <vue-countdown :time="dataOrder.transaction_provider.payment_diff" v-slot="{ hours, minutes, seconds }">
                                                                 <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
                                                             </vue-countdown> 
                                                         </div>
@@ -111,7 +111,7 @@
                                                     <div class="detail-pay">
                                                         <ul class="list-group list-group-horizontal my-1">
                                                             <li class="list-group-left">Metode Pembayaran</li>
-                                                            <li class="list-group-right">{{ this.dataOrder.transaction_midtrans.payment_type }}</li>
+                                                            <li class="list-group-right">{{ this.dataOrder.transaction_provider.payment_type }}</li>
                                                         </ul>
                                                         <ul class="list-group list-group-horizontal">
                                                             <li class="list-group-left">Total Harga ({{ this.dataOrder.qty }} barang)</li>
@@ -178,7 +178,8 @@
                                     <div class="card-footer text-muted">
                                         <template v-if="this.dataOrder.status.id == 1">
                                             <button type="button" class="btn btn-primary btn-block pull-right"
-                                                @click="orderPay(this.dataOrder.transaction_midtrans.payment_token)">
+                                                @click="orderPay(this.dataOrder.transaction_provider.transaction_id)"
+                                                >
                                                 Cara Bayar
                                             </button>
                                             <button type="button" class="btn btn-white btn-block mt-2 pull-right"
@@ -283,21 +284,6 @@ export default {
             .finally(
                 () => this.loading = false
             )
-        },
-        orderPay: function(token) {
-            window.snap.pay(token, {
-                onSuccess: function(result){
-                },
-                onPending: function(result){
-                },
-                onError: function(result){
-                },
-                onClose: function(){
-                    this.$router.push(this.$route.fullPath);
-                    return false;
-
-                },
-            })
         },
         orderCancelDoneRefund: function(row, type) {
             let attr;

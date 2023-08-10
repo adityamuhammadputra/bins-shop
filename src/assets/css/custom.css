@@ -738,6 +738,11 @@ button.v-facebook-login {
         border-top: none;
     }
 
+    
+    .border-none-mobile {
+        border:none;
+    }
+
     .wrap-loading img {
         margin-top: 60%;
     }

@@ -1,0 +1,310 @@
+<template>
+     <div class="section mt-4 mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12" v-if="!isMobile()">
+                    <h5 class="title mb-3">Keranjang Belanja </h5>
+                </div>
+                <div class="col-12" v-else id="title-mobile">
+                    <h5 class="title mb-2"> 
+                        <router-link to="/" class="image">
+                            <span class="fa fa-angle-left"></span> 
+                            Keranjang 
+                        </router-link>
+                    </h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="wrap-loading" v-if="loadingButton">
+                    <img src="/assets/images/loading3.gif"/>
+                    <p>Loading...</p>
+                </div>
+                <div class="col-md-8 col-12">
+                    <div class="card border-none-trl-mobile" v-if="user">
+                        <div class="card-body p-0-mobile" >
+                            <div class="comment-area-wrapper" v-if="this.loading === true" style="position: relative;top: -30px;">
+                                <template v-for="row in 5" :key="row">
+                                    <div class="col-12 product">
+                                        <content-loader  viewBox="0 0 700 320" :speed="2" primaryColor="#f3f3f3"
+                                            secondaryColor="#ecebeb">
+                                            <rect x="8" y="70" rx="3" ry="3" width="150" height="150"/> 
+                                            <rect x="190" y="70" rx="3" ry="3" width="500" height="90"/> 
+                                            <rect x="8" y="240" rx="3" ry="3" width="250" height="100"/> 
+                                            <rect x="450" y="240" rx="3" ry="3" width="250" height="100" /> 
+                                            <!-- <rect x="11" y="128" rx="3" ry="3" width="78" height="900" />  -->
+                                        </content-loader>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="comment-area-wrapper mt-2" v-else>
+                                <div class="shop-top-bar-left alert-transaction mb-3">
+                                    <div class="shop-top-show">
+                                        <span><b>Info!</b> Pilih tandai (<input type="checkbox" style="width: 18px;margin-right: 0;height: 14px;" checked>) untuk beli barang</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 pb-4" style="border-bottom: 1px solid #f3f3f3;" 
+                                    v-if="data.length > 0"
+                                    v-for="(cart, indexCart) in data" v-bind:key="cart.id">
+                                    <div class="single-comment-wrap mb-2">
+                                        <input type="checkbox" 
+                                            v-model="data[indexCart].status"
+                                            @change="cartCheck(data)"
+                                            style="width: 23px;margin-right: 13px;height: 23px;"
+                                        >
+                                        <a class="author-thumb" href="#">
+                                            <router-link :to="'/product/'+data[indexCart].product.slug+ '?back=cart'" class="image">
+                                                <img :src="cart.product.file" alt="Author">
+                                            </router-link>
+                                        </a>
+                                        <div class="comments-info">
+                                            <p class="mb-0" style="font-size: 14px;">
+                                                <router-link :to="'/product/'+data[indexCart].product.slug + '?back=cart'" class="image">
+                                                {{ data[indexCart].product.name }}
+                                                </router-link>
+                                            </p>
+                                            <p>
+                                                <b v-if="data[indexCart].product.price_discount">
+                                                    {{ data[indexCart].product.price_discount }} 
+                                                    <del style="font-size: 12px; font-weight: normal;">{{ data[indexCart].product.price_rp }} </del>
+                                                </b>
+                                                <b v-else>
+                                                    {{ data[indexCart].product.price_rp }}
+                                                </b>
+                                            </p>
+                                        </div>
+                                        <a href="#" style="font-weight: 500;font-size: 20px; margin-right: 10px;"
+                                            @click="chartDelete(cart)">
+                                            <i class="pe-7s-close-circle"></i>
+                                        </a>
+                                    </div>
+                                    <div class="comment-footer d-flex justify-content-between ml-2">
+                                        <span class="author">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" :id="'floatingInputGrid' + indexCart" 
+                                                    v-model="data[indexCart].notes"
+                                                    @blur="chartUpdate(cart)" placeholder="Catatan" 
+                                                        style="height: 45px;border-radius: 0px;padding-top: 1rem;">
+                                                <label :for="'floatingInputGrid' + indexCart" style="padding-top: 5px;">Catatan </label>
+                                            </div>
+                                        </span>
+                                        <a href="#" class="btn-reply">
+                                            <div class="quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" v-model="data[indexCart].qty" type="text">
+                                                    <div class="dec qtybutton" 
+                                                        @click="(data[indexCart].qty > 1) ? data[indexCart].qty-- : 1; cartCheck(data); chartUpdate(cart)"
+                                                        :style="(data[indexCart].qty > 1) ? '' : 'color: grey;pointer-events: none;'">
+                                                        <i class="fa fa-minus"></i>
+                                                    </div>
+                                                    <div class="inc qtybutton" 
+                                                        @click="data[indexCart].qty++; cartCheck(data); chartUpdate(cart)">
+                                                        <i class="fa fa-plus"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div v-else class="text-center">
+                                    <img src="/assets/images/keranjang-kosong.png" alt="keranjang-kosong" style="width: 300px;"/>
+                                    <h5>Waaah Keranjang belanjamu kosong!</h5>
+                                    <p>Dari pada kosong, yuk lihat Produk Lainnya barang untuk kamu. kali aja cocok :D</p>
+                                    <router-link to="/product" class="btn btn-primary">Lihat Produk Lainnya</router-link> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3"  v-if="!this.$store.state.auth.user">
+                        <div class="card-body p-0-mobile">
+                            <ElseLogin></ElseLogin>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" v-if="!isMobile()">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="cart-calculate-items">
+                                <h6 class="title">Ringkasan Belanja </h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Total Harga ({{ this.totalBarang }} barang)</td>
+                                                <td>Rp. {{ formatRibu(this.totalHarga) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ongkos Kirim</td>
+                                                <td>Rp. 0</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td><b>Total</b></td>
+                                                <td class="total-amount"><b>Rp. {{ formatRibu(this.totalHarga) }}</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block w-100" 
+                                :disabled="loadingButton"
+                                @click="cartCheckout()"
+                                >Beli ({{ this.totalBarang }} barang)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" v-if="isMobile()">
+                <div class="col-12">
+                    <div class="cart-wishlist-btn mb-4">
+                           <div class="add-to_cart" style="float: left;margin-top: 7px;padding-left: 5px;">
+                                <b>Rp. {{ formatRibu(this.totalHarga) }}</b>
+                           </div>
+                           <div class="add-to-wishlist" style="float: right;margin-right: 10px;">
+                               <button class="btn btn-danger btn-hover-danger" 
+                                :disabled="loadingButton"
+                                @click="cartCheckout()"
+                                >Beli ({{ this.totalBarang }} barang)
+                               </button>
+                           </div>
+                       </div>
+                </div>
+            </div>
+
+            <ProductRecomend :loadChart="true">
+            </ProductRecomend>
+
+        </div>
+    </div>
+</template>
+    
+<script>
+import ProductRecomend from '/src/components/ProductRecomend.vue'
+import ElseLogin from '/src/components/ElseLogin.vue'
+import { ContentLoader } from 'vue-content-loader'
+
+export default {
+    name: 'cart',
+    components: {
+        ProductRecomend, ElseLogin, ContentLoader
+    },
+    data() {
+        return {
+            data: [],
+            totalBarang: 0,
+            totalHarga: 0,
+            loading: true,
+            loadingButton: false,
+            errored: false,
+            user : null,
+        }
+    },
+    watch:{
+        setCartLoading(oldVal, newVal) {
+            if (newVal === false) {
+                this.cartData(false)
+            }
+        },
+    },
+    created() {
+        if (this.$store.state.auth.user) 
+            this.cartData();
+        this.$store.state.default.carts = [];
+        
+        // console.log(this.datax);
+        // console.log(this.data);
+        // console.log(this.$store.state.default.exlude);
+    },
+    computed: {
+        setCartLoading() {
+            return this.$store.state.default.cartLoading;
+        }
+        
+    },
+    mounted() {
+            this.stickyTitleToHeader();
+
+        if (this.$store.state.auth.user) 
+            this.user = this.$store.state.auth.user.user;
+        // console.log(this.data);
+    },
+    methods: {
+        cartCheck: function (data) {
+            let totalBarang = 0,
+                totalHarga = 0;
+
+            data.map(function(value, key){
+                
+                if (value.status === true || value.status === false) {
+                    if (value.status === true) {
+                        totalBarang = totalBarang + value.qty
+                        totalHarga = totalHarga + parseInt(value.product.price_final) * parseInt(value.qty)
+                    } else {
+                        totalBarang - parseInt(value.qty)
+                        totalHarga - parseInt(value.product.price_final) * parseInt(value.qty)
+                    }
+                }
+            });
+
+            this.totalBarang = totalBarang;
+            this.totalHarga = totalHarga;
+        },  
+        chartUpdate: function(row) {
+            this.axios.patch('chart/' + row.id, row, this.$store.state.config)
+            .then((response) => {
+                return response;
+                // console.log(response.data.data);
+            })
+            .catch(error => {
+                this.errorNotif(error)
+            })
+            .finally(
+                () => this.loading = false
+            )
+        },
+        chartDelete: function(row) {
+            this.$swal({
+                // heightAuto: false,
+                title: "Konfirmasi !",
+                html: 'Hapus ' + row.product.name + ' dari keranjang ?',
+                // text: 'Hapus ' + row.product.name + ' dari keranjang ?',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal',
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    this.axios.delete('chart/' + row.id, this.$store.state.config)
+                    .then((response) => {
+                        this.successNotif(response.data.message)
+                        this.cartData(false)
+                        this.countChart();
+                    })
+                    .catch(error => {
+                        this.errorNotif(error)
+                    })
+                }
+            })
+        },  
+        cartCheckout: function() {
+            if (this.totalBarang == 0) {
+                this.successNotif('Belum pilih / tandai barang yang akan di beli')
+                return false;
+            }
+
+            this.loadingButton = true
+            const dataSumm = {
+                amount : this.totalHarga,
+                qty : this.totalBarang,
+                product: this.data,
+            }
+            
+            // console.log(dataSumm);
+            // return false;
+            this.$store.state.default.carts = dataSumm;
+            this.$router.push('/cart/payment');
+        },
+    },
+}
+</script>

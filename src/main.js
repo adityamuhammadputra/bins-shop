@@ -91,6 +91,9 @@ vueApp.mixin({
         dateTimeOuput2: function(date) {
             return moment(date).format('DD MMMM YYYY') + ' Pukul ' + moment(date).format('HH:mm');
         },
+        dateTimeUnixOutput: function(date) {
+            return moment.unix(date).format('DD MMMM YYYY') + ' Pukul ' + moment.unix(date).format('HH:mm');
+        },
         findString: function(str) {
             console.log(str);
         },
@@ -195,6 +198,79 @@ vueApp.mixin({
             })
             .catch(error => {
                 window.location.href = '/user'
+                this.errorNotif(error)
+            })
+            .finally(
+                () => this.loading = false
+            )
+        },
+        orderPay: function(payload) {
+            this.axios.get('order/preview?payload='+payload, this.$store.state.config)
+            .then((response) => {
+                let htmlQr = '', htmlPayCode = '';
+                let result = response.data.data;
+                if (result.qr_url) {
+                    htmlQr = `<div class="mb-2">
+                                <div style="font-size: 12px;color: #98a3b2;">
+                                    <i>Scan Untuk Bayar</i>
+                                </div>
+                                <div style="text-align: center;">
+                                    <img src="`+result.qr_url+`" style="width: 250px;">
+                                </div>
+                            </div>`;
+                }
+                if (result.pay_code) {
+                    htmlPayCode = `<div class="mb-2">
+                                        <div style="font-size: 14px;color: #98a3b2;">
+                                            Kode Bayar/Nomor VA
+                                        </div>
+                                        <div style="font-size: 15px;color: #2c4656;font-weight: 600;">
+                                            `+ result.pay_code +`
+                                            <span class="text-success pull-right" @click="navigator.clipboard.writeText('x')"><i class="pe-7s-copy-file"></i> Salin</span>
+                                        </div>
+                                    </div>`;
+                }
+
+                const html =`<h6 class="mt-2">Selesaikan Pembayaran Sebelum</h6>
+                            <b class="text-danger mb-3">`+ this.dateTimeUnixOutput(result.expired_time) + `</b>
+                            <div class="card mt-3">
+                                <div class="card-header" style="background: white;">
+                                    <b class="pull-left" style="font-size: 16px;">` + result.payment_name + `</b>
+                                    <img class="pull-right" src="`+result.icon_url+`" style="width: 65px;">
+                                </div>
+                                <div class="card-body text-left">
+                                    <div class="mb-2">
+                                        <div style="font-size: 14px;color: #98a3b2;">
+                                            No. Invoice
+                                        </div>
+                                        <div style="font-size: 15px;color: #2c4656;font-weight: 600;">
+                                            `+ result.merchant_ref +`
+                                        </div>
+                                    </div>
+                                    ` + htmlPayCode + `
+                                    <div class="mb-2">
+                                        <div style="font-size: 14px;color: #98a3b2;">
+                                            Jumlah Tagihan
+                                        </div>
+                                        <div style="font-size: 15px;color: #2c4656;font-weight: 600;">
+                                            Rp. `+ this.formatRibu(result.amount) +`
+                                            <span class="text-success pull-right"><i class="pe-7s-copy-file"></i> Salin</span>
+                                        </div>
+                                    </div>
+                                    ` + htmlQr + `
+                                </div>
+                            </div>`;
+                this.$swal({
+                    icon: false,
+                    title: "",
+                    html: html,
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    // confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Tutup',
+                })
+            })
+            .catch(error => {
                 this.errorNotif(error)
             })
             .finally(
