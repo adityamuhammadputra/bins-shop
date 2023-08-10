@@ -3,9 +3,16 @@
     <div class="section mb-5" :class="(isMobile()) ? 'mt-3' : 'mt-5'">
         <div class="container">
             <div class="row" v-if="user">
+                
+                
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
+                            <div class="wrap-loading" v-if="this.loadingOverlay === true">
+                                <img src="/assets/images/loading3.gif"/>
+                                <p>Loading...</p>
+                            </div>
+
                             <div class="col-lg-3 col-md-4" v-if="!isMobile()">
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <TabMenu v-bind:url="'order'"></TabMenu>
@@ -14,10 +21,28 @@
                             <!-- My Account Tab Menu End -->
 
                             <!-- My Account Tab Content Start -->
-                            <div class="col-lg-9 col-md-8" v-if="this.loading === true">
-                                <div  class="text-center">
-                                    <img src="/assets/images/loading3.gif" style="width: 200px;"/>
-                                    <p>Loading...</p>
+                            <div class="col-lg-9 col-md-8" v-if="this.loading === true" style="position: relative; top: -10px;">
+                                <div class="col-12 product">
+                                    <content-loader  :viewBox="(isMobile() ? '0 0 550 1200' : '0 0 1200 1200')" :speed="2" primaryColor="#f3f3f3"
+                                        secondaryColor="#ecebeb">
+                                        <rect x="0" y="20" rx="3" ry="3" width="300" height="50"/> 
+                                        <rect x="900" y="20" rx="3" ry="3" width="300" height="50"/> 
+                                        <rect x="0" y="100" rx="3" ry="3" width="1200" height="35"/> 
+                                        <rect x="0" y="140" rx="3" ry="3" width="1200" height="35"/> 
+                                        <rect x="0" y="240" rx="3" ry="3" width="150" height="150"/> 
+                                        <rect x="180" y="240" rx="3" ry="3" width="400" height="30"/> 
+                                        <rect x="180" y="290" rx="3" ry="3" width="300" height="30"/> 
+                                        <rect x="0" y="420" rx="3" ry="3" width="1200" height="70"/> 
+                                        <rect x="0" y="530" rx="3" ry="3" width="1200" height="30"/> 
+                                        <rect x="0" y="570" rx="3" ry="3" width="1200" height="30"/> 
+                                        <rect x="0" y="610" rx="3" ry="3" width="1200" height="30"/> 
+                                        <rect x="0" y="650" rx="3" ry="3" width="1200" height="30"/> 
+                                        <rect x="0" y="710" rx="3" ry="3" width="300" height="40"/> 
+                                        <rect x="0" y="760" rx="3" ry="3" width="600" height="150"/> 
+                                        <rect x="0" y="940" rx="3" ry="3" width="1200" height="70"/> 
+                                        <rect x="0" y="1030" rx="3" ry="3" width="1200" height="70"/> 
+                                        <rect x="0" y="1120" rx="3" ry="3" width="1200" height="70"/> 
+                                    </content-loader>
                                 </div>
                             </div>
 
@@ -264,6 +289,7 @@ export default {
             dataOrder : null,
             user : null,
             loading : true,
+            loadingOverlay: true,
             exlude: [],
         }
     },
@@ -277,6 +303,7 @@ export default {
             this.axios.get('order/' + this.$route.params.order_id, this.$store.state.config)
             .then((response) => {
                 this.dataOrder = response.data.data
+                this.loadingOverlay = false
             })
             .catch(error => {
                 this.errorNotif(error)

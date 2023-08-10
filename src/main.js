@@ -205,6 +205,7 @@ vueApp.mixin({
             )
         },
         orderPay: function(payload) {
+            this.loadingOverlay = true;
             this.axios.get('order/preview?payload='+payload, this.$store.state.config)
             .then((response) => {
                 let htmlQr = '', htmlPayCode = '';
@@ -274,7 +275,7 @@ vueApp.mixin({
                 this.errorNotif(error)
             })
             .finally(
-                () => this.loading = false
+                () => this.loadingOverlay = false
             )
         },
         swalToCart: function(msg) {

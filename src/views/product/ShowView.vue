@@ -560,8 +560,7 @@ export default {
                 product: this.form.product,
                 direct: true,
             }
-            console.log(dataSumm);
-            // return false;
+            // console.log(dataSumm);
             this.$store.state.default.carts = dataSumm;
             this.$router.push('/product/payment');
         },

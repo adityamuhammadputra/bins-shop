@@ -7,6 +7,11 @@
                 <div class="col-lg-12">
                     <div class="myaccount-page-wrapper">
                         <div class="row">
+                            <div class="wrap-loading" v-if="this.loadingOverlay === true">
+                                <img src="/assets/images/loading3.gif"/>
+                                <p>Loading...</p>
+                            </div>
+
                             <div class="col-lg-3 col-md-4">
                                 <TabMenu v-bind:url="'order'"></TabMenu>
                             </div>
@@ -16,7 +21,18 @@
                             <div class="col-lg-9 col-md-8" v-if="this.loading === true" style="position: relative;top: -5px;">
                                 <template v-for="row in 5" :key="row">
                                     <div class="col-12 product">
-                                        <content-loader  viewBox="0 0 700 320" :speed="2" primaryColor="#f3f3f3"
+                                        <content-loader v-if="!isMobile()" viewBox="0 0 1200 320" :speed="2" primaryColor="#f3f3f3"
+                                            secondaryColor="#ecebeb">
+                                            <rect x="0" y="20" rx="3" ry="3" width="1200" height="30"/> 
+                                            <rect x="8" y="70" rx="3" ry="3" width="150" height="150"/> 
+                                            <rect x="190" y="70" rx="3" ry="3" width="700" height="50"/> 
+                                            <rect x="190" y="140" rx="3" ry="3" width="700" height="40"/> 
+                                            <rect x="750" y="240" rx="3" ry="3" width="200" height="65" /> 
+                                            <rect x="1000" y="240" rx="3" ry="3" width="200" height="65" /> 
+                                            <!-- <rect x="11" y="128" rx="3" ry="3" width="78" height="900" />  -->
+                                        </content-loader>
+
+                                        <content-loader v-else viewBox="0 0 700 320" :speed="2" primaryColor="#f3f3f3"
                                             secondaryColor="#ecebeb">
                                             <rect x="0" y="20" rx="3" ry="3" width="700" height="30"/> 
                                             <rect x="8" y="70" rx="3" ry="3" width="150" height="150"/> 
@@ -254,6 +270,7 @@ export default {
             dataOrder : [],
             user : null,
             loading : true,
+            loadingOverlay: false,
             status: '',
             exlude: [],
         }
