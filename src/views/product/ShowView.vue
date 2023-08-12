@@ -435,7 +435,7 @@
                                                                     <img :src="replay.user.avatar"  
                                                                         referrerpolicy="no-referrer" style="border-radius: 100%; width: 30px;">
                                                                 </span>
-                                                                <p> 
+                                                                <p>
                                                                     <span class="mr-1" style="font-size: 16px;">
                                                                         {{ replay.user.name.split(' ')[0] }}
                                                                     </span>

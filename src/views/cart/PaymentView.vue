@@ -108,15 +108,30 @@
                                 </template>
                             </div>
 
-                            <div class="comment-area-wrapper" v-else
-                                v-if="user && data.length > 0 && products.length > 0"
-                                style="padding: 10px 0px; border-bottom: 1px solid #efefef;cursor: pointer;" 
-                                v-for="payment in data" v-bind:key="payment.id"
-                                @click="paymentStore(payment)">
-                                <img :src="payment.icon_url" alt="Author" style="min-width: 25px;max-height: 25px;"> 
-                                <span class="ml-1" style="font-size: 14px;">{{ payment.name }}</span> 
-                                <span class="fa fa-angle-right pull-right" style="font-size: 20px;font-weight: bold;     line-height: 30px;"></span> 
-                            </div>
+                            <template v-else>
+                                <template v-if="user && this.data" 
+                                    v-for="(paymentGroup, key) in this.data" v-bind:key="key">
+                                    <p style="margin-top: 1rem;margin-bottom: 0px;color: #a8a8a8;font-size: 14px;">
+                                        {{ key.substring(2) }}
+                                    </p>
+                                    <template v-for="payment in paymentGroup" v-bind:key="payment.code">
+                                        <div class="comment-area-wrapper" 
+                                            style="padding: 10px 0px; border-bottom: 1px solid #efefef;cursor: pointer;" 
+                                            @click="paymentStore(payment)"
+                                            >
+                                            <img v-if="payment.name == 'QRIS (Customizable)'" 
+                                                src="/assets/images/qrisDanaGopay.png" 
+                                                    alt="Author" style="min-width: 25px;max-height: 30px;"> 
+                                            <img v-else :src="payment.icon_url" 
+                                                    alt="Author" style="min-width: 25px;max-height: 25px;"> 
+                                            <span class="ml-1" style="font-size: 14px;">
+                                                {{ (payment.name == 'QRIS (Customizable)') ? 'QRIS (Dana & Gopay)' : payment.name }}
+                                            </span> 
+                                            <span class="fa fa-angle-right pull-right" style="font-size: 20px;font-weight: bold;     line-height: 30px;"></span> 
+                                        </div>
+                                    </template>
+                                </template>
+                            </template>
                         </div>
                     </div>
 
@@ -184,7 +199,7 @@ export default {
                 this.orderPay(response.data.data.reference)
             })
             .catch(error => {
-                this.errorNotif(error)
+                alert(error.response.data.message)
             })
             .finally(
                 () => this.loading = false

@@ -208,7 +208,10 @@ vueApp.mixin({
             this.loadingOverlay = true;
             this.axios.get('order/preview?payload='+payload, this.$store.state.config)
             .then((response) => {
-                let htmlQr = '', htmlPayCode = '';
+
+                let htmlQr = ''
+                    , htmlPayCode = ''
+                    , htmlPayButton = '';
                 let result = response.data.data;
                 if (result.qr_url) {
                     htmlQr = `<div class="mb-2">
@@ -220,6 +223,17 @@ vueApp.mixin({
                                 </div>
                             </div>`;
                 }
+                
+                if (result.pay_url && (result.payment_method == 'OVO' || result.payment_method == 'SHOPEEPAY')) {
+                    let bgButton = '#ee4d2d';
+                    if (result.payment_method == 'OVO') {
+                        bgButton = '#4b3491';
+                    }
+                    htmlPayButton = `<div class="mb-2 mt-4">
+                                        <a class="btn btn-info btn-block" style="background: `+bgButton+`;" href="`+ result.pay_url +`">Lanjut Bayar</a>
+                                        </div>
+                                    </div>`;
+                }
                 if (result.pay_code) {
                     htmlPayCode = `<div class="mb-2">
                                         <div style="font-size: 14px;color: #98a3b2;">
@@ -227,12 +241,14 @@ vueApp.mixin({
                                         </div>
                                         <div style="font-size: 15px;color: #2c4656;font-weight: 600;">
                                             `+ result.pay_code +`
-                                            <span class="text-success pull-right" @click="navigator.clipboard.writeText('x')"><i class="pe-7s-copy-file"></i> Salin</span>
+                                            <span class="text-success pull-right" 
+                                            style="cursor: pointer;" 
+                                            onclick="navigator.clipboard.writeText('`+ result.pay_code +`'), alert('Berhasil disalin')"><i class="pe-7s-copy-file"></i> Salin</span>
                                         </div>
                                     </div>`;
                 }
 
-                const html =`<h6 class="mt-2">Selesaikan Pembayaran Sebelum</h6>
+                let html =`<h6 class="mt-2">Selesaikan Pembayaran Sebelum</h6>
                             <b class="text-danger mb-3">`+ this.dateTimeUnixOutput(result.expired_time) + `</b>
                             <div class="card mt-3">
                                 <div class="card-header" style="background: white;">
@@ -255,10 +271,13 @@ vueApp.mixin({
                                         </div>
                                         <div style="font-size: 15px;color: #2c4656;font-weight: 600;">
                                             Rp. `+ this.formatRibu(result.amount) +`
-                                            <span class="text-success pull-right"><i class="pe-7s-copy-file"></i> Salin</span>
+                                            <span class="text-success pull-right"
+                                            style="cursor: pointer;" 
+                                            onclick="navigator.clipboard.writeText('`+ result.amount +`'), alert('Berhasil disalin')"><i class="pe-7s-copy-file"></i> Salin</span>
                                         </div>
                                     </div>
                                     ` + htmlQr + `
+                                    ` + htmlPayButton + `
                                 </div>
                             </div>`;
                 this.$swal({
@@ -272,7 +291,8 @@ vueApp.mixin({
                 })
             })
             .catch(error => {
-                this.errorNotif(error)
+                alert(error)
+                // this.errorNotif(error)
             })
             .finally(
                 () => this.loadingOverlay = false
@@ -365,4 +385,5 @@ vueApp.mixin({
 })
 
 vueApp.mount('#app')
+
 

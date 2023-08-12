@@ -47,7 +47,9 @@ export default {
     }, 
     mounted() {
         // this.focusOnEditButton()
-        this.$refs.input.focus()
+        if (this.isMobile() == true) {
+            this.$refs.input.focus()
+        }
         // this.$nextTick(this.$refs.input.focus())
         // this.$refs.qx.focus = 'x'
         // nextTick(() => {
