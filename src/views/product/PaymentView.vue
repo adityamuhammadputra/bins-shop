@@ -116,22 +116,17 @@
                                             style="padding: 10px 0px; border-bottom: 1px solid #efefef;cursor: pointer;" 
                                             @click="paymentStore(payment)"
                                             >
-                                            <img v-if="payment.name == 'QRIS (Customizable)'" 
-                                                src="/assets/images/qrisDanaGopay.png" 
-                                                    alt="Author" style="min-width: 25px;max-height: 30px;"> 
-                                            <img v-else :src="payment.icon_url" 
-                                                    alt="Author" style="min-width: 25px;max-height: 25px;"> 
-                                            <span class="ml-1" style="font-size: 14px;">
-                                                {{ (payment.name == 'QRIS (Customizable)') ? 'QRIS (Dana & Gopay)' : payment.name }}
-                                            </span> 
+                                            <img :src="payment.icon_url" alt="Author" style="min-width: 25px;max-height: 25px;"> 
+                                            <span class="ml-1" style="font-size: 14px;">{{ payment.name }}</span> 
                                             <span class="fa fa-angle-right pull-right" style="font-size: 20px;font-weight: bold;     line-height: 30px;"></span> 
                                         </div>
                                     </template>
                                 </template>
                             </template>
                         </div>
-                        <div v-else>
-                            Opps... barang tidak ditemuakn, silahkan kembali
+                        <div v-else class="card-body p-0-mobile">
+                            <span class="mb-3"><b>Pilih metode pembayaran</b> </span> <br>
+                            Terjadi kesalah :(
                         </div>
                     </div>
 

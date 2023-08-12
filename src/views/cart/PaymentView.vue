@@ -92,7 +92,7 @@
 
                 <div class="col-md-4 col-12">
                     <div class="card border-none-trl-mobile mb-4">
-                        <div class="card-body p-0-mobile">
+                        <div class="card-body p-0-mobile" v-if="products.length > 0">
                             <span class="mb-3"><b>Pilih metode pembayaran</b> </span>
 
                             <div class="comment-area-wrapper" v-if="this.loading === true" style="position: relative;top: -10px;">
@@ -119,20 +119,19 @@
                                             style="padding: 10px 0px; border-bottom: 1px solid #efefef;cursor: pointer;" 
                                             @click="paymentStore(payment)"
                                             >
-                                            <img v-if="payment.name == 'QRIS (Customizable)'" 
-                                                src="/assets/images/qrisDanaGopay.png" 
-                                                    alt="Author" style="min-width: 25px;max-height: 30px;"> 
-                                            <img v-else :src="payment.icon_url" 
-                                                    alt="Author" style="min-width: 25px;max-height: 25px;"> 
-                                            <span class="ml-1" style="font-size: 14px;">
-                                                {{ (payment.name == 'QRIS (Customizable)') ? 'QRIS (Dana & Gopay)' : payment.name }}
-                                            </span> 
+                                            <img :src="payment.icon_url" alt="Author" style="min-width: 25px;max-height: 25px;"> 
+                                            <span class="ml-1" style="font-size: 14px;">{{ payment.name }}</span> 
                                             <span class="fa fa-angle-right pull-right" style="font-size: 20px;font-weight: bold;     line-height: 30px;"></span> 
                                         </div>
                                     </template>
                                 </template>
                             </template>
                         </div>
+                        <div class="card-body p-0-mobile" v-else>
+                            <span class="mb-3"><b>Pilih metode pembayaran</b> </span><br>
+                            Terjadi kesalah :(
+                        </div>
+
                     </div>
 
                     <div class="card mb-3"  v-if="!this.$store.state.auth.user">
