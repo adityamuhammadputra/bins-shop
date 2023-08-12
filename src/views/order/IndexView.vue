@@ -72,15 +72,15 @@
                                     v-if="dataOrder.length > 0"
                                     v-for="(order, indexOrder) in dataOrder" v-bind:key="order.id">
                                     <div class="card-header" style="background: white;border: none;">
-                                        <i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}
-                                        <span class="text-detail">|</span> {{ order.invoice }}
-                                        <span class="badge pull-left"
-                                            v-if="isMobile()"
-                                            :class="'bg-' + order.status.color"> 
-                                            {{ order.status.name }} 
-                                        </span>
+                                        <span><i class="fa fa-calendar-o"></i> {{ dateOuput2(order.created_at) }}</span>
+                                        <template v-if="isMobile()">
+                                            <span class="pull-right">{{ order.invoice }}</span> 
+                                        </template>
+                                        <template v-else>
+                                            <span class="text-detail">|</span> {{ order.invoice }}
+                                        </template>
+
                                         <span class="badge pull-right"
-                                            v-else
                                             :class="'bg-' + order.status.color"> 
                                             {{ order.status.name }} 
                                         </span>
