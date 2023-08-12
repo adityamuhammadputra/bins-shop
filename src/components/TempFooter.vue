@@ -195,6 +195,7 @@
                 <div data-v-67637842="" class="wn-btn-item">
                     <div data-v-67637842="" class="wn-btn-icon" style="color: rgb(46, 46, 46);">
                         <i data-v-67637842="" data-v-67637842-s="" class="pe-7s-news-paper"></i><!--v-if-->
+                        <div data-v-67637842="" class="wn-btn-badge" v-if="this.$store.state.default.notif > 0">{{ this.$store.state.default.notif }}</div>
                         <span>Transaksi</span>
                     </div>
                     <div data-v-67637842="" class="wn-btn-border"></div>
