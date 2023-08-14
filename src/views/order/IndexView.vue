@@ -88,7 +88,7 @@
                                     <div class="alert alert-warning d-flex align-items-center mx-3 py-2" role="alert"
                                      v-if="order.status.id == 1">
                                         <div>
-                                            Lakukan pembayaran dalam waktu
+                                            Lakukan pembayaran dalam waktu <br v-if="isMobile()">
                                             <vue-countdown :time="order.transaction_provider.payment_diff" v-slot="{ hours, minutes, seconds }">
                                                 <b>{{ hours }} jam, {{ minutes }} menit, {{ seconds }} detik.</b>
                                             </vue-countdown> 
