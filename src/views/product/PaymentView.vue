@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-12" v-if="!isMobile()">
                     <h5 class="title mb-3">
-                        <router-link :to="'/product/'+product.slug" class="image">
+                        <router-link :to="'/product/'" class="image">
                             <span class="fa fa-angle-left"></span> 
                             Pembayaran 
                         </router-link>
@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-12" v-else id="title-mobile">
                     <h5 class="title mb-2"> 
-                        <router-link :to="'/product/'+product.slug" class="image">
+                        <router-link :to="'/product/'" class="image">
                             <span class="fa fa-angle-left"></span> 
                             Pembayaran 
                         </router-link>
@@ -194,8 +194,15 @@ export default {
                 this.orderPay(response.data.data.reference)
             })
             .catch(error => {
-                console.log(error);
-                alert(error.response.data.message)
+                let message = error.response.data.message
+                console.log(message);
+                if (message.includes("customer phone")) {
+                    alert('Cek kembali nomor hp untuk pembayaran')
+                    window.location.href = '/user'
+                } else {
+                    alert(message)
+                    window.location.href = '/product'
+                }
             })
             .finally(
                 () => this.loading = false

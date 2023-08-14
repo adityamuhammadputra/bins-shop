@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-axios.defaults.baseURL = 'http://bins.local/api/v1/'
+axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+// axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
@@ -59,11 +59,13 @@ vueApp.component("content-loader", ContentLoader)
 
 vueApp.mixin({
     methods: {
-        // testAh: function (){
-        //     console.log('test');
-        // },
+        toHttps: function() {
+            if (location.protocol !== 'https') {
+                location.replace(`https://binsshop.tech`);
+            }
+        },
         currentBaseUrl: function () {
-            return 'http://localhost:8080';
+            return 'https://binsshop.tech';
         },
         globalAlert: function (message) {
             this.$swal(message);
@@ -376,14 +378,10 @@ vueApp.mixin({
                 }
             }
         },
-        toHttps: function() {
-            if (location.protocol !== 'https:') {
-                // location.replace(`https:${location.href.substring(location.protocol.length)}`);
-            }
-        }
     },
 })
 
 vueApp.mount('#app')
+
 
 

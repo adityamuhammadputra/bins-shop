@@ -198,7 +198,14 @@ export default {
                 this.orderPay(response.data.data.reference)
             })
             .catch(error => {
-                alert(error.response.data.message)
+                let message = error.response.data.message
+                if (message.includes("customer phone")) {
+                    alert('Cek kembali nomor hp untuk pembayaran')
+                    window.location.href = '/user'
+                } else {
+                    alert(message)
+                    window.location.href = '/cart'
+                }
             })
             .finally(
                 () => this.loading = false

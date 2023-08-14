@@ -77,13 +77,16 @@
 
                                                 <fieldset class="mt-2">
                                                     <legend class="mt-0 mb-5">Info Pribadi</legend>
-                                                    <div class="form-floating mb-5">
+                                                    <div class="form-floating">
                                                         <input type="text" class="form-control" id="phone" 
                                                             placeholder="Nomor Hp"
                                                             v-model="this.user.phone"
                                                             style="height: 45px;border-radius: 0px;padding-top: 1rem;">
                                                         <label for="phone" style="padding-top: 7px;">Nomor Hp </label>
                                                     </div>
+                                                    <p style="font-size: 11px;font-style: italic;" class="mt-0 mb-5">
+                                                        Nomor hp digunakan untuk Transaksi OVO, ShopeePay dan Gopay
+                                                    </p>
 
                                                     <div class="form-floating mb-5">
                                                         <select class="form-control" id="gender" placeholder="Jenis Kelamin"
