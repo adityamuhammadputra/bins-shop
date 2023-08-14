@@ -213,6 +213,11 @@
                                             </button>
                                         </template>
                                         <template v-if="this.dataOrder.status.id == 2 || this.dataOrder.status.id == 3">
+                                            <!-- <button type="button" class="btn btn-primary btn-block pull-right"
+                                                @click="orderPay(this.dataOrder.transaction_provider.transaction_id)"
+                                                >
+                                                Cara Bayar
+                                            </button> -->
                                             <button type="button" class="btn btn-primary btn-block pull-right"
                                                 @click="orderCancelDoneRefund(this.dataOrder, 'done')">
                                                 Selesaikan Pesanan

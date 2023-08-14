@@ -591,10 +591,10 @@ export default {
             )
         },
         copyLink: function(url){
+            console.log(url);
             navigator.clipboard.writeText(url)
             this.successNotif("Url berhasil disalin")
         },
-
     }
 }
 </script>

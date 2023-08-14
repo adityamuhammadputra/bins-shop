@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-// axios.defaults.baseURL = 'http://bins.local/api/v1/'
+// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
@@ -61,7 +61,7 @@ vueApp.mixin({
     methods: {
         toHttps: function() {
             if (location.protocol !== 'https') {
-                location.replace(`https://binsshop.tech`);
+                // location.replace(`https://binsshop.tech`);
             }
         },
         currentBaseUrl: function () {
@@ -215,6 +215,7 @@ vueApp.mixin({
                     , htmlPayCode = ''
                     , htmlPayButton = '';
                 let result = response.data.data;
+                
                 if (result.qr_url) {
                     htmlQr = `<div class="mb-2">
                                 <div style="font-size: 12px;color: #98a3b2;">
@@ -250,8 +251,17 @@ vueApp.mixin({
                                     </div>`;
                 }
 
-                let html =`<h6 class="mt-2">Selesaikan Pembayaran Sebelum</h6>
-                            <b class="text-danger mb-3">`+ this.dateTimeUnixOutput(result.expired_time) + `</b>
+                let labelTop = `Selesaikan Pembayaran Sebelum</h6>
+                                <b class="text-danger mb-3">`+ this.dateTimeUnixOutput(result.expired_time) + `</b>`,
+                                htmlIcon = false;
+                if (result.status == 'PAID') {
+                    labelTop = `Terimakasih, Pembayaran Berhasil!</h6>`;
+                    htmlPayButton = '';
+                    htmlIcon = 'success';
+                    htmlQr = '';
+                }
+
+                let html =`<h6 class="mt-2">`+ labelTop + `
                             <div class="card mt-3">
                                 <div class="card-header" style="background: white;">
                                     <b class="pull-left" style="font-size: 16px;">` + result.payment_name + `</b>
@@ -283,7 +293,7 @@ vueApp.mixin({
                                 </div>
                             </div>`;
                 this.$swal({
-                    icon: false,
+                    icon: htmlIcon,
                     title: "",
                     html: html,
                     showCancelButton: true,
