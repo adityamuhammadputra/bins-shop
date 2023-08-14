@@ -85,7 +85,7 @@
                             <rect x="0" y="16" rx="1" ry="1" width="50" height="7" /> 
                             <rect x="0" y="25" rx="1" ry="1" width="30" height="5" /> 
                             <rect x="0" y="32" rx="1" ry="1" width="50" height="20" /> 
-                            <rect x="0" y="55" rx="1" ry="1" width="100" height="60" /> 
+                            <rect x="0" y="55" rx="1" ry="1" width="100" height="60" v-if="!isMobile()"/> 
                         </content-loader>
                     </div>
                     <!-- Product Summery Start -->

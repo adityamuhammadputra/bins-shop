@@ -12,8 +12,8 @@ import  './assets/css/custom.css'
 
 // Axios
 import axios from 'axios'
-// axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
-axios.defaults.baseURL = 'http://bins.local/api/v1/'
+axios.defaults.baseURL = 'https://be.binsshop.tech/api/v1/'
+// axios.defaults.baseURL = 'http://bins.local/api/v1/'
 
 import VueAxios from 'vue-axios'
 
