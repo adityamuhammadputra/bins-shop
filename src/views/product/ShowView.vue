@@ -206,7 +206,7 @@
                         <div class="social-share">
                             <span>
                                 <a 
-                                    :href="'https://api.whatsapp.com/send/?phone=62816262439&text=Hai min, mau tanya produk ini %0a' + currentBaseUrl()+$route.fullPath + '&type=phone_number&app_absent=0'" 
+                                    :href="'https://api.whatsapp.com/send/?phone=62816262439&text=Hai min, mau tanya produk ini %0a' + 'https://binsshop.tech'+$route.fullPath + '&type=phone_number&app_absent=0'" 
                                     target="_blank"
                                     style="cursor: pointer;">
                                     <i class="pe-7s-chat"></i> Chat 
@@ -215,20 +215,20 @@
                             |
                             <span> Bagikan : {{  }}</span>
                             <!--  -->
-                            <a @click="copyLink(currentBaseUrl()+$route.fullPath)" style="cursor: pointer;">
+                            <a @click="copyLink('https://binsshop.tech'+$route.fullPath)" style="cursor: pointer;">
                                 <i class="fa fa-copy text-primary"></i>
                             </a>
 
                             <ShareNetwork
                                 network="whatsapp"
-                                :url="currentBaseUrl()+$route.fullPath"
+                                :url="'https://binsshop.tech'+$route.fullPath"
                                 :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
                             >
                                 <i class="fa fa-whatsapp whatsapp-color"></i>
                             </ShareNetwork>
                             <ShareNetwork
                                 network="facebook"
-                                :url="currentBaseUrl()+$route.fullPath"
+                                :url="'https://binsshop.tech'+$route.fullPath"
                                 :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
                                 hashtags="binsshop"
                             >
@@ -236,7 +236,7 @@
                             </ShareNetwork>
                             <ShareNetwork
                                 network="twitter"
-                                :url="currentBaseUrl()+$route.fullPath"
+                                :url="'https://binsshop.tech'+$route.fullPath"
                                 :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
                                 hashtags="binsshop"
                             >
@@ -244,7 +244,7 @@
                             </ShareNetwork>
                             <ShareNetwork
                                 network="linkedin"
-                                :url="currentBaseUrl()+$route.fullPath"
+                                :url="'https://binsshop.tech'+$route.fullPath"
                                 :title="+'Yuk beli '+ detail.name + ' Di bins shop!'"
                                 hashtags="binsshop"
                             >
